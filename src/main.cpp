@@ -1,7 +1,10 @@
 #include <iostream>
+#include "include/https_client.hpp"
 
 int main(int argc, char const *argv[])
 {
-    std::cout << "Hello World" << std::endl;
+    HttpsClient client("github.com", "443");
+
+    std::cout << client.Get("/") << std::endl;
     return 0;
 }
