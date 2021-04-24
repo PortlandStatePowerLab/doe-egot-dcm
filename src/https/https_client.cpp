@@ -1,5 +1,5 @@
-#include "include/https_client.hpp"
-#include "include/root_certificates.hpp"
+#include "include/https/https_client.hpp"
+#include "include/https/root_certificates.hpp"
 #include <boost/certify/https_verification.hpp>
 #include <boost/certify/extensions.hpp>
 

@@ -20,6 +20,20 @@ include(FetchContent)
 find_package(Boost REQUIRED)
 find_package(OpenSSL REQUIRED)
 
+FetchContent_Declare(
+  googletest
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG        master
+)
+
+FetchContent_Declare(
+  flecs
+  GIT_REPOSITORY https://github.com/SanderMertens/flecs.git
+  GIT_TAG        v2.3.2
+)
+
+FetchContent_MakeAvailable(googletest flecs)
+
 # project dirs
 add_subdirectory(src)
 add_subdirectory(tests)
