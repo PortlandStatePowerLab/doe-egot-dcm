@@ -3,6 +3,7 @@ set(COMPONENT_NAME dcm_tests)
 add_executable (${COMPONENT_NAME}
     main.cpp
     https_tests.cpp
+    ecs_tests.cpp
 )
 
 target_link_libraries(${COMPONENT_NAME} 
@@ -10,12 +11,14 @@ target_link_libraries(${COMPONENT_NAME}
     gtest_main 
     Boost::boost
     https
+    ecs
     pthread
 )
 
 target_include_directories(${COMPONENT_NAME} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     ${https_INCLUDE_DIRS}
+    ${ecs_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}
     ${googletest_INCLUDE_DIRS}
 )

@@ -1,4 +1,5 @@
 add_subdirectory(https)
+add_subdirectory(ecs)
 
 set(COMPONENT_NAME dcm)
 
