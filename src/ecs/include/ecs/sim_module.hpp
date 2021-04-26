@@ -8,31 +8,49 @@ struct simple_module {
     // that their fully qualified Flecs name matches the C++ type name. It also
     // ensures that type names cannot clash between modules.
 
-    struct Position {
-        double x, y;
+    struct DER
+    {
+        unsigned int max_watt_hours;
+        int max_import_watts, max_export_watts;
+        int max_import_ramp, max_export_ramp;
     };
 
-    struct Velocity {
-        double x, y;
+    struct Energy
+    {
+        int watt_hours;
+
+    };
+
+    struct Power
+    {
+        int watts;
+
+    };
+
+    enum class Status : short
+    {
+        kImporting,
+        kExporting,
+        kIdle,
+        kCustomerOverride
     };
 
     simple_module(flecs::world& ecs) {
+
+
         /* Register module with world */
         ecs.module<simple_module>();
 
         /* Register components */
-        ecs.component<Position>();
-        ecs.component<Velocity>();
+        ecs.component<Status>();
+        ecs.component<Energy>();
+        ecs.component<Power>();
+        ecs.component<DER>();
 
-        /* Register system */
-        ecs.system<Position, const Velocity>("Move")
-            .each([](flecs::entity e, Position& p, const Velocity& v) {    
-                p.x += v.x;
-                p.y += v.y;
+        ecs.set<DER>({1000, 4500, 0, 4500, 0});
 
-                std::cout << "Moved " << e.name() << " to {" <<
-                    p.x << ", " << p.y << "}" << std::endl;
-            });        
+        auto q = ecs.query<Status, Energy, Power>("$DER");
+     
     }
 };
 
