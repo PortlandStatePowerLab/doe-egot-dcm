@@ -3,7 +3,7 @@
 
 int main(int argc, char const *argv[])
 {
-    HttpsClient client("0.0.0.0", "443");
+    HttpsClient client("localhost", "443");
 
     std::cout << client.Get("/dcap") << std::endl;
     return 0;

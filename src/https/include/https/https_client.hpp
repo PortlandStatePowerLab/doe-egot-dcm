@@ -41,7 +41,7 @@ public:
     );
 
 private:
-    void Connect ();
+    boost::beast::ssl_stream<boost::beast::tcp_stream> Connect ();
     boost::beast::http::response <boost::beast::http::dynamic_body> Send
     (
         boost::beast::http::request <boost::beast::http::string_body>& req
@@ -55,7 +55,6 @@ private:
     boost::asio::io_context io_context_;
     boost::asio::ssl::context ssl_context_;
     boost::asio::ip::tcp::resolver resolver_;
-    boost::beast::ssl_stream<boost::beast::tcp_stream> stream_;
 };
 
 #endif // __HTTPS_CLIENT_H__

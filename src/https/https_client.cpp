@@ -1,5 +1,6 @@
 #include "include/https/https_client.hpp"
 #include "include/https/root_certificates.hpp"
+#include <boost/asio/ssl/rfc2818_verification.hpp>
 
 // alias to make things easier to read
 namespace bb = boost::beast;
@@ -10,26 +11,12 @@ HttpsClient::HttpsClient(const std::string &host, const std::string &port)
     : host_(host), 
     port_(port), 
     ssl_context_(ssl::context::tlsv12_client), 
-    resolver_(io_context_),
-    stream_(io_context_, ssl_context_)
+    resolver_(io_context_)
 {
     load_root_certificates(ssl_context_);
-
-    ssl_context_.set_verify_mode(
-        ssl::context::verify_peer 
-        | ssl::context::verify_fail_if_no_peer_cert
-    );
-
-    // Set SNI Hostname (many hosts need this to handshake successfully)
-    if(! SSL_set_tlsext_host_name(stream_.native_handle(), host_.c_str()))
-    {
-        bb::error_code ec{static_cast<int>(::ERR_get_error()), net::error::get_ssl_category()};
-        throw bb::system_error{ec};
-    }
-
-    ssl_context_.set_default_verify_paths();
-
-    ssl_context_.set_verify_mode(ssl::verify_peer);
+    ssl_context_.set_verify_callback(
+        make_verbose_verification(ssl::rfc2818_verification(host_))
+    );   
 }
 
 HttpsClient::~HttpsClient ()
@@ -95,21 +82,32 @@ HttpsClient::Delete(const std::string& target)
     return HttpsClient::Send (req);
 }
 
-void HttpsClient::Connect() 
+bb::ssl_stream<bb::tcp_stream> HttpsClient::Connect() 
 {
+    bb::ssl_stream<bb::tcp_stream> stream(io_context_, ssl_context_);
+
+    // Set SNI Hostname (many hosts need this to handshake successfully)
+    if(! SSL_set_tlsext_host_name(stream.native_handle(), host_.c_str()))
+    {
+        bb::error_code ec{static_cast<int>(::ERR_get_error()), net::error::get_ssl_category()};
+        throw bb::system_error{ec};
+    } 
+
     // Make the connection on the IP address we get from a lookup
-    bb::get_lowest_layer(stream_).connect(resolver_.resolve(host_, port_));
+    bb::get_lowest_layer(stream).connect(resolver_.resolve(host_, port_));
     
-    stream_.handshake(ssl::stream_base::client);
+    stream.handshake(ssl::stream_base::client);
+
+    return stream;
 }
 
 bb::http::response <bb::http::dynamic_body>
 HttpsClient::Send(bb::http::request<bb::http::string_body>& req)
 {
-    HttpsClient::Connect();
+    bb::ssl_stream<bb::tcp_stream> stream = HttpsClient::Connect();
 
 	// Send the HTTP request to the remote host
-	bb::http::write(stream_, req);
+	bb::http::write(stream, req);
 
 	// This buffer is used for reading and must be persisted
 	bb::flat_buffer buffer;
@@ -118,10 +116,10 @@ HttpsClient::Send(bb::http::request<bb::http::string_body>& req)
 	bb::http::response<bb::http::dynamic_body> res;
 
 	// Receive the HTTP response
-	bb::http::read(stream_, buffer, res);
+	bb::http::read(stream, buffer, res);
 
     boost::system::error_code ec;
-    stream_.shutdown(ec);
+    stream.shutdown(ec);
     if(ec == net::error::eof)
     {
         // Rationale:
