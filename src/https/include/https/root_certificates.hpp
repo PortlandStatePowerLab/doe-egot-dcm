@@ -75,10 +75,9 @@ namespace detail
     load_root_certificates(boost::asio::ssl::context &ctx, boost::system::error_code &ec)
     {
         ctx.set_verify_mode(boost::asio::ssl::verify_peer);
-        ctx.load_verify_file("ca.crt");
+        ctx.add_verify_path("certs");
         ctx.use_certificate_file("client1.crt", boost::asio::ssl::context::pem);
-        ctx.use_private_key_file("client1.key", boost::asio::ssl::context::pem);
-        ctx.set_default_verify_paths();
+        ctx.use_private_key_file("private/client1.key", boost::asio::ssl::context::pem);
     }
 
 } // detail
