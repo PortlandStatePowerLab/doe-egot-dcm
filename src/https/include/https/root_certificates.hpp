@@ -11,6 +11,7 @@
 //
 
 #include <boost/asio/ssl.hpp>
+#include <boost/bind.hpp>
 #include <string>
 #include <iostream>
 
@@ -33,6 +34,70 @@
         https://github.com/djarek/certify
     tl;dr: root_certificates.hpp should not be used in production code
 */
+
+// This is temporary since I was struggling to get rfc 2818 to validate with self
+// signed certificates on the localhost.
+bool verify_certificate_simple(bool preverified, boost::asio::ssl::verify_context& ctx)
+{
+    X509_STORE_CTX *cts = ctx.native_handle();
+    char subject_name[256];
+    X509* cert = X509_STORE_CTX_get_current_cert(cts);
+    X509_NAME_oneline(X509_get_subject_name(cert), subject_name, 256);
+
+    std::cout << "SSL Verification:" << std::endl;
+    std::cout << "Verifying: " << subject_name << "\n";
+
+    // fingerprint
+    const EVP_MD *digest = EVP_get_digestbyname("sha256");
+    unsigned char md[EVP_MAX_MD_SIZE];
+    unsigned int n;
+    X509_digest(cert, digest, md, &n);
+
+    printf("Fingerprint: ");
+      for(size_t pos = 0; pos < 11; pos++)
+        printf("%02x:", md[pos]);
+
+  if (X509_verify_cert(cts))
+  {
+    switch (X509_STORE_CTX_get_error(cts))
+    {
+    case X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT:
+        std::cout << "the issuer certificate could not be found" << std::endl;
+        preverified = false;
+        break;
+    case X509_V_ERR_UNABLE_TO_DECRYPT_CERT_SIGNATURE:
+        std::cout << "the certificate signature could not be decrypted" << std::endl;
+        preverified = false;
+        break;
+    case X509_V_ERR_UNABLE_TO_DECODE_ISSUER_PUBLIC_KEY:
+        std::cout << "the public key in the certificate SubjectPublicKeyInfo could not be read" << std::endl;
+        preverified = false;
+        break;
+    case X509_V_ERR_CERT_SIGNATURE_FAILURE:
+        std::cout << "the signature of the certificate is invalid" << std::endl;
+        preverified = false;
+        break;
+    case X509_V_ERR_DEPTH_ZERO_SELF_SIGNED_CERT:
+        std::cout << "the passed certificate is self signed and the same certificate cannot be found in the list of trusted certificates" << std::endl;
+        preverified = false;
+        break;
+    case X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY:
+        std::cout << "the issuer certificate of a locally looked up certificate could not be found" << std::endl;
+        preverified = false;
+        break;
+    case X509_V_ERR_SUBJECT_ISSUER_MISMATCH:
+        std::cout << "the current candidate issuer certificate was rejected because its subject name did not match the issuer name of the current certificate" << std::endl;
+        preverified = false;
+        break;
+    default:
+        preverified = true;
+        break;
+    }
+    return preverified;
+  }
+
+  return preverified;
+}
 
 // from https://www.javaer101.com/en/article/12616899.html
 template <typename Verifier>
@@ -76,8 +141,11 @@ namespace detail
     {
         ctx.set_verify_mode(boost::asio::ssl::verify_peer);
         ctx.add_verify_path("certs");
-        ctx.use_certificate_file("client1.crt", boost::asio::ssl::context::pem);
-        ctx.use_private_key_file("private/client1.key", boost::asio::ssl::context::pem);
+        ctx.use_certificate_file("client.crt", boost::asio::ssl::context::pem);
+        ctx.use_private_key_file("private/client.key", boost::asio::ssl::context::pem);
+        ctx.set_verify_callback(
+          boost::bind(&verify_certificate_simple, true, _2)
+        );
     }
 
 } // detail

@@ -13,10 +13,7 @@ HttpsClient::HttpsClient(const std::string &host, const std::string &port)
     ssl_context_(ssl::context::tlsv12_client), 
     resolver_(io_context_)
 {
-    load_root_certificates(ssl_context_);
-    ssl_context_.set_verify_callback(
-        make_verbose_verification(ssl::rfc2818_verification(host_))
-    );   
+    load_root_certificates(ssl_context_);  
 }
 
 HttpsClient::~HttpsClient ()
