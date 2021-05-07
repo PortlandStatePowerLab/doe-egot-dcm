@@ -3,6 +3,8 @@
 #include <gtest/gtest.h>
 #include <https/https_client.hpp>
 
+extern std::string g_program_path;
+
 class HttpsTesting : public ::testing::Test 
 {
 protected:
@@ -10,7 +12,7 @@ protected:
     {        
         host = "0.0.0.0";
         port = "443";
-        client = new HttpsClient(host, port);
+        client = new HttpsClient(g_program_path, host, port);
     }
 
     void TearDown() override

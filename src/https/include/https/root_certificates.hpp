@@ -44,21 +44,12 @@ bool verify_certificate_simple(bool preverified, boost::asio::ssl::verify_contex
     X509* cert = X509_STORE_CTX_get_current_cert(cts);
     X509_NAME_oneline(X509_get_subject_name(cert), subject_name, 256);
 
-    std::cout << "SSL Verification:" << std::endl;
-    std::cout << "Verifying: " << subject_name << "\n";
-
     // fingerprint
     const EVP_MD *digest = EVP_get_digestbyname("sha256");
     unsigned char md[EVP_MAX_MD_SIZE];
     unsigned int n;
     X509_digest(cert, digest, md, &n);
 
-    printf("Fingerprint: ");
-      for(size_t pos = 0; pos < 11; pos++)
-        printf("%02x:", md[pos]);
-
-  if (X509_verify_cert(cts))
-  {
     switch (X509_STORE_CTX_get_error(cts))
     {
     case X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT:
@@ -82,8 +73,8 @@ bool verify_certificate_simple(bool preverified, boost::asio::ssl::verify_contex
         preverified = false;
         break;
     case X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY:
-        std::cout << "the issuer certificate of a locally looked up certificate could not be found" << std::endl;
-        preverified = false;
+        //std::cout << "the issuer certificate of a locally looked up certificate could not be found" << std::endl;
+        preverified = true;
         break;
     case X509_V_ERR_SUBJECT_ISSUER_MISMATCH:
         std::cout << "the current candidate issuer certificate was rejected because its subject name did not match the issuer name of the current certificate" << std::endl;
@@ -93,56 +84,22 @@ bool verify_certificate_simple(bool preverified, boost::asio::ssl::verify_contex
         preverified = true;
         break;
     }
-    return preverified;
-  }
-
-  return preverified;
-}
-
-// from https://www.javaer101.com/en/article/12616899.html
-template <typename Verifier>
-class verbose_verification
-{
-public:
-  verbose_verification(Verifier verifier)
-    : verifier_(verifier)
-  {}
-
-  bool operator()(
-    bool preverified,
-    boost::asio::ssl::verify_context& ctx
-  )
-  {
-    char subject_name[256];
-    X509* cert = X509_STORE_CTX_get_current_cert(ctx.native_handle());
-    X509_NAME_oneline(X509_get_subject_name(cert), subject_name, 256);
-    bool verified = verifier_(preverified, ctx);
-    std::cout << "Verifying: " << subject_name << "\n"
-                 "Verified: " << verified << std::endl;
-    return verified;
-  }
-private:
-  Verifier verifier_;
-};
-
-///@brief Auxiliary function to make verbose_verification objects.
-template <typename Verifier>
-verbose_verification<Verifier>
-make_verbose_verification(Verifier verifier)
-{
-  return verbose_verification<Verifier>(verifier);
 }
 
 namespace detail
 {
 
     inline void
-    load_root_certificates(boost::asio::ssl::context &ctx, boost::system::error_code &ec)
+    load_root_certificates(const std::string & root, boost::asio::ssl::context &ctx, boost::system::error_code &ec)
     {
         ctx.set_verify_mode(boost::asio::ssl::verify_peer);
-        ctx.add_verify_path("certs");
-        ctx.use_certificate_file("client.crt", boost::asio::ssl::context::pem);
-        ctx.use_private_key_file("private/client.key", boost::asio::ssl::context::pem);
+
+        ctx.add_verify_path(root + "/certs");
+
+        ctx.use_certificate_file(root + "/client2.crt" , boost::asio::ssl::context::pem);
+
+        ctx.use_private_key_file(root + "/private/client2.key", boost::asio::ssl::context::pem);
+
         ctx.set_verify_callback(
           boost::bind(&verify_certificate_simple, true, _2)
         );
@@ -153,16 +110,16 @@ namespace detail
 // Load the root certificates into an ssl::context
 
 inline void
-load_root_certificates(boost::asio::ssl::context &ctx, boost::system::error_code &ec)
+load_root_certificates(const std::string & root, boost::asio::ssl::context &ctx, boost::system::error_code &ec)
 {
-    detail::load_root_certificates(ctx, ec);
+    detail::load_root_certificates(root, ctx, ec);
 }
 
 inline void
-load_root_certificates(boost::asio::ssl::context &ctx)
+load_root_certificates(const std::string &root, boost::asio::ssl::context &ctx)
 {
     boost::system::error_code ec;
-    detail::load_root_certificates(ctx, ec);
+    detail::load_root_certificates(root, ctx, ec);
     if (ec)
         throw boost::system::system_error{ec};
 }

@@ -1,4 +1,4 @@
-set(COMPONENT_NAME dcm_tests)
+set(COMPONENT_NAME dcm_testing)
 
 add_executable (${COMPONENT_NAME}
     main.cpp

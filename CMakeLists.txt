@@ -14,6 +14,7 @@ project(
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # Find packages go here.
 include(FetchContent)
@@ -33,7 +34,13 @@ FetchContent_Declare(
   GIT_TAG        v2.3.2
 )
 
-FetchContent_MakeAvailable(googletest flecs)
+FetchContent_Declare(
+  SEP
+  GIT_REPOSITORY https://github.com/PortlandStatePowerLab/doe-egot-sep.git
+  GIT_TAG        XMLAdapter
+)
+
+FetchContent_MakeAvailable(googletest flecs SEP)
 
 ExternalProject_Add (
   ssl-ca
@@ -43,7 +50,7 @@ ExternalProject_Add (
   BUILD_COMMAND ""
   INSTALL_COMMAND ""
   UPDATE_COMMAND COMMAND COMMAND ${CMAKE_COMMAND} -E copy_directory
-  <SOURCE_DIR>/root-ca ${CMAKE_BINARY_DIR}/src/
+  <SOURCE_DIR>/root-ca ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
 )
 
 # project dirs

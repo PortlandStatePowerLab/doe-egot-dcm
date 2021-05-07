@@ -13,11 +13,13 @@
 #include <string>
 #include <memory>
 
+extern std::string g_program_path;
+
 // Singleton Design Pattern
 class HttpsClient
 {
 public:
-    HttpsClient (const std::string &host,const std::string &port);
+    HttpsClient (const std::string &root, const std::string &host,const std::string &port);
     ~HttpsClient ();
 
     boost::beast::http::response <boost::beast::http::dynamic_body> Get
@@ -48,6 +50,7 @@ private:
     );
 
 private:
+    std::string root_;
     std::string host_;
     std::string port_;
 

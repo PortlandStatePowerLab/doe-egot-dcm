@@ -7,13 +7,14 @@ namespace bb = boost::beast;
 namespace net = boost::asio; 
 namespace ssl = net::ssl; 
 
-HttpsClient::HttpsClient(const std::string &host, const std::string &port) 
-    : host_(host), 
+HttpsClient::HttpsClient(const std::string &root, const std::string &host, const std::string &port) 
+    : root_(root),
+    host_(host), 
     port_(port), 
     ssl_context_(ssl::context::tlsv12_client), 
     resolver_(io_context_)
 {
-    load_root_certificates(ssl_context_);  
+    load_root_certificates(root_, ssl_context_);  
 }
 
 HttpsClient::~HttpsClient ()
