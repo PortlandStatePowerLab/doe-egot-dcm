@@ -105,29 +105,61 @@ HttpsClient::Send(bb::http::request<bb::http::string_body>& req)
     bb::ssl_stream<bb::tcp_stream> stream = HttpsClient::Connect();
 
 	// Send the HTTP request to the remote host
+    std::cout << "writing..." << std::endl;
 	bb::http::write(stream, req);
-
+    std::cout << "writing done." << std::endl;
 	// This buffer is used for reading and must be persisted
 	bb::flat_buffer buffer;
 
 	// Declare a container to hold the response
 	bb::http::response<bb::http::dynamic_body> res;
-
-	// Receive the HTTP response
-	bb::http::read(stream, buffer, res);
-
     boost::system::error_code ec;
     stream.shutdown(ec);
+    if (ec)
+    {
+        if(ec == net::error::eof || ec == boost::asio::ssl::error::stream_truncated)
+        {
+            // Rationale:
+            // http://stackoverflow.com/questions/25587403/boost-asio-ssl-async-shutdown-always-finishes-with-an-error
+            ec = {};
+        }
+        else
+        {
+            std::cout << "ec" << std::endl;
+            throw bb::system_error{ec};
+        }
+    }
+ 
+
+	// Receive the HTTP response
+    std::cout << "now to read" << std::endl;
+	bb::http::read(stream, buffer, res, ec);
+    std::cout << "made it past the read" << std::endl;
+    
+    /*
     if(ec == net::error::eof)
     {
         // Rationale:
         // http://stackoverflow.com/questions/25587403/boost-asio-ssl-async-shutdown-always-finishes-with-an-error
         ec = {};
     }
+    if (ec != net::error::eof)
+    {
+        std::cout << "not eof lol" << std::endl;
+        ec = {};
+    }
+    if (ec == boost::asio::ssl::error::stream_truncated)
+    {
+        //Rationale: https://github.com/boostorg/beast/issues/824
+        //net::ssl::error::stream_truncated
+        std::cout << "stream truncated error ignored" << std::endl;
+        ec = {};
+    }
     if(ec)
     {
+        std::cout << "ec" << std::endl;
         throw bb::system_error{ec};
     }
-
+    */
 	return res;
 }

@@ -92,6 +92,7 @@ namespace detail
     inline void
     load_root_certificates(const std::string & root, boost::asio::ssl::context &ctx, boost::system::error_code &ec)
     {
+        std::cout << "detail::load_root_certificates, root:" << root + "/certs" << std::endl;
         ctx.set_verify_mode(boost::asio::ssl::verify_peer);
 
         ctx.add_verify_path(root + "/certs");
