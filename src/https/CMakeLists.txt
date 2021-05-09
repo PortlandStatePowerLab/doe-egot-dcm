@@ -2,6 +2,7 @@ set(COMPONENT_NAME https)
 
 add_library(${COMPONENT_NAME} STATIC
   https_client.cpp
+  combined_client.cpp
 )
 
 # Create ALIAS targets.
