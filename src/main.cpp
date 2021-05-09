@@ -23,11 +23,10 @@ int main(int argc, char **argv)
   GetParentPath(argv);
   std::cout << "argv: " << *argv << std::endl;
   std::cout << "Parent path: " << g_program_path << std::endl;
-  
-  //g_program_path = ssl_path;
+
 
   HttpsClient client(g_program_path, "host.docker.internal", "8886");
-/*
+
   std::cout << client.Get("/dcap") << std::endl;
   std::cout << client.Get("/tm") << std::endl;
   std::cout << client.Get("/edev") << std::endl;
@@ -56,7 +55,7 @@ std::string freq = R"(<?xml version="1.0" encoding="utf-8"?>
     <requestStatus>0</requestStatus>
   </RequestStatus>
 </FlowReservationRequest>)";
-*/ 
+
   std::string test_dtm_msg = R"(    <message>
         <from>DCM</from>
         <to>DER</to>

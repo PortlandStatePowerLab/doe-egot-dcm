@@ -40,7 +40,13 @@ FetchContent_Declare(
   GIT_TAG        XMLAdapter
 )
 
-FetchContent_MakeAvailable(googletest flecs SEP)
+FetchContent_Declare(
+  cea2045
+  GIT_REPOSITORY https://github.com/epri-dev/CTA-2045-UCM-CPP-Library.git
+  GIT_TAG        master
+)
+
+FetchContent_MakeAvailable(googletest flecs SEP cea2045)
 
 ExternalProject_Add (
   ssl-ca
@@ -56,3 +62,4 @@ ExternalProject_Add (
 # project dirs
 add_subdirectory(src)
 add_subdirectory(tests)
+add_subdirectory(xml_writer)
