@@ -5,24 +5,29 @@ using namespace der;
 
 DERSimulator::DERSimulator()
 {
-
+    world_.import<der_simulator_module>();
 }
 DERSimulator::~DERSimulator()
 {}
 void DERSimulator::TestRun()
 {
-    world_.import<der_simulator_module>();
-    int input = 0;
-    std::cout << "DERSimulator::TestRun, type 1 to exit" << std::endl;
+    int mins = 0;
+    std::cout << "DERSimulator::TestRun" << std::endl;
+    std::cout << "How many minutes would you like to simulate?" << std::endl;
+    std::cin >> mins;
+  
     
-    world_.set_target_fps(1);
-    while (!input) 
+
+    //world_.set_target_fps(1);
+    for (int i = 0; i < mins; i++)
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 60; i++)
         {
             world_.progress();
-        }
-        std::cin >> input;
+        } 
+        std::cout <<" Minute " << i << ": " << PrintSimpleDERImportEnergy(world_,) << std::endl;
+
         
-    }
+    
+    }  
 }

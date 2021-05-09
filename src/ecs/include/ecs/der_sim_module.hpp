@@ -14,9 +14,10 @@ class der_simulator_module
 
         struct SimpleDER
         {
-            int available_import_energy, available_export_energy, loss_rate;
+            double available_import_energy, available_export_energy, loss_per_second;
+            int loss_rate, import_low, import_high;
         };
-
+        
         struct Energy
         {
             int watt_hours;
@@ -39,8 +40,6 @@ class der_simulator_module
 
         der_simulator_module(flecs::world& world_) 
         {
-            der_import_high_ = 900;
-            der_import_low_ = 0;
             /* Register module with world */
             world_.module<der_simulator_module>();
 
@@ -60,7 +59,7 @@ class der_simulator_module
                 .add<SimpleDER>()
                 .add<DERSimulatorEntityTag>();
             //instantiate m_simulated_der memeber as an instance of that type
-            m_simulated_der = world_.entity().add(der_sim_type).set<SimpleDER>({600, 1800, 60})
+            m_simulated_der = world_.entity().add(der_sim_type).set<SimpleDER>({600, 1800, 0.166, 60, 0, 900})
                                                             .set<Status>(Status::kIdle);
 
             //auto q = world_.query<Status, Energy, Power>("$DER");
@@ -72,9 +71,10 @@ class der_simulator_module
                     {
                         if (s == Status::kIdle)
                         {
-                            if (d.available_import_energy < 900) //see section 3 of leighton's thesis
+                            //std::cout << ( d.import_high - ((d.import_high - d.import_low) / 2)) << std::endl;
+                            if (d.available_import_energy < d.import_high) //see section 3 of leighton's thesis
                             { 
-                                d.available_import_energy += d.loss_rate;
+                                d.available_import_energy += d.loss_per_second;
                                 d.available_export_energy = 2100 - d.available_export_energy;
                                 d.loss_rate = 22000 / ( d.available_import_energy + 215 );
                             }
@@ -84,16 +84,26 @@ class der_simulator_module
                             }
                         }
                     }
-                    std::cout << "Available Import Energy: " << d.available_import_energy << "Wh" << std::endl;
+                    else if (s == Status::kImporting)
+                    {
+                        if (d.available_import_energy > ( d.import_high - ((d.import_high - d.import_low) / 2 )))
+                        {
+                            d.available_import_energy -= d.loss_per_second;
+                            d.available_export_energy = 2100 - d.available_export_energy;
+                            d.loss_rate = 22000 / ( d.available_import_energy + 215 );
+
+                        }
+                        else
+                        {
+                            s = Status::kIdle;
+                        }
+                    }
+                    //std::cout << "Available Import Energy: " << d.available_import_energy << "Wh" << std::endl;
                 }
                 );   
         }
 
         flecs::entity m_simulated_der;
-        int der_import_low_;
-        int der_import_high_;
-        
-
 };
 
 } //namespace der
