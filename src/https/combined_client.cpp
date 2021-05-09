@@ -22,10 +22,11 @@ CombinedHttpsClient::GetCombined(const std::string& target, const std::string& q
 bb::http::response <bb::http::dynamic_body>
 CombinedHttpsClient::PostCombined(const std::string& target, const std::string& resource)
 {
+
     std::cout << "let's just pretend we also talked to the gsp" << std::endl;
-    auto dtm_result = dtm_client_->Post(target, resource);
+    auto dtm_response = dtm_client_->Post(target, resource);
     std::cout << "Made it through the deref dtm Post" << std::endl;
-    return dtm_result;
+    return dtm_response;
 }
 
 bb::http::response <bb::http::dynamic_body>
@@ -39,4 +40,12 @@ CombinedHttpsClient::DeleteCombined(const std::string& target)
 {
 
 }
+bb::http::response <bb::http::dynamic_body>
+CombinedHttpsClient::PostDTM(const std::string& target, const std::string& resource)
+{
 
+    std::cout << "let's just pretend we also talked to the gsp" << std::endl;
+    auto dtm_response = dtm_client_->Post(target, resource);
+    std::cout << "Made it through the deref dtm Post" << std::endl;
+    return dtm_response;
+}

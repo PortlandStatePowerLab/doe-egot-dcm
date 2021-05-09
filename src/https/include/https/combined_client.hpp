@@ -50,20 +50,21 @@ class CombinedHttpsClient
         (
             const std::string& target, const std::string& query = ""
         );
-
         boost::beast::http::response <boost::beast::http::dynamic_body> PostCombined
         (
             const std::string& target, const std::string& resource
         );
-
         boost::beast::http::response <boost::beast::http::dynamic_body> PutCombined
         (
             const std::string& target, const std::string& resource
         );
-
         boost::beast::http::response <boost::beast::http::dynamic_body> DeleteCombined
         (
             const std::string& target
+        );
+        boost::beast::http::response <boost::beast::http::dynamic_body> PostDTM
+        (
+            const std::string& target, const std::string& resource
         );
     private:
         GSPDetails gsp_connection_info_;
