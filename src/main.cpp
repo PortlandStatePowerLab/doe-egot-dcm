@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <https/https_client.hpp>
+#include <https/combined_client.hpp>
 #include <sep/models.hpp>
 #include <xml/adapter.hpp>
 #include <xml/xml_validator.hpp>
@@ -26,7 +27,8 @@ int main(int argc, char **argv)
 
 
   HttpsClient client(g_program_path, "host.docker.internal", "8886");
-
+  CombinedHttpsClient combined_client(g_program_path);
+/*
   std::cout << client.Get("/dcap") << std::endl;
   std::cout << client.Get("/tm") << std::endl;
   std::cout << client.Get("/edev") << std::endl;
@@ -55,7 +57,7 @@ std::string freq = R"(<?xml version="1.0" encoding="utf-8"?>
     <requestStatus>0</requestStatus>
   </RequestStatus>
 </FlowReservationRequest>)";
-
+*/
   std::string test_dtm_msg = R"(    <message>
         <from>DCM</from>
         <to>DER</to>
@@ -70,6 +72,7 @@ std::string freq = R"(<?xml version="1.0" encoding="utf-8"?>
         <logged>1617498512</logged>
     </message>)";
    auto thing = client.Post("/na", test_dtm_msg);
+   auto thing2 = combined_client.PostCombined("/na", test_dtm_msg);
    
    //std::cout << client.Get("/fres") << std::endl;
    //std::cout << client.Get("/sdev") << std::endl;

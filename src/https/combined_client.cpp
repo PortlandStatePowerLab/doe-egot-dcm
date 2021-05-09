@@ -1,5 +1,5 @@
 #include "include/https/combined_client.hpp"
-
+#include <iostream>
 
 // alias to make things easier to read
 namespace bb = boost::beast;
@@ -15,142 +15,25 @@ CombinedHttpsClient::~CombinedHttpsClient()
 bb::http::response <bb::http::dynamic_body>
 CombinedHttpsClient::GetCombined(const std::string& target, const std::string& query)
 {
-    HttpsClient::Get(target, query);
-    std::string href = target + query;
-    bb::http::request <bb::http::string_body> req
-    {
-        bb::http::verb::get, href, 11
-    };
-    req.set(bb::http::field::host, host_);
 
-    req.prepare_payload();
-    return HttpsClient::Send (req);
 }
 
 bb::http::response <bb::http::dynamic_body>
-HttpsClient::Post(const std::string& target, const std::string& resource)
+CombinedHttpsClient::PostCombined(const std::string& target, const std::string& resource)
 {
-    bb::http::request <bb::http::string_body> req
-    {
-        bb::http::verb::post, target, 11
-    };
-    req.set(bb::http::field::host, host_);
-
-    req.body() = resource;
-    req.prepare_payload();
-
-    return HttpsClient::Send (req);
+    std::cout << "let's just pretend we also talked to the gsp" << std::endl;
+    dtm_client_->Post(target, resource);
 }
 
 bb::http::response <bb::http::dynamic_body>
-HttpsClient::Put(const std::string& target, const std::string& resource)
+CombinedHttpsClient::PutCombined(const std::string& target, const std::string& resource)
 {
-    bb::http::request <bb::http::string_body> req
-    {
-        bb::http::verb::put, target, 11
-    };
-    req.set(bb::http::field::host, host_);
-
-    req.body() = resource;
-    req.prepare_payload();
-
-    return HttpsClient::Send (req);
+   
 }
 
 bb::http::response <bb::http::dynamic_body>
-HttpsClient::Delete(const std::string& target)
+CombinedHttpsClient::DeleteCombined(const std::string& target)
 {
-    bb::http::request <bb::http::string_body> req
-    {
-        bb::http::verb::delete_, target, 11
-    };
-    req.set(bb::http::field::host, host_);
 
-    req.prepare_payload();
-
-    return HttpsClient::Send (req);
 }
 
-bb::ssl_stream<bb::tcp_stream> HttpsClient::Connect() 
-{
-    bb::ssl_stream<bb::tcp_stream> stream(io_context_, ssl_context_);
-
-    // Set SNI Hostname (many hosts need this to handshake successfully)
-    if(! SSL_set_tlsext_host_name(stream.native_handle(), host_.c_str()))
-    {
-        bb::error_code ec{static_cast<int>(::ERR_get_error()), net::error::get_ssl_category()};
-        throw bb::system_error{ec};
-    } 
-
-    // Make the connection on the IP address we get from a lookup
-    bb::get_lowest_layer(stream).connect(resolver_.resolve(host_, port_));
-    
-    stream.handshake(ssl::stream_base::client);
-
-    return stream;
-}
-
-bb::http::response <bb::http::dynamic_body>
-HttpsClient::Send(bb::http::request<bb::http::string_body>& req)
-{
-    bb::ssl_stream<bb::tcp_stream> stream = HttpsClient::Connect();
-
-	// Send the HTTP request to the remote host
-    std::cout << "writing..." << std::endl;
-	bb::http::write(stream, req);
-    std::cout << "writing done." << std::endl;
-	// This buffer is used for reading and must be persisted
-	bb::flat_buffer buffer;
-
-	// Declare a container to hold the response
-	bb::http::response<bb::http::dynamic_body> res;
-    boost::system::error_code ec;
-    stream.shutdown(ec);
-    if (ec)
-    {
-        if(ec == net::error::eof || ec == boost::asio::ssl::error::stream_truncated)
-        {
-            // Rationale:
-            // http://stackoverflow.com/questions/25587403/boost-asio-ssl-async-shutdown-always-finishes-with-an-error
-            ec = {};
-        }
-        else
-        {
-            std::cout << "ec" << std::endl;
-            throw bb::system_error{ec};
-        }
-    }
- 
-
-	// Receive the HTTP response
-    std::cout << "now to read" << std::endl;
-	bb::http::read(stream, buffer, res, ec);
-    std::cout << "made it past the read" << std::endl;
-    
-    /*
-    if(ec == net::error::eof)
-    {
-        // Rationale:
-        // http://stackoverflow.com/questions/25587403/boost-asio-ssl-async-shutdown-always-finishes-with-an-error
-        ec = {};
-    }
-    if (ec != net::error::eof)
-    {
-        std::cout << "not eof lol" << std::endl;
-        ec = {};
-    }
-    if (ec == boost::asio::ssl::error::stream_truncated)
-    {
-        //Rationale: https://github.com/boostorg/beast/issues/824
-        //net::ssl::error::stream_truncated
-        std::cout << "stream truncated error ignored" << std::endl;
-        ec = {};
-    }
-    if(ec)
-    {
-        std::cout << "ec" << std::endl;
-        throw bb::system_error{ec};
-    }
-    */
-	return res;
-}

@@ -3,6 +3,7 @@
 #include "https_client.hpp"
 
 
+
 struct DTMDetails
 {
     std::string dtm_root;
@@ -19,6 +20,11 @@ struct GSPDetails
 class CombinedHttpsClient
 {
     public:
+        CombinedHttpsClient(const std::string &root)
+        {
+            gsp_client_ = new HttpsClient(root, "localhost", "443");
+            dtm_client_ = new HttpsClient(root, "host.docker.internal", "8886");
+        }
         CombinedHttpsClient(const std::string &root, const std::string &host,const std::string &port) 
         {
             gsp_client_ = new HttpsClient(root, host, port);
