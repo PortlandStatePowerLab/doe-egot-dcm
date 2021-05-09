@@ -7,33 +7,34 @@
 #include <xml/adapter.hpp>
 #include <xml/xml_validator.hpp>
 #include <ecs/sim_module.hpp>
+#include <ecs/der_simulator.hpp>
 
-std::string g_program_path;
-void SimulateDER(); //prototype
-void RunHttpsTests(int argc, char **argv);
-void GetParentPath(char** arg);
-/*
 void GetParentPath(char** arg)
 {
     g_program_path = arg[0];
     std::size_t found = g_program_path.find_last_of("/\\");
     g_program_path = g_program_path.substr(0,found);
-};
-*/
-
-int main(int argc, char **argv)
+}; 
+void SimulateDER()
 {
-  SimulateDER();
-  //std::string ssl_path = "../ssl-ca/";
-  std::cout << "src main" << std::endl;
+    std::cout << "playground simulate DER function " << std::endl;
+    der::DERSimulator simulated_der;
+
+    simulated_der.TestRun();
+    
+}
+
+void RunHttpsTests(int argc, char **argv)
+{
+    std::cout << "src main" << std::endl;
   GetParentPath(argv);
   std::cout << "argv: " << *argv << std::endl;
   std::cout << "Parent path: " << g_program_path << std::endl;
 
-/*
+
   //HttpsClient client(g_program_path, "host.docker.internal", "8886");
   CombinedHttpsClient combined_client(g_program_path);
-
+/*
   std::cout << client.Get("/dcap") << std::endl;
   std::cout << client.Get("/tm") << std::endl;
   std::cout << client.Get("/edev") << std::endl;
@@ -62,7 +63,7 @@ std::string freq = R"(<?xml version="1.0" encoding="utf-8"?>
     <requestStatus>0</requestStatus>
   </RequestStatus>
 </FlowReservationRequest>)";
-
+*/
   std::string test_dtm_msg = R"(    <message>
         <from>DCM</from>
         <to>DER</to>
@@ -84,6 +85,5 @@ std::string freq = R"(<?xml version="1.0" encoding="utf-8"?>
     //std::cout << response << std::endl;
     //sep::DeviceCapability *dcap = new sep::DeviceCapability;
     //xml::Parse(boost::beast::buffers_to_string(response.body().data()), dcap);
-*/
-    return 0;
+
 }
