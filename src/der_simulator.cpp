@@ -25,7 +25,7 @@ void DERSimulator::TestRun()
         {
             world_.progress();
         } 
-        std::cout <<" Minute " << i << ": " << PrintSimpleDERImportEnergy(world_,) << std::endl;
+        std::cout <<" Minute " << i << ": " << PrintSimpleDERImportEnergy() << std::endl;
 
         
     
