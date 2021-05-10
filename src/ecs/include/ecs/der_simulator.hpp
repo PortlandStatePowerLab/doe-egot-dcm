@@ -12,7 +12,7 @@ class DERSimulator
         DERSimulator();
         ~DERSimulator();
         void TestRun();
-        double PrintSimpleDERImportEnergy()
+        void PrintSimpleDERImportEnergy()
         {
             auto q = world_.query<der::der_simulator_module::SimpleDER>();
             q.each(
