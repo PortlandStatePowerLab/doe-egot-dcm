@@ -106,11 +106,13 @@ class der_simulator_module
             world_.system<DERSimulatorEntityTag, SimpleDER>("SimulateDraw")  
                 .each([](flecs::entity e, DERSimulatorEntityTag& x, SimpleDER& d)
                 {
-                    
                     int random = rand();
                     if (4500 > random && random > 0)
                     {
                         std::cout << "random number is " << random << std::endl;
+                        d.available_import_energy = random;
+                        d.available_export_energy = 2100 - d.available_export_energy;
+                        d.loss_rate = 22000 / ( d.available_import_energy + 215 );
                     }
                 }
                 );   
