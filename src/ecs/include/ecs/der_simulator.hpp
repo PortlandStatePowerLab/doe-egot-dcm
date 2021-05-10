@@ -18,7 +18,7 @@ class DERSimulator
             q.each(
                 [](flecs::entity e, der::der_simulator_module::SimpleDER& d)
                 {
-                    std::cout << d.available_import_energy;
+                    std::cout << "available import energy: " << int(d.available_import_energy) << " Wh ";
                 }
             ); 
         }
