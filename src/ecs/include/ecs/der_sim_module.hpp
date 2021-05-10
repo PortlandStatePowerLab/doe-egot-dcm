@@ -1,6 +1,8 @@
 #ifndef __DER_SIM_MODULE_H__
 #define __DER_SIM_MODULE_H__
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 #include <flecs.h>
 
 namespace der
@@ -101,6 +103,18 @@ class der_simulator_module
                     //std::cout << "Available Import Energy: " << d.available_import_energy << "Wh" << std::endl;
                 }
                 );   
+            world_.system<DERSimulatorEntityTag, SimpleDER>("SimulateDraw")  
+                .each([](flecs::entity e, DERSimulatorEntityTag& x, SimpleDER& d)
+                {
+                    
+                    int random = rand();
+                    if (4500 > random && random > 0)
+                    {
+                        std::cout << "random number is " << random << std::endl;
+                    }
+                }
+                );   
+            
         }
 
         flecs::entity m_simulated_der;
