@@ -39,8 +39,6 @@ CombinedHttpsClient::DeleteCombined(const std::string& target)
 bb::http::response <bb::http::dynamic_body>
 CombinedHttpsClient::PostDTM(const std::string& target, const std::string& resource)
 {
-    std::cout << "let's just pretend we also talked to the gsp" << std::endl;
     auto dtm_response = dtm_client_->Post(target, resource);
-    std::cout << "Made it through the deref dtm Post" << std::endl;
     return dtm_response;
 }
