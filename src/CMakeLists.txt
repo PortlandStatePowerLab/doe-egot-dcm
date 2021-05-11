@@ -6,7 +6,6 @@ set(COMPONENT_NAME dcm)
 add_executable(${COMPONENT_NAME} 
   main.cpp
   playground.cpp
-  der_simulator.cpp
 )
 
 target_link_libraries(${COMPONENT_NAME} PUBLIC 
