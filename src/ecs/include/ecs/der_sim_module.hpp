@@ -11,25 +11,22 @@ namespace der
 class der_simulator_module 
 {
     public:
+
         struct DERSimulatorEntityTag 
         {};
 
         struct SimpleDER
         {
             double available_import_energy, available_export_energy, loss_per_second;
-            int loss_rate, import_low, import_high;
-        };
-        
-        struct Energy
-        {
-            int watt_hours;
-
+            int loss_rate, import_low, import_high, secs_since_epoch, secs_since_command;
         };
 
-        struct Power
+        enum class CurrentActiveCommand : short //change this enum value to simulate commands
         {
-            int watts;
-
+            kNoCommand,
+            kImportPowerCommand,
+            kExportPowerCommand,
+            kCustomerHasOverriddenCommands
         };
 
         enum class Status : short
@@ -47,28 +44,62 @@ class der_simulator_module
 
             /* Register components */
             world_.component<Status>();
-            world_.component<Energy>();
-            world_.component<Power>();
             world_.component<SimpleDER>();
+            world_.component<CurrentActiveCommand>();
             world_.component<DERSimulatorEntityTag>();
-
+            
             //world_.set<DER>({1000, 4500, 0, 4500, 0});
             //create type for simulated der entities
             auto der_sim_type = world_.type("der_sim_type")
                 .add<Status>()
-                .add<Energy>()
-                .add<Power>()
                 .add<SimpleDER>()
+                .add<CurrentActiveCommand>()
                 .add<DERSimulatorEntityTag>();
             //instantiate m_simulated_der memeber as an instance of that type
-            m_simulated_der = world_.entity().add(der_sim_type).set<SimpleDER>({600, 1800, 0.166, 60, 0, 900})
-                                                            .set<Status>(Status::kIdle);
+            m_simulated_der = world_.entity().add(der_sim_type).set<SimpleDER>({600, 1800, 0.166, 60, 0, 900, 0, 0})
+                                                            .set<Status>(Status::kIdle)
+                                                            .set<CurrentActiveCommand>(CurrentActiveCommand::kNoCommand);
 
-            //auto q = world_.query<Status, Energy, Power>("$DER");
-
-            world_.system<DERSimulatorEntityTag, SimpleDER, Status>("UpdateSimDER")  
-                .each([this](flecs::entity e, DERSimulatorEntityTag& x, SimpleDER& d, Status& s)
+            world_.system<DERSimulatorEntityTag, SimpleDER, CurrentActiveCommand, Status>("UpdateSimDER")  
+                .each([this](flecs::entity e, DERSimulatorEntityTag& x, SimpleDER& d, CurrentActiveCommand& c, Status& s)
                 {
+                    ++d.secs_since_epoch;
+
+                    if (c != CurrentActiveCommand::kNoCommand)
+                    {
+                        ++d.secs_since_command;
+                        if (!d.secs_since_command)
+                        {
+                            switch (c) 
+                            {
+                                case CurrentActiveCommand::kImportPowerCommand:
+                                {
+                                    d.import_high = 300;
+                                    d.import_low = 0;
+                                    break;
+                                }
+                                case CurrentActiveCommand::kExportPowerCommand:
+                                {
+                                    d.import_high = 2100;
+                                    d.import_low = 1725;
+                                    break;
+                                }
+                                case CurrentActiveCommand::kCustomerHasOverriddenCommands:
+                                {
+                                    d.import_high = 900;
+                                    d.import_low = 0;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else if (c == CurrentActiveCommand::kNoCommand)
+                    {
+                        d.secs_since_command = 0;
+                        d.import_high = 900;
+                        d.import_low = 0;
+                    }
+
                     if (s != Status::kImporting)
                     {
                         if (s == Status::kIdle)
@@ -104,18 +135,19 @@ class der_simulator_module
                     //std::cout << "Available Import Energy: " << d.available_import_energy << "Wh" << std::endl;
                 }
                 );   
+
             world_.system<DERSimulatorEntityTag, SimpleDER>("SimulateDraw")  
                 .each([](flecs::entity e, DERSimulatorEntityTag& x, SimpleDER& d)
                 {
-                    int random = ( rand() % 3600 );
+                    int random = ( rand() % 7200 );
                     //std::cout << "random " << random << " " << std::endl;
                     if (random == 30)
                     {
                         double delta = ( rand() % int( ( 4500 - d.available_import_energy ) ) );
                         double draw = d.available_import_energy + delta;
-                        if (draw > 1000)
+                        if (delta > 1000)
                         {
-                            if (rand() % 5 == 0)
+                            if ( !( rand() % 3 == 0 ) )
                             {
                                 std::cout << " (x) ";
                                 draw -= 1000;
@@ -138,14 +170,15 @@ class der_simulator_module
                     }
                 }
                 );   
-            
         }
+
         void UpdateSimpleLossRates(SimpleDER * der) //remember to pass the pointer
         {
             der->loss_rate =  22000 / ( der->available_import_energy + 215 );
             der->loss_per_second = double( double(der->loss_rate) / 3600 );
             //std::cout << "loss rate updates: " << der->loss_rate << "  " << der->loss_per_second << " " << der->available_import_energy << std::endl;
         }
+        
         flecs::entity m_simulated_der;
 };
 
