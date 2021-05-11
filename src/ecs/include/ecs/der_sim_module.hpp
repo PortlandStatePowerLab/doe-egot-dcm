@@ -65,7 +65,7 @@ class der_simulator_module
                 {
                     ++d.secs_since_epoch;
 
-                    if (c != CurrentActiveCommand::kNoCommand)
+                    if ( c != CurrentActiveCommand::kNoCommand )
                     {
                         ++d.secs_since_command;
                         if (!d.secs_since_command)
@@ -93,7 +93,7 @@ class der_simulator_module
                             }
                         }
                     }
-                    else if (c == CurrentActiveCommand::kNoCommand)
+                    else if ( ( c == CurrentActiveCommand::kNoCommand ) && ( d.secs_since_command > 0 ) )
                     {
                         d.secs_since_command = 0;
                         d.import_high = 900;
