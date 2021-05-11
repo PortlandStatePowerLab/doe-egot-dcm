@@ -48,6 +48,7 @@ class DERSimulator
                 }
             ); 
         }
+        
     protected:
         flecs::world world_;
 };

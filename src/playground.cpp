@@ -15,6 +15,7 @@ void GetParentPath(char** arg)
     std::size_t found = g_program_path.find_last_of("/\\");
     g_program_path = g_program_path.substr(0,found);
 }; 
+
 void SimulateDER()
 {
     std::cout << "playground simulate DER function " << std::endl;
