@@ -15,8 +15,7 @@ void DERSimulator::TestRun()
     std::cout << "DERSimulator::TestRun" << std::endl;
     std::cout << "How many minutes would you like to simulate?" << std::endl;
     std::cin >> mins;
-  
-    
+    srand(mins); //seed rand() generator 
 
     //world_.set_target_fps(1);
     for (int i = 0; i < mins; i++)
@@ -25,11 +24,12 @@ void DERSimulator::TestRun()
         {
             world_.progress();
         } 
-        std::cout <<" Minute " << i << ": ";
-        PrintSimpleDERImportEnergy();
-        std::cout << std::endl;
+        if (i % 5 == 0) //only print incrementally
+        {
+            std::cout <<" Minute " << i << ": ";
+            PrintSimpleDERImportEnergy();
+            std::cout << std::endl;
+        }
 
-        
-    
     }  
 }

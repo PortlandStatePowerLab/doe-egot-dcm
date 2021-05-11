@@ -67,7 +67,7 @@ class der_simulator_module
             //auto q = world_.query<Status, Energy, Power>("$DER");
 
             world_.system<DERSimulatorEntityTag, SimpleDER, Status>("UpdateSimDER")  
-                .each([](flecs::entity e, DERSimulatorEntityTag& x, SimpleDER& d, Status& s)
+                .each([this](flecs::entity e, DERSimulatorEntityTag& x, SimpleDER& d, Status& s)
                 {
                     if (s != Status::kImporting)
                     {
@@ -77,12 +77,13 @@ class der_simulator_module
                             if (d.available_import_energy < d.import_high) //see section 3 of leighton's thesis
                             { 
                                 d.available_import_energy += d.loss_per_second;
-                                d.available_export_energy = 2100 - d.available_export_energy;
-                                d.loss_rate = 22000 / ( d.available_import_energy + 215 );
+                                d.available_export_energy = 2100 - d.available_import_energy;
+                                UpdateSimpleLossRates(&d);
                             }
                             else
                             {
                                 s = Status::kImporting;
+                                std::cout << "     DER Status changed: Importing   " << std::endl;
                             }
                         }
                     }
@@ -90,14 +91,14 @@ class der_simulator_module
                     {
                         if (d.available_import_energy > ( d.import_high - ((d.import_high - d.import_low) / 2 )))
                         {
-                            d.available_import_energy -= d.loss_per_second;
-                            d.available_export_energy = 2100 - d.available_export_energy;
-                            d.loss_rate = 22000 / ( d.available_import_energy + 215 );
-
+                            d.available_import_energy -= 0.55; //approx Wh of available import energy lost per second during import for EWH
+                            d.available_export_energy = 2100 - d.available_import_energy;
+                            UpdateSimpleLossRates(&d);
                         }
                         else
                         {
                             s = Status::kIdle;
+                            std::cout << "     DER Status changed: Idle   " << std::endl;
                         }
                     }
                     //std::cout << "Available Import Energy: " << d.available_import_energy << "Wh" << std::endl;
@@ -106,19 +107,45 @@ class der_simulator_module
             world_.system<DERSimulatorEntityTag, SimpleDER>("SimulateDraw")  
                 .each([](flecs::entity e, DERSimulatorEntityTag& x, SimpleDER& d)
                 {
-                    int random = rand();
-                    if (4500 > random && random > 0)
+                    int random = ( rand() % 3600 );
+                    //std::cout << "random " << random << " " << std::endl;
+                    if (random == 30)
                     {
-                        std::cout << "random number is " << random << std::endl;
-                        d.available_import_energy = random;
-                        d.available_export_energy = 2100 - d.available_export_energy;
-                        d.loss_rate = 22000 / ( d.available_import_energy + 215 );
+                        double delta = ( rand() % int( ( 4500 - d.available_import_energy ) ) );
+                        double draw = d.available_import_energy + delta;
+                        if (draw > 1000)
+                        {
+                            if (rand() % 5 == 0)
+                            {
+                                std::cout << " (x) ";
+                                draw -= 1000;
+                            }
+                                
+                        }
+                        std::cout << "    Random draw. Prev import Wh: " << d.available_import_energy << std::endl;
+                        std::cout << "    delta import Wh: " << delta << std::endl;
+                        std::cout << "    new import Wh: " << draw << std::endl;
+                        d.available_import_energy = draw;
+
+                        if (d.available_import_energy > 2100)
+                        {
+                            d.available_export_energy = 0;
+                        }
+                        else
+                        {
+                            d.available_export_energy = 2100 - d.available_import_energy;
+                        }
                     }
                 }
                 );   
             
         }
-
+        void UpdateSimpleLossRates(SimpleDER * der) //remember to pass the pointer
+        {
+            der->loss_rate =  22000 / ( der->available_import_energy + 215 );
+            der->loss_per_second = double( double(der->loss_rate) / 3600 );
+            //std::cout << "loss rate updates: " << der->loss_rate << "  " << der->loss_per_second << " " << der->available_import_energy << std::endl;
+        }
         flecs::entity m_simulated_der;
 };
 
