@@ -62,10 +62,7 @@ class DERSimulator
         }
         std::string GetEnergy()
         {
-            const der_simulator_module::SimpleDER* der = world_.get<der_simulator_module::SimpleDER>();
-            double import = der->available_import_energy;
-            std::string response = "Available Import Energy: " + str(import) + "Wh";
-            return response;
+           
         }
         std::string GetNameplate()
         {
