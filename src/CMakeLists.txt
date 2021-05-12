@@ -1,12 +1,14 @@
 add_subdirectory(https)
 add_subdirectory(ecs)
 add_subdirectory(command_pattern)
+add_subdirectory(dtm_msg_writer)
 
 set(COMPONENT_NAME dcm)
 
 add_executable(${COMPONENT_NAME} 
   main.cpp
   playground.cpp
+  ecs_dcm.cpp
 )
 
 target_link_libraries(${COMPONENT_NAME} PUBLIC 
@@ -14,6 +16,7 @@ target_link_libraries(${COMPONENT_NAME} PUBLIC
   SEP::Model
   ecs
   command_pattern
+  dtm_msg_writer
   SEP::XML
   pthread
 )

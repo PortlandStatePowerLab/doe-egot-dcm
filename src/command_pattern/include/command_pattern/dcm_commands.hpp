@@ -12,6 +12,7 @@
 #include <xml/adapter.hpp>
 #include <xml/xml_validator.hpp>
 #include "simple_sim_receiver.hpp"
+#include <dtm_msg_writer/announce_xml.h>
 
 namespace dcm
 {
@@ -34,6 +35,7 @@ class BaseCommand
 
         CombinedHttpsClient * https_client_;
         BaseReceiver * receiver_;
+        xml::XMLCommandAdapter xml_writer_;
 
 };
 

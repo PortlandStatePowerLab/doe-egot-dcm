@@ -57,6 +57,7 @@ class ECS_DCM
             // imaginary comms tests, or pre-defined binary init
             receiver_ = new SimpleSimulatorReceiver; //emulated DER
         }
+        void RunSimulatorLoop();
     
     private:
 

@@ -7,6 +7,7 @@
 #include <xml/adapter.hpp>
 #include <xml/xml_validator.hpp>
 #include <ecs/sim_module.hpp>
+#include <dtm_msg_writer/abstract_command.h>
 
 std::string g_program_path;
 

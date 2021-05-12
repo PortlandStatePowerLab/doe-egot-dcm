@@ -1,4 +1,4 @@
-#include "announce_xml.h"
+#include "include/dtm_msg_writer/announce_xml.h"
 //
 // Created by Whitman on 3/25/2021.
 //
@@ -115,6 +115,10 @@ void XMLCommandAdapter::MakeCommand(string type)
     tree_.put("message.content.command.duration", dur);
     tree_.put("message.content.expect_response", 1);
     tree_.put("message.logged", std::time(0));
+}
+std::string XMLCommandAdapter::ReturnCustomCommand(std::string& to, std::string& from, std::string& type)
+{
+    
 }
 
 }//namespace xml

@@ -25,6 +25,7 @@ namespace xml
  * -------------------------------------------------------------------
  */
 const std::string testing_file_name = "test_file.xml";
+const std::string MSG_LOG_PATH = "../../msg_logs/dtm_messages_testing.xml";
 
 class XMLCommandAdapter
 {
@@ -41,10 +42,17 @@ class XMLCommandAdapter
         void Load();
         void Shed();
         void MakeCommand(std::string type);
+        std::string ReturnCustomCommand(std::string& to, std::string& from, std::string& type);
         std::string ReturnCommandAsStr()
         {
             std::stringstream ss;
             boost::property_tree::write_xml(ss, tree_, boost::property_tree::xml_writer_make_settings<std::string>(' ', 4));
+            return ss.str();
+        }
+        std::string ReturnCommandAsStr(boost::property_tree::ptree& prop)
+        {
+            std::stringstream ss;
+            boost::property_tree::write_xml(ss, prop, boost::property_tree::xml_writer_make_settings<std::string>(' ', 4));
             return ss.str();
         }
 
