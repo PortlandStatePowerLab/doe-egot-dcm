@@ -27,4 +27,5 @@ install(
     FILE ${COMPONENT_NAME}Targets.cmake
     NAMESPACE ${PROJECT_NAME}::
     DESTINATION lib/cmake
+    EXCLUDE_FROM_ALL
 )
