@@ -32,14 +32,9 @@ void SimulateDER()
     simulated_der.TestRun();
     
 }
-void RunHttpsTests(int argc, char **argv)
+void RunHttpsTests()
 {
-    std::cout << "src main" << std::endl;
-  GetParentPath(argv);
-  std::cout << "argv: " << *argv << std::endl;
-  std::cout << "Parent path: " << g_program_path << std::endl;
-
-
+  std::cout << " RunHttpsTests() " << std::endl;
   //HttpsClient client(g_program_path, "host.docker.internal", "8886");
   CombinedHttpsClient combined_client(g_program_path);
 /*

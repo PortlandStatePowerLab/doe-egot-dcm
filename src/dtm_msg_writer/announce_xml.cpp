@@ -128,7 +128,8 @@ std::string XMLCommandAdapter::ReturnCustomCommand(const std::string& to, const 
     tree_.put("message.content.command.start", start_time);
     tree_.put("message.content.command.duration", duration);
     //tree_.put("message.content.expect_response", 1);
-    tree_.put("message.created", std::time(0));
+    tree_.put("message.DCM_timestamp", std::time(0));
+    return ReturnCommandAsStr();
 }
 
 

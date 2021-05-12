@@ -13,7 +13,7 @@ std::string g_program_path;
 
 void SimulateDER(); //prototypes
 void SimulateDCMSystem();
-void RunHttpsTests(int argc, char **argv);
+void RunHttpsTests();
 void GetParentPath(char** arg);
 
 int main(int argc, char **argv)
@@ -26,6 +26,8 @@ int main(int argc, char **argv)
   GetParentPath(argv);
   std::cout << "argv: " << *argv << std::endl;
   std::cout << "Parent path: " << g_program_path << std::endl;
+  std::cout << "Here" << std::endl;
+  //RunHttpsTests();
   SimulateDCMSystem();
   return 0;
 }

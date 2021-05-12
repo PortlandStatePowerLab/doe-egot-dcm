@@ -62,7 +62,7 @@ class CombinedHttpsClient
         (
             const std::string& target
         );
-        boost::beast::http::response <boost::beast::http::dynamic_body> PostDTM
+        void PostDTM
         (
             const std::string& resource
         );

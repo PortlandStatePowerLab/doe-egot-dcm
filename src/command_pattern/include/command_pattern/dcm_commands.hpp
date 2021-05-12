@@ -49,8 +49,13 @@ class ImportEnergy : public BaseCommand
         ~ImportEnergy() {}
         std::string Execute() 
         {
+            std::string response_from_der = "der response not supported yet";
             std::cout << "  ImportEnergy Command Executing... " << std::endl;
-            https_client_->PostDTM( xml_writer_.ReturnCustomCommand("DER", "DCM", "ImportEnergy", "unknown") );
+            std::string msg_out =  xml_writer_.ReturnCustomCommand("DER", "DCM", "ImportEnergy", "unknown");
+            std::cout << "    ---- message is: : " << msg_out << std::endl << "  Now to post it..." << std::endl;
+            https_client_->PostDTM(msg_out);
+            std::cout << "is this (importenergy executre() ) where the invalid ptr is? " << std::endl;
+            return response_from_der;
         }
 
     private:

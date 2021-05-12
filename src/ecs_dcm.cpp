@@ -16,6 +16,8 @@ namespace dcm
 void ECS_DCM::RunSimulatorLoop()
 {
     std::cout << "   ECS_DCM::RunSimulatorLoop() " << std::endl;
+
+    import_energy_c_->Execute();
 }
 
 
