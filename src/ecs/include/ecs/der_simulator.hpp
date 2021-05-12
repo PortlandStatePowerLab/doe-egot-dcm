@@ -127,7 +127,7 @@ class DERSimulator
         std::string GetNameplate()
         {
             //whatever lol
-            return "Power 4500 Watts, Max Export Energy 2100 Wh, Max Import Energy 4500 Wh "
+            return "Power 4500 Watts, Max Export Energy 2100 Wh, Max Import Energy 4500 Wh ";
         }
         std::string Idle()
         {
