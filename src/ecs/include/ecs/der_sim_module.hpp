@@ -12,57 +12,12 @@ namespace der
 class der_simulator_module 
 {
     public:
-/*
-        struct DERSimulatorEntityTag 
-        {};
 
-        struct SimpleDER
-        {
-            double available_import_energy, available_export_energy, loss_per_second;
-            int loss_rate, import_low, import_high, secs_since_epoch, secs_since_command;
-        };
-
-        enum class CurrentActiveCommand : short //change this enum value to simulate commands
-        {
-            kNoCommand,
-            kImportEnergyCommand,
-            kExportEnergyCommand,
-            kCustomerHasOverriddenCommands
-        };
-
-        enum class Status : short
-        {
-            kImporting,
-            kExporting,
-            kIdle,
-            kCustomerOverride
-        };
-*/
         der_simulator_module(flecs::world& world_) 
         {
             //Register module with world 
             world_.module<der_simulator_module>();
             world_.import<der_components>();
-/*
-            // Register components 
-            world_.component<Status>();
-            world_.component<SimpleDER>();
-            world_.component<CurrentActiveCommand>();
-            world_.component<DERSimulatorEntityTag>();
-            
-            //world_.set<DER>({1000, 4500, 0, 4500, 0});
-            //create type for simulated der entities
-            auto der_sim_type = world_.type("der_sim_type")
-                .add<Status>()
-                .add<SimpleDER>()
-                .add<CurrentActiveCommand>()
-                .add<DERSimulatorEntityTag>();
-            //instantiate m_simulated_der memeber as an instance of that type
-            m_simulated_der = world_.entity("m_sim_der_1").add(der_sim_type).set<SimpleDER>({600, 1800, 0.166, 60, 0, 900, 0, 0})
-                                                            .set<Status>(Status::kIdle)
-                                                            .set<CurrentActiveCommand>(CurrentActiveCommand::kNoCommand);
-            */
-            //auto q = world_.query<der::der_simulator_module::SimpleDER>();
 
             world_.system<der_components::DERSimulatorEntityTag, der_components::SimpleDER, der_components::CurrentActiveCommand, der_components::Status>("UpdateSimDER")  
                 .each([this](flecs::entity e, der_components::DERSimulatorEntityTag& x, der_components::SimpleDER& d, der_components::CurrentActiveCommand& c, der_components::Status& s)

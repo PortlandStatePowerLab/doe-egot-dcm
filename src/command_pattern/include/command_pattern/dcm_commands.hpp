@@ -44,8 +44,7 @@ class ImportEnergy : public BaseCommand
         ImportEnergy() {}
         ImportEnergy(CombinedHttpsClient * c, BaseReceiver * r) : BaseCommand(c, r) 
         {std::cout << "ImportEnergy Command Constructed " << std::endl;}
-        ~ImportEnergy() 
-        {}
+        ~ImportEnergy() {}
         std::string Execute() {}
 
     private:
@@ -57,8 +56,7 @@ class ExportEnergy : public BaseCommand
 
         ExportEnergy() {}
         ExportEnergy(CombinedHttpsClient * c, BaseReceiver * r) : BaseCommand(c, r) {}
-        ~ExportEnergy() 
-        {}
+        ~ExportEnergy() {}
         std::string Execute() {}
 
     private:
