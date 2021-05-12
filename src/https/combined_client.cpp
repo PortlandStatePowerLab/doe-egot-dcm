@@ -37,8 +37,8 @@ CombinedHttpsClient::DeleteCombined(const std::string& target)
 
 }
 bb::http::response <bb::http::dynamic_body>
-CombinedHttpsClient::PostDTM(const std::string& target, const std::string& resource)
+CombinedHttpsClient::PostDTM(const std::string& resource)
 {
-    auto dtm_response = dtm_client_->Post(target, resource);
+    auto dtm_response = dtm_client_->Post("NO TARGET", resource);
     return dtm_response;
 }

@@ -25,12 +25,13 @@ namespace xml
  * -------------------------------------------------------------------
  */
 const std::string testing_file_name = "test_file.xml";
+const std::string GENERIC = "unknown";
 const std::string MSG_LOG_PATH = "../../msg_logs/dtm_messages_testing.xml";
 
 class XMLCommandAdapter
 {
     public:
-        XMLCommandAdapter() : xml_notification_("NO DATA"), test_file_name_(testing_file_name)
+        XMLCommandAdapter() : xml_notification_("NO DATA"), test_file_name_(testing_file_name), saved_("unknown")
         {}
         ~XMLCommandAdapter();
         void GenerateTestFile();
@@ -42,7 +43,7 @@ class XMLCommandAdapter
         void Load();
         void Shed();
         void MakeCommand(std::string type);
-        std::string ReturnCustomCommand(std::string& to, std::string& from, std::string& type);
+        std::string ReturnCustomCommand(const std::string& to, const std::string& from, const std::string& type, const std::string& duration);
         std::string ReturnCommandAsStr()
         {
             std::stringstream ss;
@@ -59,6 +60,7 @@ class XMLCommandAdapter
     private:
         std::string xml_notification_;
         std::string test_file_name_;
+        std::string saved_;
         boost::property_tree::ptree tree_;
 };
 

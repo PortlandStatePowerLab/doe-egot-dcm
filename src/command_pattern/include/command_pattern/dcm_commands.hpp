@@ -31,7 +31,7 @@ class BaseCommand
         }
         virtual std::string Execute() = 0;
 
-    private:
+    protected:
 
         CombinedHttpsClient * https_client_;
         BaseReceiver * receiver_;
@@ -47,7 +47,11 @@ class ImportEnergy : public BaseCommand
         ImportEnergy(CombinedHttpsClient * c, BaseReceiver * r) : BaseCommand(c, r) 
         {std::cout << "ImportEnergy Command Constructed " << std::endl;}
         ~ImportEnergy() {}
-        std::string Execute() {}
+        std::string Execute() 
+        {
+            std::cout << "  ImportEnergy Command Executing... " << std::endl;
+            https_client_->PostDTM( xml_writer_.ReturnCustomCommand("DER", "DCM", "ImportEnergy", "unknown") );
+        }
 
     private:
 };

@@ -64,7 +64,7 @@ class CombinedHttpsClient
         );
         boost::beast::http::response <boost::beast::http::dynamic_body> PostDTM
         (
-            const std::string& target, const std::string& resource
+            const std::string& resource
         );
     private:
         GSPDetails gsp_connection_info_;

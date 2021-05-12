@@ -21,7 +21,11 @@ class BaseReceiver
 
         BaseReceiver() {}
         ~BaseReceiver() {}
-        virtual void Polymorphism(void) {}
+        virtual std::string Import() {}
+        virtual std::string Export() {}
+        virtual std::string GetEnergy() {}
+        virtual std::string GetNameplate() {}
+        virtual std::string Idle() {}
 
     private:
 
@@ -41,7 +45,30 @@ class SimpleSimulatorReceiver : public BaseReceiver
         {
             delete sim_der_;
         }
-        void Polymorphism() {}
+        std::string Import() 
+        {
+            return sim_der_->ImportEnergy();
+        }
+        std::string Export() 
+        {
+            return sim_der_->ExportEnergy();
+        }
+        std::string GetEnergy() 
+        {
+            return sim_der_->GetEnergy();
+        }
+        std::string GetNameplate() 
+        {
+            return sim_der_->GetNameplate();
+        }
+        std::string Idle() 
+        {
+            return sim_der_->Idle();
+        }
+        void IncrementSimulatorProgress()
+        {
+            sim_der_->IncrementProgress();
+        }
 
     private:
 

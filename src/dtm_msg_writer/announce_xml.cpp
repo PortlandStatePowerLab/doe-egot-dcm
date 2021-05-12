@@ -103,7 +103,6 @@ void XMLCommandAdapter::Shed()
 }
 void XMLCommandAdapter::MakeCommand(string type)
 {
-    float dur = 3.1415; //duration for testing
     std::time_t start_time = std::time(0);
     string str_time = ctime(&start_time);
     //std::tm* gmtm = gmtime(&t);
@@ -112,14 +111,26 @@ void XMLCommandAdapter::MakeCommand(string type)
     tree_.put("message.to", "DER");
     tree_.put("message.content.command.type", type);
     tree_.put("message.content.command.start", start_time);
-    tree_.put("message.content.command.duration", dur);
+    //tree_.put("message.content.command.duration", dur);
     tree_.put("message.content.expect_response", 1);
     tree_.put("message.logged", std::time(0));
 }
-std::string XMLCommandAdapter::ReturnCustomCommand(std::string& to, std::string& from, std::string& type)
+std::string XMLCommandAdapter::ReturnCustomCommand(const std::string& to, const std::string& from, const std::string& type, const std::string& duration)
 {
-    
+    float dur = 3.1415; //duration for testing
+    std::time_t start_time = std::time(0);
+    string str_time = ctime(&start_time);
+    //std::tm* gmtm = gmtime(&t);
+    //std::string str_time = std::asctime(gmtm);
+    tree_.put("message.from", from);
+    tree_.put("message.to", to);
+    tree_.put("message.content.command.type", type);
+    tree_.put("message.content.command.start", start_time);
+    tree_.put("message.content.command.duration", duration);
+    //tree_.put("message.content.expect_response", 1);
+    tree_.put("message.created", std::time(0));
 }
+
 
 }//namespace xml
 }//namespace dcm
