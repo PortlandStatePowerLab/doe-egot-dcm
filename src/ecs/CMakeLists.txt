@@ -19,7 +19,7 @@ target_link_libraries(${COMPONENT_NAME} INTERFACE
 # install the target and create export-set
 install(
     EXPORT ${COMPONENT_NAME}Targets
-    FILE ${COMPONENT_NAME}Targets.cmake
+    FILE ${PROJECT_NAME}-${COMPONENT_NAME}Targets.cmake
     NAMESPACE ${PROJECT_NAME}::
     DESTINATION lib/cmake
 )
