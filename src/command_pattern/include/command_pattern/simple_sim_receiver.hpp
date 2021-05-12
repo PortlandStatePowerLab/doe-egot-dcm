@@ -34,6 +34,7 @@ class SimpleSimulatorReceiver : public BaseReceiver
 
         SimpleSimulatorReceiver() 
         {
+            std::cout << " SimpleSimulatorReceiver default constructor " << std::endl;
             sim_der_ = new der::DERSimulator;
         }
         ~SimpleSimulatorReceiver() 

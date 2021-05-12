@@ -1,5 +1,6 @@
 #ifndef __DCM_COMMANDS_H__
 #define __DCM_COMMANDS_H__
+
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,10 +21,16 @@ class BaseCommand
     public:
 
         BaseCommand() {}
+        BaseCommand(CombinedHttpsClient * c, BaseReceiver * r) : https_client_(c), receiver_(r)
+        {}
         ~BaseCommand() {}
         virtual std::string Execute() = 0;
 
     private:
+
+        CombinedHttpsClient * https_client_;
+        BaseReceiver * receiver_;
+
 };
 
 class ImportEnergy : public BaseCommand
@@ -31,6 +38,7 @@ class ImportEnergy : public BaseCommand
     public:
 
         ImportEnergy() {}
+        ImportEnergy(CombinedHttpsClient * c, BaseReceiver * r) : BaseCommand(c, r) {}
         ~ImportEnergy() {}
         std::string Execute() {}
 
@@ -42,6 +50,7 @@ class ExportEnergy : public BaseCommand
     public:
 
         ExportEnergy() {}
+        ExportEnergy(CombinedHttpsClient * c, BaseReceiver * r) : BaseCommand(c, r) {}
         ~ExportEnergy() {}
         std::string Execute() {}
 
@@ -53,6 +62,7 @@ class GetEnergy : public BaseCommand
     public:
 
         GetEnergy() {}
+        GetEnergy(CombinedHttpsClient * c, BaseReceiver * r) : BaseCommand(c, r) {}
         ~GetEnergy() {}
         std::string Execute() {}
 
@@ -64,6 +74,7 @@ class GetNameplate : public BaseCommand
     public:
 
         GetNameplate() {}
+        GetNameplate(CombinedHttpsClient * c, BaseReceiver * r) : BaseCommand(c, r) {}
         ~GetNameplate() {}
         std::string Execute() {}
 
@@ -75,6 +86,7 @@ class Idle : public BaseCommand
     public:
 
         Idle() {}
+        Idle(CombinedHttpsClient * c, BaseReceiver * r) : BaseCommand(c, r) {}
         ~Idle() {}
         std::string Execute() {}
 

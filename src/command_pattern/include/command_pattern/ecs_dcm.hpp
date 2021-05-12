@@ -1,5 +1,6 @@
 #ifndef __ECS_DCM_H__
 #define __ECS_DCM_H__
+
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,7 +22,14 @@ class ECS_DCM
 
         ECS_DCM() 
         {
+            //SetReceiver();
+            //need a program path
+        }
+        ECS_DCM(const std::string& root) 
+        {
+            std::cout << " ECS_DCM root arg constructor " << std::endl;
             SetReceiver();
+            combined_client_ = new CombinedHttpsClient(root);
         }
         ~ECS_DCM() 
         {
@@ -29,6 +37,7 @@ class ECS_DCM
         }
         void SetReceiver()
         {
+            std::cout << " ECS_DCM::SetReceiver() " << std::endl;
             // imaginary comms tests, or pre-defined binary init
             receiver_ = new SimpleSimulatorReceiver; //emulated DER
         }
@@ -36,6 +45,7 @@ class ECS_DCM
     private:
 
         flecs::world dcm_world_;
+        CombinedHttpsClient * combined_client_;
         BaseReceiver * receiver_;
         BaseCommand * import_energy_c_;
         BaseCommand * export_energy_c_;

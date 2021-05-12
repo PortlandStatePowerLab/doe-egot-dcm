@@ -8,6 +8,7 @@
 #include <xml/xml_validator.hpp>
 #include <ecs/sim_module.hpp>
 #include <ecs/der_simulator.hpp>
+#include <command_pattern/ecs_dcm.hpp>
 
 
 void GetParentPath(char** arg)
@@ -18,6 +19,8 @@ void GetParentPath(char** arg)
 }; 
 void SimulateDCMSystem()
 {
+  std::cout << "Now simulating dcm system" << std::endl;
+  dcm::ECS_DCM dcm(g_program_path);
 
 }
 void SimulateDER()

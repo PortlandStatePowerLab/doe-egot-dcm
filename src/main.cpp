@@ -17,12 +17,14 @@ void GetParentPath(char** arg);
 
 int main(int argc, char **argv)
 {
-  SimulateDER();
+  //SimulateDER();
+  //note: don't create 2 instances of a flecs::world containing class
+  //as flecs scope works outside class scope, it causes redefine errs
   //std::string ssl_path = "../ssl-ca/";
   std::cout << "src main" << std::endl;
   GetParentPath(argv);
   std::cout << "argv: " << *argv << std::endl;
   std::cout << "Parent path: " << g_program_path << std::endl;
-
+  SimulateDCMSystem();
   return 0;
 }

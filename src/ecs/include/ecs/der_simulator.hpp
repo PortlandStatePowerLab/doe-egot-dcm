@@ -13,6 +13,7 @@ class DERSimulator
 
         DERSimulator()
         {
+            std::cout << "DERSimulator Default Constructor... importing der sim module..." << std::endl;
             world_.import<der_simulator_module>();
         }
 
