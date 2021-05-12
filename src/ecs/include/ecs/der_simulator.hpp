@@ -51,41 +51,43 @@ class DERSimulator
         }
         std::string ImportEnergy()
         {
-            //auto e = world_.lookup("m_sim_der_1");
+            std::string response;
             auto q = world_.query<der_simulator_module::DERSimulatorEntityTag, der_simulator_module::CurrentActiveCommand>();
             q.each(
-                [](flecs::entity e, der_simulator_module::DERSimulatorEntityTag& t, der_simulator_module::CurrentActiveCommand& c)
+                [&response](flecs::entity e, der_simulator_module::DERSimulatorEntityTag& t, der_simulator_module::CurrentActiveCommand& c)
                 {
                     if (c != der_simulator_module::CurrentActiveCommand::kImportEnergyCommand)
                     {
                         c = der_simulator_module::CurrentActiveCommand::kImportEnergyCommand;
-                        return "ImportEnergy Ack"
+                        response =  "ImportEnergy Ack";
                     }
                     else
                     {
-                        return "ImportEnergy Nack, already importing"
+                        response =  "ImportEnergy Nack, already importing";
                     }
                 }
             ); 
+            return response;
         }
         std::string ExportEnergy()
         {
-            //auto e = world_.lookup("m_sim_der_1");
+            std::string response;
             auto q = world_.query<der_simulator_module::DERSimulatorEntityTag, der_simulator_module::CurrentActiveCommand>();
             q.each(
-                [](flecs::entity e, der_simulator_module::DERSimulatorEntityTag& t, der_simulator_module::CurrentActiveCommand& c)
+                [&response](flecs::entity e, der_simulator_module::DERSimulatorEntityTag& t, der_simulator_module::CurrentActiveCommand& c)
                 {
                     if (c != der_simulator_module::CurrentActiveCommand::kExportEnergyCommand)
                     {
                         c = der_simulator_module::CurrentActiveCommand::kExportEnergyCommand;
-                        return "ExportEnergy Ack"
+                        response =  "ExportEnergy Ack";
                     }
                     else
                     {
-                        return "ExportEnergy Nack, already exporting"
+                        response =  "ExportEnergy Nack, already exporting";
                     }
                 }
             ); 
+            return response;
         }
         std::string GetPower()
         {
@@ -120,22 +122,23 @@ class DERSimulator
         }
         std::string Idle()
         {
-            //auto e = world_.lookup("m_sim_der_1");
+            std::string response;
             auto q = world_.query<der_simulator_module::DERSimulatorEntityTag, der_simulator_module::CurrentActiveCommand>();
             q.each(
-                [](flecs::entity e, der_simulator_module::DERSimulatorEntityTag& t, der_simulator_module::CurrentActiveCommand& c)
+                [&response](flecs::entity e, der_simulator_module::DERSimulatorEntityTag& t, der_simulator_module::CurrentActiveCommand& c)
                 {
                     if (c != der_simulator_module::CurrentActiveCommand::kNoCommand)
                     {
-                        c = der_simulator_module::CurrentActiveCommand::kINoCommand;
-                        return "Idle Ack"
+                        c = der_simulator_module::CurrentActiveCommand::kNoCommand;
+                        response =  "Idle Ack";
                     }
                     else
                     {
-                        return "Idle Nack, already idle"
+                        response =  "Idle Nack, already idle";
                     }
                 }
             ); 
+            return response;
         }
 
     protected:
