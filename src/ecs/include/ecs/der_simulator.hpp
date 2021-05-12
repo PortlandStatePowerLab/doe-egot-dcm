@@ -32,7 +32,7 @@ class DERSimulator
                 if (i % 5 == 0) //only print incrementally
                 {
                     std::cout <<" Minute " << i << ": ";
-                    PrintSimpleDERImportEnergy();
+                    //PrintSimpleDERImportEnergy();
                     std::cout << GetEnergy() << std::endl;
                     std::cout << std::endl;
                 }
@@ -41,12 +41,10 @@ class DERSimulator
         }
         void PrintSimpleDERImportEnergy()
         {
-            std::string here;
             auto q = world_.query<der::der_simulator_module::SimpleDER>();
             q.each(
-                [&here](flecs::entity e, der::der_simulator_module::SimpleDER& d)
+                [](flecs::entity e, der::der_simulator_module::SimpleDER& d)
                 {
-                    here = "what";
                     std::cout << "available import energy: " << int(d.available_import_energy) << " Wh ";
                 }
             ); 
@@ -73,16 +71,17 @@ class DERSimulator
             response += std::to_string(import) + " Wh";
             return response;
             */
-            double import;
+            double import_e, export_e;
             auto q = world_.query<der::der_simulator_module::SimpleDER>();
             q.each(
-                [&import](flecs::entity e, der::der_simulator_module::SimpleDER& d)
+                [&import_e, &export_e](flecs::entity e, der::der_simulator_module::SimpleDER& d)
                 {
-                    import = d.available_import_energy;
+                    import_e = d.available_import_energy;
+                    export_e = d.available_export_energy;
                 }
             ); 
-            std::string response = "Available import energy: ";
-            response += std::to_string( int(import) ) + " Wh";
+            std::string response = "import: ";
+            response += std::to_string( int(import_e) ) + " Wh, export: " + std::to_string( int(export_e) ) + " Wh";
             return response;
         }
         std::string GetNameplate()
