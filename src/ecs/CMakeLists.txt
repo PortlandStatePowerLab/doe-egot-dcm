@@ -18,15 +18,6 @@ target_link_libraries(${COMPONENT_NAME} INTERFACE
 
 # install the target and create export-set
 install(
-    TARGETS ${COMPONENT_NAME}
-    EXPORT ${COMPONENT_NAME}Targets
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-    RUNTIME DESTINATION bin
-    INCLUDES DESTINATION include
-)
-
-install(
     EXPORT ${COMPONENT_NAME}Targets
     FILE ${COMPONENT_NAME}Targets.cmake
     NAMESPACE ${PROJECT_NAME}::
