@@ -160,7 +160,12 @@ class DERSimulator
             ); 
             return response;
         }
-
+        // This function to allow synchronization with another flecs::world
+        void IncrementProgress()
+        {
+            world_.progress(); 
+        }
+        
     protected:
 
         flecs::world world_;

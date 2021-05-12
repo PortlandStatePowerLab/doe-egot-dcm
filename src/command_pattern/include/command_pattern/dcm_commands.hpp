@@ -70,6 +70,17 @@ class GetNameplate : public BaseCommand
     private:
 };
 
+class Idle : public BaseCommand
+{
+    public:
+
+        Idle() {}
+        ~Idle() {}
+        std::string Execute() {}
+
+    private:
+};
+
 } // namespace dcm
 
 #endif //__DCM_COMMANDS_H__
