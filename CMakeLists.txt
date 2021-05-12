@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 
 # project variables
 set(PROJECT_VERSION 1.0.0)
-set(PROJECT_NAME egot)
+set(PROJECT_NAME DCM)
 
 # This is your project statement. You should always list languages;
 project(
