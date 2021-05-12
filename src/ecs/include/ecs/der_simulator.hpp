@@ -118,6 +118,25 @@ class DERSimulator
         {
             //
         }
+        std::string Idle()
+        {
+            //auto e = world_.lookup("m_sim_der_1");
+            auto q = world_.query<der_simulator_module::DERSimulatorEntityTag, der_simulator_module::CurrentActiveCommand>();
+            q.each(
+                [](flecs::entity e, der_simulator_module::DERSimulatorEntityTag& t, der_simulator_module::CurrentActiveCommand& c)
+                {
+                    if (c != der_simulator_module::CurrentActiveCommand::kNoCommand)
+                    {
+                        c = der_simulator_module::CurrentActiveCommand::kINoCommand;
+                        return "Idle Ack"
+                    }
+                    else
+                    {
+                        return "Idle Nack, already idle"
+                    }
+                }
+            ); 
+        }
 
     protected:
         flecs::world world_;
