@@ -51,15 +51,45 @@ class DERSimulator
         }
         std::string ImportEnergy()
         {
-
+            //auto e = world_.lookup("m_sim_der_1");
+            auto q = world_.query<der_simulator_module::DERSimulatorEntityTag, der_simulator_module::CurrentActiveCommand>();
+            q.each(
+                [](flecs::entity e, der_simulator_module::DERSimulatorEntityTag& t, der_simulator_module::CurrentActiveCommand& c)
+                {
+                    if (c != der_simulator_module::CurrentActiveCommand::kImportEnergyCommand)
+                    {
+                        c = der_simulator_module::CurrentActiveCommand::kImportEnergyCommand;
+                        return "ImportEnergy Ack"
+                    }
+                    else
+                    {
+                        return "ImportEnergy Nack, already importing"
+                    }
+                }
+            ); 
         }
         std::string ExportEnergy()
         {
-
+            //auto e = world_.lookup("m_sim_der_1");
+            auto q = world_.query<der_simulator_module::DERSimulatorEntityTag, der_simulator_module::CurrentActiveCommand>();
+            q.each(
+                [](flecs::entity e, der_simulator_module::DERSimulatorEntityTag& t, der_simulator_module::CurrentActiveCommand& c)
+                {
+                    if (c != der_simulator_module::CurrentActiveCommand::kExportEnergyCommand)
+                    {
+                        c = der_simulator_module::CurrentActiveCommand::kExportEnergyCommand;
+                        return "ExportEnergy Ack"
+                    }
+                    else
+                    {
+                        return "ExportEnergy Nack, already exporting"
+                    }
+                }
+            ); 
         }
         std::string GetPower()
         {
-            
+            return "import: 4500 Wh";
         }
         std::string GetEnergy()
         {

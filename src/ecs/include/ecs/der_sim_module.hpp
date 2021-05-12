@@ -24,8 +24,8 @@ class der_simulator_module
         enum class CurrentActiveCommand : short //change this enum value to simulate commands
         {
             kNoCommand,
-            kImportPowerCommand,
-            kExportPowerCommand,
+            kImportEnergyCommand,
+            kExportEnergyCommand,
             kCustomerHasOverriddenCommands
         };
 
@@ -59,6 +59,8 @@ class der_simulator_module
             m_simulated_der = world_.entity("m_sim_der_1").add(der_sim_type).set<SimpleDER>({600, 1800, 0.166, 60, 0, 900, 0, 0})
                                                             .set<Status>(Status::kIdle)
                                                             .set<CurrentActiveCommand>(CurrentActiveCommand::kNoCommand);
+            
+            //auto q = world_.query<der::der_simulator_module::SimpleDER>();
 
             world_.system<DERSimulatorEntityTag, SimpleDER, CurrentActiveCommand, Status>("UpdateSimDER")  
                 .each([this](flecs::entity e, DERSimulatorEntityTag& x, SimpleDER& d, CurrentActiveCommand& c, Status& s)
@@ -72,13 +74,13 @@ class der_simulator_module
                         {
                             switch (c) 
                             {
-                                case CurrentActiveCommand::kImportPowerCommand:
+                                case CurrentActiveCommand::kImportEnergyCommand:
                                 {
                                     d.import_high = 300;
                                     d.import_low = 0;
                                     break;
                                 }
-                                case CurrentActiveCommand::kExportPowerCommand:
+                                case CurrentActiveCommand::kExportEnergyCommand:
                                 {
                                     d.import_high = 2100;
                                     d.import_low = 1725;
