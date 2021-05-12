@@ -20,10 +20,14 @@ class BaseCommand
 {
     public:
 
-        BaseCommand() {}
+        BaseCommand() : https_client_(nullptr), receiver_(nullptr) {}
         BaseCommand(CombinedHttpsClient * c, BaseReceiver * r) : https_client_(c), receiver_(r)
         {}
-        ~BaseCommand() {}
+        ~BaseCommand() 
+        {
+            https_client_ = nullptr;
+            receiver_ = nullptr;
+        }
         virtual std::string Execute() = 0;
 
     private:
@@ -38,8 +42,10 @@ class ImportEnergy : public BaseCommand
     public:
 
         ImportEnergy() {}
-        ImportEnergy(CombinedHttpsClient * c, BaseReceiver * r) : BaseCommand(c, r) {}
-        ~ImportEnergy() {}
+        ImportEnergy(CombinedHttpsClient * c, BaseReceiver * r) : BaseCommand(c, r) 
+        {std::cout << "ImportEnergy Command Constructed " << std::endl;}
+        ~ImportEnergy() 
+        {}
         std::string Execute() {}
 
     private:
@@ -51,7 +57,8 @@ class ExportEnergy : public BaseCommand
 
         ExportEnergy() {}
         ExportEnergy(CombinedHttpsClient * c, BaseReceiver * r) : BaseCommand(c, r) {}
-        ~ExportEnergy() {}
+        ~ExportEnergy() 
+        {}
         std::string Execute() {}
 
     private:
