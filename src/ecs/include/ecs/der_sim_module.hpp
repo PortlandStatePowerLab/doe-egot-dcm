@@ -56,7 +56,7 @@ class der_simulator_module
                 .add<CurrentActiveCommand>()
                 .add<DERSimulatorEntityTag>();
             //instantiate m_simulated_der memeber as an instance of that type
-            m_simulated_der = world_.entity().add(der_sim_type).set<SimpleDER>({600, 1800, 0.166, 60, 0, 900, 0, 0})
+            m_simulated_der = world_.entity("m_sim_der_1").add(der_sim_type).set<SimpleDER>({600, 1800, 0.166, 60, 0, 900, 0, 0})
                                                             .set<Status>(Status::kIdle)
                                                             .set<CurrentActiveCommand>(CurrentActiveCommand::kNoCommand);
 

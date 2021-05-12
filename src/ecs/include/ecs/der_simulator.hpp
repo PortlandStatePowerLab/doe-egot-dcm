@@ -40,10 +40,12 @@ class DERSimulator
         }
         void PrintSimpleDERImportEnergy()
         {
+            std::string here;
             auto q = world_.query<der::der_simulator_module::SimpleDER>();
             q.each(
-                [](flecs::entity e, der::der_simulator_module::SimpleDER& d)
+                [&here](flecs::entity e, der::der_simulator_module::SimpleDER& d)
                 {
+                    here = "what";
                     std::cout << "available import energy: " << int(d.available_import_energy) << " Wh ";
                 }
             ); 
@@ -62,7 +64,10 @@ class DERSimulator
         }
         std::string GetEnergy()
         {
-           
+            auto e = world_.lookup("m_sim_der_1");
+            const der_simulator_module::SimpleDER* der = e.get<der_simulator_module::SimpleDER>();
+            double import = der->available_import_energy;
+            return "Available import energy: " + std::string(import) + "Wh";
         }
         std::string GetNameplate()
         {
