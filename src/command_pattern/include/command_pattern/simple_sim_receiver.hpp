@@ -10,7 +10,10 @@
 #include <sep/models.hpp>
 #include <xml/adapter.hpp>
 #include <xml/xml_validator.hpp>
-#include <ecs/sim_module.hpp>
+#include <ecs/der_simulator.hpp>
+
+namespace dcm
+{
 
 class BaseReceiver
 {
@@ -21,18 +24,29 @@ class BaseReceiver
         virtual void Polymorphism(void) {}
 
     private:
-};
 
+
+};
+// This is a receiver class for interacting with a simulated DER
 class SimpleSimulatorReceiver : public BaseReceiver
 {
     public:
 
-        SimpleSimulatorReceiver() {}
-        ~SimpleSimulatorReceiver() {}
+        SimpleSimulatorReceiver() 
+        {
+            sim_der_ = new der::DERSimulator;
+        }
+        ~SimpleSimulatorReceiver() 
+        {
+            delete sim_der_;
+        }
         void Polymorphism() {}
 
     private:
+
+        der::DERSimulator* sim_der_;
 };
 
+} // namespace dcm
 
 #endif //__SIMPLE_SIM_RECEIVER_H__

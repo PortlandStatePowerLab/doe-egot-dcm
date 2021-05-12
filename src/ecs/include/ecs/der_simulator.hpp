@@ -6,14 +6,18 @@
 
 namespace der
 {
+
 class DERSimulator 
 {
     public:
+
         DERSimulator()
         {
             world_.import<der_simulator_module>();
         }
+
         ~DERSimulator() {}
+        
         void TestRun()
         {
             int mins = 0;
@@ -47,6 +51,7 @@ class DERSimulator
                 }
             } 
         }
+
         void PrintSimpleDERImportEnergy()
         {
             auto q = world_.query<der::der_simulator_module::SimpleDER>();
@@ -57,6 +62,7 @@ class DERSimulator
                 }
             ); 
         }
+
         std::string ImportEnergy()
         {
             std::string response;
@@ -77,6 +83,7 @@ class DERSimulator
             ); 
             return response;
         }
+
         std::string ExportEnergy()
         {
             std::string response;
@@ -97,10 +104,12 @@ class DERSimulator
             ); 
             return response;
         }
+
         std::string GetPower()
         {
             return "import: 4500 Wh";
         }
+
         std::string GetEnergy()
         {
             /*
@@ -124,11 +133,13 @@ class DERSimulator
             response += std::to_string( int(import_e) ) + " Wh, export: " + std::to_string( int(export_e) ) + " Wh";
             return response;
         }
+
         std::string GetNameplate()
         {
             //whatever lol
             return "Power 4500 Watts, Max Export Energy 2100 Wh, Max Import Energy 4500 Wh ";
         }
+
         std::string Idle()
         {
             std::string response;
@@ -151,7 +162,9 @@ class DERSimulator
         }
 
     protected:
+
         flecs::world world_;
 };
+
 } // namespace der
 #endif //__DER_SIMULATOR_H__

@@ -9,13 +9,17 @@
 #include <ecs/sim_module.hpp>
 #include <ecs/der_simulator.hpp>
 
+
 void GetParentPath(char** arg)
 {
     g_program_path = arg[0];
     std::size_t found = g_program_path.find_last_of("/\\");
     g_program_path = g_program_path.substr(0,found);
 }; 
+void SimulateDCMSystem()
+{
 
+}
 void SimulateDER()
 {
     std::cout << "playground simulate DER function " << std::endl;
@@ -24,7 +28,6 @@ void SimulateDER()
     simulated_der.TestRun();
     
 }
-
 void RunHttpsTests(int argc, char **argv)
 {
     std::cout << "src main" << std::endl;

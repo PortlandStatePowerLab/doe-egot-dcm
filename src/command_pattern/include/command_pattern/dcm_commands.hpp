@@ -10,9 +10,12 @@
 #include <sep/models.hpp>
 #include <xml/adapter.hpp>
 #include <xml/xml_validator.hpp>
-#include <ecs/sim_module.hpp>
+#include "simple_sim_receiver.hpp"
 
-class BaseCommand
+namespace dcm
+{
+
+class BaseCommand 
 {
     public:
 
@@ -26,7 +29,7 @@ class BaseCommand
 class ImportEnergy : public BaseCommand
 {
     public:
-    
+
         ImportEnergy() {}
         ~ImportEnergy() {}
         std::string Execute() {}
@@ -66,5 +69,7 @@ class GetNameplate : public BaseCommand
 
     private:
 };
+
+} // namespace dcm
 
 #endif //__DCM_COMMANDS_H__
