@@ -8,10 +8,9 @@
 namespace der
 {
 
-class der_simulator_module 
+class der_components
 {
     public:
-
         struct DERSimulatorEntityTag 
         {};
 
@@ -37,12 +36,61 @@ class der_simulator_module
             kCustomerOverride
         };
 
+        der_components(flecs::world& world_) 
+        {
+            world_.module<der_components>();
+            // Register components 
+            world_.component<Status>();
+            world_.component<SimpleDER>();
+            world_.component<CurrentActiveCommand>();
+            world_.component<DERSimulatorEntityTag>();
+            
+            //world_.set<DER>({1000, 4500, 0, 4500, 0});
+            //create type for simulated der entities
+            auto der_sim_type = world_.type("der_sim_type")
+                .add<Status>()
+                .add<SimpleDER>()
+                .add<CurrentActiveCommand>()
+                .add<DERSimulatorEntityTag>();
+        }
+};
+
+class der_simulator_module 
+{
+    public:
+/*
+        struct DERSimulatorEntityTag 
+        {};
+
+        struct SimpleDER
+        {
+            double available_import_energy, available_export_energy, loss_per_second;
+            int loss_rate, import_low, import_high, secs_since_epoch, secs_since_command;
+        };
+
+        enum class CurrentActiveCommand : short //change this enum value to simulate commands
+        {
+            kNoCommand,
+            kImportEnergyCommand,
+            kExportEnergyCommand,
+            kCustomerHasOverriddenCommands
+        };
+
+        enum class Status : short
+        {
+            kImporting,
+            kExporting,
+            kIdle,
+            kCustomerOverride
+        };
+*/
         der_simulator_module(flecs::world& world_) 
         {
-            /* Register module with world */
+            //Register module with world 
             world_.module<der_simulator_module>();
-
-            /* Register components */
+            world_.import<der_components>();
+/*
+            // Register components 
             world_.component<Status>();
             world_.component<SimpleDER>();
             world_.component<CurrentActiveCommand>();
@@ -59,34 +107,34 @@ class der_simulator_module
             m_simulated_der = world_.entity("m_sim_der_1").add(der_sim_type).set<SimpleDER>({600, 1800, 0.166, 60, 0, 900, 0, 0})
                                                             .set<Status>(Status::kIdle)
                                                             .set<CurrentActiveCommand>(CurrentActiveCommand::kNoCommand);
-            
+            */
             //auto q = world_.query<der::der_simulator_module::SimpleDER>();
 
-            world_.system<DERSimulatorEntityTag, SimpleDER, CurrentActiveCommand, Status>("UpdateSimDER")  
-                .each([this](flecs::entity e, DERSimulatorEntityTag& x, SimpleDER& d, CurrentActiveCommand& c, Status& s)
+            world_.system<der_components::DERSimulatorEntityTag, der_components::SimpleDER, der_components::CurrentActiveCommand, der_components::Status>("UpdateSimDER")  
+                .each([this](flecs::entity e, der_components::DERSimulatorEntityTag& x, der_components::SimpleDER& d, der_components::CurrentActiveCommand& c, der_components::Status& s)
                 {
                     ++d.secs_since_epoch;
 
-                    if ( c != CurrentActiveCommand::kNoCommand )
+                    if ( c != der_components::CurrentActiveCommand::kNoCommand )
                     {
                         ++d.secs_since_command;
                         if (!d.secs_since_command)
                         {
                             switch (c) 
                             {
-                                case CurrentActiveCommand::kImportEnergyCommand:
+                                case der_components::CurrentActiveCommand::kImportEnergyCommand:
                                 {
                                     d.import_high = 300;
                                     d.import_low = 0;
                                     break;
                                 }
-                                case CurrentActiveCommand::kExportEnergyCommand:
+                                case der_components::CurrentActiveCommand::kExportEnergyCommand:
                                 {
                                     d.import_high = 2100;
                                     d.import_low = 1725;
                                     break;
                                 }
-                                case CurrentActiveCommand::kCustomerHasOverriddenCommands:
+                                case der_components::CurrentActiveCommand::kCustomerHasOverriddenCommands:
                                 {
                                     d.import_high = 900;
                                     d.import_low = 0;
@@ -95,16 +143,16 @@ class der_simulator_module
                             }
                         }
                     }
-                    else if ( ( c == CurrentActiveCommand::kNoCommand ) && ( d.secs_since_command > 0 ) )
+                    else if ( ( c == der_components::CurrentActiveCommand::kNoCommand ) && ( d.secs_since_command > 0 ) )
                     {
                         d.secs_since_command = 0;
                         d.import_high = 900;
                         d.import_low = 0;
                     }
 
-                    if (s != Status::kImporting)
+                    if (s != der_components::Status::kImporting)
                     {
-                        if (s == Status::kIdle)
+                        if (s == der_components::Status::kIdle)
                         {
                             //std::cout << ( d.import_high - ((d.import_high - d.import_low) / 2)) << std::endl;
                             if (d.available_import_energy < d.import_high) //see section 3 of leighton's thesis
@@ -115,12 +163,12 @@ class der_simulator_module
                             }
                             else
                             {
-                                s = Status::kImporting;
+                                s = der_components::Status::kImporting;
                                 std::cout << "     DER Status changed: Importing   " << std::endl;
                             }
                         }
                     }
-                    else if (s == Status::kImporting)
+                    else if (s == der_components::Status::kImporting)
                     {
                         if (d.available_import_energy > ( d.import_high - ((d.import_high - d.import_low) / 2 )))
                         {
@@ -130,7 +178,7 @@ class der_simulator_module
                         }
                         else
                         {
-                            s = Status::kIdle;
+                            s = der_components::Status::kIdle;
                             std::cout << "     DER Status changed: Idle   " << std::endl;
                         }
                     }
@@ -138,8 +186,8 @@ class der_simulator_module
                 }
                 );   
 
-            world_.system<DERSimulatorEntityTag, SimpleDER>("SimulateDraw")  
-                .each([](flecs::entity e, DERSimulatorEntityTag& x, SimpleDER& d)
+            world_.system<der_components::DERSimulatorEntityTag, der_components::SimpleDER>("SimulateDraw")  
+                .each([](flecs::entity e, der_components::DERSimulatorEntityTag& x, der_components::SimpleDER& d)
                 {
                     int random = ( rand() % 7200 );
                     //std::cout << "random " << random << " " << std::endl;
@@ -174,7 +222,7 @@ class der_simulator_module
                 );   
         }
 
-        void UpdateSimpleLossRates(SimpleDER * der) //remember to pass the pointer
+        void UpdateSimpleLossRates(der_components::SimpleDER * der) //remember to pass the pointer
         {
             der->loss_rate =  22000 / ( der->available_import_energy + 215 );
             der->loss_per_second = double( double(der->loss_rate) / 3600 );

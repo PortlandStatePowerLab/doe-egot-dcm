@@ -17,7 +17,7 @@ class DERSimulator
         }
 
         ~DERSimulator() {}
-        
+
         void TestRun()
         {
             int mins = 0;
@@ -54,9 +54,9 @@ class DERSimulator
 
         void PrintSimpleDERImportEnergy()
         {
-            auto q = world_.query<der::der_simulator_module::SimpleDER>();
+            auto q = world_.query<der::der_components::SimpleDER>();
             q.each(
-                [](flecs::entity e, der::der_simulator_module::SimpleDER& d)
+                [](flecs::entity e, der::der_components::SimpleDER& d)
                 {
                     std::cout << "available import energy: " << int(d.available_import_energy) << " Wh ";
                 }
@@ -66,13 +66,13 @@ class DERSimulator
         std::string ImportEnergy()
         {
             std::string response;
-            auto q = world_.query<der_simulator_module::DERSimulatorEntityTag, der_simulator_module::CurrentActiveCommand>();
+            auto q = world_.query<der_components::DERSimulatorEntityTag, der_components::CurrentActiveCommand>();
             q.each(
-                [&response](flecs::entity e, der_simulator_module::DERSimulatorEntityTag& t, der_simulator_module::CurrentActiveCommand& c)
+                [&response](flecs::entity e, der_components::DERSimulatorEntityTag& t, der_components::CurrentActiveCommand& c)
                 {
-                    if (c != der_simulator_module::CurrentActiveCommand::kImportEnergyCommand)
+                    if (c != der_components::CurrentActiveCommand::kImportEnergyCommand)
                     {
-                        c = der_simulator_module::CurrentActiveCommand::kImportEnergyCommand;
+                        c = der_components::CurrentActiveCommand::kImportEnergyCommand;
                         response =  "ImportEnergy Ack";
                     }
                     else
@@ -87,13 +87,13 @@ class DERSimulator
         std::string ExportEnergy()
         {
             std::string response;
-            auto q = world_.query<der_simulator_module::DERSimulatorEntityTag, der_simulator_module::CurrentActiveCommand>();
+            auto q = world_.query<der_components::DERSimulatorEntityTag, der_components::CurrentActiveCommand>();
             q.each(
-                [&response](flecs::entity e, der_simulator_module::DERSimulatorEntityTag& t, der_simulator_module::CurrentActiveCommand& c)
+                [&response](flecs::entity e, der_components::DERSimulatorEntityTag& t, der_components::CurrentActiveCommand& c)
                 {
-                    if (c != der_simulator_module::CurrentActiveCommand::kExportEnergyCommand)
+                    if (c != der_components::CurrentActiveCommand::kExportEnergyCommand)
                     {
-                        c = der_simulator_module::CurrentActiveCommand::kExportEnergyCommand;
+                        c = der_components::CurrentActiveCommand::kExportEnergyCommand;
                         response =  "ExportEnergy Ack";
                     }
                     else
@@ -121,9 +121,9 @@ class DERSimulator
             return response;
             */
             double import_e, export_e;
-            auto q = world_.query<der::der_simulator_module::SimpleDER>();
+            auto q = world_.query<der::der_components::SimpleDER>();
             q.each(
-                [&import_e, &export_e](flecs::entity e, der::der_simulator_module::SimpleDER& d)
+                [&import_e, &export_e](flecs::entity e, der::der_components::SimpleDER& d)
                 {
                     import_e = d.available_import_energy;
                     export_e = d.available_export_energy;
@@ -143,13 +143,13 @@ class DERSimulator
         std::string Idle()
         {
             std::string response;
-            auto q = world_.query<der_simulator_module::DERSimulatorEntityTag, der_simulator_module::CurrentActiveCommand>();
+            auto q = world_.query<der_components::DERSimulatorEntityTag, der_components::CurrentActiveCommand>();
             q.each(
-                [&response](flecs::entity e, der_simulator_module::DERSimulatorEntityTag& t, der_simulator_module::CurrentActiveCommand& c)
+                [&response](flecs::entity e, der_components::DERSimulatorEntityTag& t, der_components::CurrentActiveCommand& c)
                 {
-                    if (c != der_simulator_module::CurrentActiveCommand::kNoCommand)
+                    if (c != der_components::CurrentActiveCommand::kNoCommand)
                     {
-                        c = der_simulator_module::CurrentActiveCommand::kNoCommand;
+                        c = der_components::CurrentActiveCommand::kNoCommand;
                         response =  "Idle Ack";
                     }
                     else

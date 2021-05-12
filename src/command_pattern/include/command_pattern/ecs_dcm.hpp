@@ -19,15 +19,18 @@ class ECS_DCM
 {
     public:
 
-        ECS_DCM() {}
+        ECS_DCM() 
+        {
+            SetReceiver();
+        }
         ~ECS_DCM() 
         {
-            
+            delete receiver_;
         }
         void SetReceiver()
         {
             // imaginary comms tests, or pre-defined binary init
-            receiver_ = new SimpleSimulatorReceiver;
+            receiver_ = new SimpleSimulatorReceiver; //emulated DER
         }
     
     private:
