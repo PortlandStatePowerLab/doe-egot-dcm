@@ -36,7 +36,15 @@ class DERSimulator
                     std::cout << GetEnergy() << std::endl;
                     std::cout << std::endl;
                 }
-
+                if (i == 250)
+                {
+                    
+                    ExportEnergy();
+                }
+                if (i == 500)
+                {
+                    ImportEnergy();
+                }
             } 
         }
         void PrintSimpleDERImportEnergy()
