@@ -1,5 +1,6 @@
 add_subdirectory(https)
 add_subdirectory(ecs)
+add_subdirectory(command_pattern)
 
 set(COMPONENT_NAME dcm)
 
@@ -12,6 +13,7 @@ target_link_libraries(${COMPONENT_NAME} PUBLIC
   https
   SEP::Model
   ecs
+  command_pattern
   SEP::XML
   pthread
 )
