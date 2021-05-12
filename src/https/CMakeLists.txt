@@ -30,4 +30,3 @@ install(
     NAMESPACE ${PROJECT_NAME}::
     DESTINATION lib/cmake
 )
-)
