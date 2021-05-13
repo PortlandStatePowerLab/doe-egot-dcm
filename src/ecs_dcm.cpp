@@ -18,6 +18,10 @@ void ECS_DCM::RunSimulatorLoop()
     std::cout << "   ECS_DCM::RunSimulatorLoop() " << std::endl;
 
     import_energy_c_->Execute();
+    export_energy_c_->Execute();
+    get_energy_c_->Execute();
+    get_nameplate_c_->Execute();
+    idle_c_->Execute();
 }
 
 
