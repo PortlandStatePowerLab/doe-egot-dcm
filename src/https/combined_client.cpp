@@ -9,7 +9,7 @@ namespace ssl = net::ssl;
 CombinedHttpsClient::CombinedHttpsClient(
     const std::string &gsp_root, const std::string &gsp_host, const std::string &gsp_port,
     const std::string &dtm_root, const std::string &dtm_host, const std::string &dtm_port)
-    : gsp_client_(gsp_host, gsp_port, gsp_root), dtm_client_(dtm_host, dtm_port, dtm_root)
+    : gsp_client_(gsp_root, gsp_host, gsp_port), dtm_client_(dtm_root, dtm_host, dtm_port)
 {
     // do nothing
 }
