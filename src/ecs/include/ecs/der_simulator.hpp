@@ -15,6 +15,7 @@ class DERSimulator
         {
             std::cout << "DERSimulator Default Constructor... importing der sim module..." << std::endl;
             world_.import<der_simulator_module>();
+            world_.progress();
         }
 
         ~DERSimulator() {}
@@ -66,7 +67,7 @@ class DERSimulator
 
         std::string ImportEnergy()
         {
-            std::string response;
+            std::string response = " der simulator error ";
             auto q = world_.query<der_components::DERSimulatorEntityTag, der_components::CurrentActiveCommand>();
             q.each(
                 [&response](flecs::entity e, der_components::DERSimulatorEntityTag& t, der_components::CurrentActiveCommand& c)

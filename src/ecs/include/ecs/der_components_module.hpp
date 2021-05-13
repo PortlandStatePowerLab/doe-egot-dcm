@@ -53,6 +53,11 @@ class der_components
                 .add<SimpleDER>()
                 .add<CurrentActiveCommand>()
                 .add<DERSimulatorEntityTag>();
+
+            auto simulated_der_entity = world_.entity("simulated_der_entity")
+                                        .add(der_sim_type)
+                                        .set<CurrentActiveCommand>(CurrentActiveCommand::kNoCommand)
+                                        .set<SimpleDER>({600, 1500, 0.01, 25, 0, 900, 0, 0});
         }
 };
 

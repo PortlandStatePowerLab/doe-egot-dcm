@@ -56,7 +56,7 @@ class ImportEnergy : public BaseCommand
             https_client_->PostDTM(msg_out);
 
             response_from_der = receiver_->Import();
-
+            std::cout << "response from DER was: " << response_from_der << std::endl;
             std::string msg_in =  xml_writer_.ReturnCustomCommand("DCM", "DER", response_from_der, "unknown");
             https_client_->PostDTM(msg_in);
 
