@@ -115,21 +115,36 @@ void XMLCommandAdapter::MakeCommand(string type)
     tree_.put("message.content.expect_response", 1);
     tree_.put("message.logged", std::time(0));
 }
-std::string XMLCommandAdapter::ReturnCustomCommand(const std::string& to, const std::string& from, const std::string& type, const std::string& duration)
+std::string XMLCommandAdapter::ReturnCustomCommand(const std::string& to, const std::string& from, const std::string& type, 
+                                                    const std::string& start, const std::string& duration, const std::string& content)
 {
-    float dur = 3.1415; //duration for testing
+    boost::property_tree::ptree t;
+
     std::time_t start_time = std::time(0);
     string str_time = ctime(&start_time);
     //std::tm* gmtm = gmtime(&t);
     //std::string str_time = std::asctime(gmtm);
-    tree_.put("message.from", from);
-    tree_.put("message.to", to);
-    tree_.put("message.content.command.type", type);
-    tree_.put("message.content.command.start", start_time);
-    tree_.put("message.content.command.duration", duration);
-    //tree_.put("message.content.expect_response", 1);
-    tree_.put("message.DCM_timestamp", std::time(0));
-    return ReturnCommandAsStr();
+    std::string content_path = "message.content." + content; 
+    std::string type_path = content_path + ".type";
+    std::string start_path = content_path + ".start";
+    std::string duration_path = content_path + ".duration";
+    
+    t.put("message.from", from);
+    t.put("message.to", to);
+    t.put(type_path, type);
+    if (start != "na")
+    {
+        t.put(start_path, start);
+    }
+    //t.put("message.content.command.start", start_time);
+    if (duration != "na")
+    {
+        t.put(duration_path, duration);
+    }
+    //t.put("message.content.command.duration", duration);
+    //t.put("message.content.expect_response", 1);
+    t.put("message.DCM_timestamp", std::time(0));
+    return ReturnCommandAsStr(t);
 }
 
 

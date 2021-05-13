@@ -11,6 +11,7 @@
 #include <xml/adapter.hpp>
 #include <xml/xml_validator.hpp>
 #include <ecs/der_simulator.hpp>
+#include <dtm_msg_writer/announce_xml.h>
 
 namespace dcm
 {
@@ -47,7 +48,8 @@ class SimpleSimulatorReceiver : public BaseReceiver
         }
         std::string Import() 
         {
-            return sim_der_->ImportEnergy();
+            std::string response = sim_der_->ImportEnergy();
+            return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
         }
         std::string Export() 
         {
@@ -71,7 +73,7 @@ class SimpleSimulatorReceiver : public BaseReceiver
         }
 
     private:
-
+        xml::XMLCommandAdapter xml_writer_;
         der::DERSimulator* sim_der_;
 };
 

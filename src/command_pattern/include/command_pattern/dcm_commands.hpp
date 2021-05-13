@@ -52,13 +52,15 @@ class ImportEnergy : public BaseCommand
             std::string response_from_der = "der response not supported yet";
             std::cout << "  ImportEnergy Command Executing... " << std::endl;
             
-            std::string msg_out =  xml_writer_.ReturnCustomCommand("DER", "DCM", "ImportEnergy", "unknown");
+            std::string msg_out =  xml_writer_.ReturnCustomCommand("DER", "DCM", "ImportEnergy", "na", "na", "command");
             https_client_->PostDTM(msg_out);
 
             response_from_der = receiver_->Import();
-            std::cout << "response from DER was: " << response_from_der << std::endl;
-            std::string msg_in =  xml_writer_.ReturnCustomCommand("DCM", "DER", response_from_der, "unknown");
-            https_client_->PostDTM(msg_in);
+            https_client_->PostDTM(response_from_der);
+            
+            //std::cout << "response from DER was: " << response_from_der << std::endl;
+            //std::string msg_in =  xml_writer_.ReturnCustomCommand("DCM", "DER", response_from_der, "na", "na", "response");
+            //https_client_->PostDTM(msg_in);
 
             return response_from_der;
         }

@@ -43,7 +43,8 @@ class XMLCommandAdapter
         void Load();
         void Shed();
         void MakeCommand(std::string type);
-        std::string ReturnCustomCommand(const std::string& to, const std::string& from, const std::string& type, const std::string& duration);
+        std::string ReturnCustomCommand(const std::string& to, const std::string& from, const std::string& type, 
+                                        const std::string& start, const std::string& duration, const std::string& content);
         std::string ReturnCommandAsStr()
         {
             std::stringstream ss;
