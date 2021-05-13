@@ -74,11 +74,11 @@ class DERSimulator
                     if (c != der_components::CurrentActiveCommand::kImportEnergyCommand)
                     {
                         c = der_components::CurrentActiveCommand::kImportEnergyCommand;
-                        response =  "ImportEnergy Ack";
+                        response =  "Ack";
                     }
                     else
                     {
-                        response =  "ImportEnergy Nack, already importing";
+                        response =  "Nack";
                     }
                 }
             ); 
