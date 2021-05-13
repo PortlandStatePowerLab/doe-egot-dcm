@@ -27,7 +27,9 @@ class BaseInvoker
                         : shared_world_ptr_(shared), 
                         import_(imp), export_(exp), get_energy_(get_e), 
                         get_nameplate_(get_n), idle_(idle)
-        {}
+        {
+            shared_world_ptr_->import<sim_invoker_module>();
+        }
         ~BaseInvoker() {}
     
     protected:

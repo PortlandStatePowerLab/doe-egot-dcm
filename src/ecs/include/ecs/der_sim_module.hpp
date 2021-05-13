@@ -17,6 +17,7 @@ class der_simulator_module
         {
             //Register module with world 
             world_.module<der_simulator_module>();
+            //import components
             world_.import<der_components>();
 
             world_.system<der_components::DERSimulatorEntityTag, der_components::SimpleDER, der_components::CurrentActiveCommand, der_components::Status>("UpdateSimDER")  
