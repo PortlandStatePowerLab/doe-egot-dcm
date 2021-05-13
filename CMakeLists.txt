@@ -17,11 +17,24 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # Find packages go here.
-include(FetchContent)
-include(ExternalProject)
 find_package(Boost REQUIRED)
 find_package(OpenSSL REQUIRED)
 
+include(ExternalProject)
+if (NOT TARGET ssl-ca)
+  ExternalProject_Add (
+    ssl-ca
+    GIT_REPOSITORY https://github.com/PortlandStatePowerLab/ssl-ca.git
+    GIT_TAG        main
+    CONFIGURE_COMMAND ""
+    BUILD_COMMAND ""
+    INSTALL_COMMAND ""
+    UPDATE_COMMAND COMMAND ${CMAKE_COMMAND} -E copy_directory
+    <SOURCE_DIR>/root-ca ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/certs
+  )
+endif()
+
+include(FetchContent)
 FetchContent_Declare(
   googletest
   GIT_REPOSITORY https://github.com/google/googletest.git
