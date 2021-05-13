@@ -20,7 +20,6 @@ CombinedHttpsClient::GetCombined(const std::string& target, const std::string& q
 bb::http::response <bb::http::dynamic_body>
 CombinedHttpsClient::PostCombined(const std::string& target, const std::string& resource)
 {
-
     std::cout << "let's just pretend we also talked to the gsp" << std::endl;
     auto dtm_response = dtm_client_->Post(target, resource);
     std::cout << "Made it through the deref dtm Post" << std::endl;
@@ -38,9 +37,9 @@ CombinedHttpsClient::DeleteCombined(const std::string& target)
 }
 void CombinedHttpsClient::PostDTM(const std::string& resource)
 {
-    std::cout << "let's just pretend we also talked to the gsp" << std::endl;
+    //std::cout << "let's just pretend we also talked to the gsp" << std::endl;
     auto dtm_response = dtm_client_->Post("/na", resource);
-    std::cout << "Made it through the deref dtm Post" << std::endl;
-    std::cout << "now something will happen with an invalid ptr" << std::endl;
+    //std::cout << "Made it through the deref dtm Post" << std::endl;
+    //std::cout << "now something will happen with an invalid ptr" << std::endl;
     //return dtm_response;
 }

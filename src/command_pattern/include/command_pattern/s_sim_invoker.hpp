@@ -38,7 +38,7 @@ class SimpleSimulatorInvoker : public BaseInvoker
     public:
 
         SimpleSimulatorInvoker(flecs::world * shared) : BaseInvoker(shared)
-        {}
+        {std::cout<<"SimpleSimulatorInvoker"<<std::endl;}
         ~SimpleSimulatorInvoker() {}
     
     private:

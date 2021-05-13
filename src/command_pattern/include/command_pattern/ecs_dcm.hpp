@@ -33,6 +33,7 @@ class ECS_DCM
             std::cout << " ECS_DCM root arg overload constructor " << std::endl;
             SetReceiver();
             combined_client_ = new CombinedHttpsClient(root);
+            sim_invoker_ = new SimpleSimulatorInvoker(&dcm_world_);
             import_energy_c_ = new ImportEnergy(combined_client_, receiver_);
             export_energy_c_ = new ExportEnergy(combined_client_, receiver_);
             get_energy_c_ = new GetEnergy(combined_client_, receiver_);
@@ -43,6 +44,7 @@ class ECS_DCM
         {
             std::cout << "  ECS_DCM Destructor" << std::endl;
             delete combined_client_;
+            delete sim_invoker_;
             delete receiver_;
             delete import_energy_c_;
             delete export_energy_c_;
@@ -63,6 +65,7 @@ class ECS_DCM
 
         flecs::world dcm_world_;
         CombinedHttpsClient * combined_client_;
+        BaseInvoker * sim_invoker_;
         BaseReceiver * receiver_;
         BaseCommand * import_energy_c_;
         BaseCommand * export_energy_c_;

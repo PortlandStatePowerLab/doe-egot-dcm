@@ -105,9 +105,9 @@ HttpsClient::Send(bb::http::request<bb::http::string_body>& req)
     bb::ssl_stream<bb::tcp_stream> stream = HttpsClient::Connect();
 
 	// Send the HTTP request to the remote host
-    std::cout << "writing..." << std::endl;
+    //std::cout << "writing..." << std::endl;
 	bb::http::write(stream, req);
-    std::cout << "writing done." << std::endl;
+    //std::cout << "writing done." << std::endl;
 	// This buffer is used for reading and must be persisted
 	bb::flat_buffer buffer;
 
@@ -125,16 +125,16 @@ HttpsClient::Send(bb::http::request<bb::http::string_body>& req)
         }
         else
         {
-            std::cout << "ec" << std::endl;
+            //std::cout << "ec" << std::endl;
             throw bb::system_error{ec};
         }
     }
  
 
 	// Receive the HTTP response
-    std::cout << "now to read" << std::endl;
+    //std::cout << "now to read" << std::endl;
 	bb::http::read(stream, buffer, res, ec);
-    std::cout << "made it past the read" << std::endl;
+    //std::cout << "made it past the read" << std::endl;
     
     /*
     if(ec == net::error::eof)
