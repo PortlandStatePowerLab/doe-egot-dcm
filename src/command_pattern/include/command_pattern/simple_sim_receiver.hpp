@@ -53,19 +53,23 @@ class SimpleSimulatorReceiver : public BaseReceiver
         }
         std::string Export() 
         {
-            return sim_der_->ExportEnergy();
+            std::string response = sim_der_->ExportEnergy();
+            return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
         }
         std::string GetEnergy() 
         {
-            return sim_der_->GetEnergy();
+            std::string response = sim_der_->GetEnergy();
+            return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
         }
         std::string GetNameplate() 
         {
-            return sim_der_->GetNameplate();
+            std::string response = sim_der_->GetNameplate();
+            return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
         }
         std::string Idle() 
         {
-            return sim_der_->Idle();
+            std::string response = sim_der_->Idle();
+            return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
         }
         void IncrementSimulatorProgress()
         {
