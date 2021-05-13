@@ -11,6 +11,8 @@
 #include <sep/models.hpp>
 #include <xml/adapter.hpp>
 #include <xml/xml_validator.hpp>
+#include <ecs/der_simulator.hpp>
+#include <ecs/der_components_module.hpp>
 #include "s_sim_invoker.hpp"
 
 namespace dcm
@@ -27,12 +29,13 @@ class ECS_DCM
         {
             //SetReceiver();
             //need a program path
+            
         }
         ECS_DCM(const std::string& root) 
         {
             std::cout << " ECS_DCM root arg overload constructor " << std::endl;
             SetReceiver();
-            combined_client_ = new CombinedHttpsClient(root);
+            combined_client_ = new CombinedHttpsClient(root, "host.docker.internal", "8886", root, "localhost", "443");
             import_energy_c_ = new ImportEnergy(combined_client_, receiver_);
             export_energy_c_ = new ExportEnergy(combined_client_, receiver_);
             get_energy_c_ = new GetEnergy(combined_client_, receiver_);

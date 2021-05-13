@@ -36,7 +36,9 @@ void RunHttpsTests()
 {
   std::cout << " RunHttpsTests() " << std::endl;
   //HttpsClient client(g_program_path, "host.docker.internal", "8886");
-  CombinedHttpsClient combined_client(g_program_path);
+  CombinedHttpsClient combined_client(g_program_path, "localhost", 
+                                      "443", g_program_path, "host.docker.internal",
+                                      "8886");
 /*
   std::cout << client.Get("/dcap") << std::endl;
   std::cout << client.Get("/tm") << std::endl;
@@ -81,7 +83,7 @@ std::string freq = R"(<?xml version="1.0" encoding="utf-8"?>
         <logged>1617498512</logged>
     </message>)";
    //auto thing = client.Post("/na", test_dtm_msg);
-   auto thing2 = combined_client.PostCombined("/na", test_dtm_msg);
+   auto thing2 = combined_client.Post("DTM", test_dtm_msg);
    
    //std::cout << client.Get("/fres") << std::endl;
    //std::cout << client.Get("/sdev") << std::endl;

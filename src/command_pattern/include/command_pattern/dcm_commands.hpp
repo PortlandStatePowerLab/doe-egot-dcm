@@ -54,14 +54,14 @@ class ImportEnergy : public BaseCommand
             
             //this is specific to a simulated receiver at this point, and not based on a particular resource. 
             std::string msg_out =  xml_writer_.ReturnCustomCommand("DER", "DCM", "ImportEnergy", "na", "na", "command");
-            https_client_->PostDTM(msg_out);
+            https_client_->Post("DTM", msg_out);
 
             response_from_der = receiver_->Import();
-            https_client_->PostDTM(response_from_der);
+            https_client_->Post("DTM", response_from_der);
             
             //std::cout << "response from DER was: " << response_from_der << std::endl;
             //std::string msg_in =  xml_writer_.ReturnCustomCommand("DCM", "DER", response_from_der, "na", "na", "response");
-            //https_client_->PostDTM(msg_in);
+            //https_client_->Post("DTM",msg_in);
 
             return response_from_der;
         }
@@ -83,10 +83,10 @@ class ExportEnergy : public BaseCommand
             
             //this is specific to a simulated receiver at this point, and not based on a particular resource. 
             std::string msg_out =  xml_writer_.ReturnCustomCommand("DER", "DCM", "ExportEnergy", "na", "na", "command");
-            https_client_->PostDTM(msg_out);
+            https_client_->Post("DTM", msg_out);
 
             response_from_der = receiver_->Export();
-            https_client_->PostDTM(response_from_der);
+            https_client_->Post("DTM", response_from_der);
 
             return response_from_der;
         }
@@ -108,10 +108,10 @@ class GetEnergy : public BaseCommand
             
             //this is specific to a simulated receiver at this point, and not based on a particular resource. 
             std::string msg_out =  xml_writer_.ReturnCustomCommand("DER", "DCM", "GetEnergy", "na", "na", "command");
-            https_client_->PostDTM(msg_out);
+            https_client_->Post("DTM", msg_out);
 
             response_from_der = receiver_->GetEnergy();
-            https_client_->PostDTM(response_from_der);
+            https_client_->Post("DTM", response_from_der);
 
             return response_from_der;
         }
@@ -133,10 +133,10 @@ class GetNameplate : public BaseCommand
             
             //this is specific to a simulated receiver at this point, and not based on a particular resource. 
             std::string msg_out =  xml_writer_.ReturnCustomCommand("DER", "DCM", "GetNameplate", "na", "na", "command");
-            https_client_->PostDTM(msg_out);
+            https_client_->Post("DTM", msg_out);
 
             response_from_der = receiver_->GetNameplate();
-            https_client_->PostDTM(response_from_der);
+            https_client_->Post("DTM", response_from_der);
 
             return response_from_der;
         }
@@ -158,10 +158,10 @@ class Idle : public BaseCommand
             
             //this is specific to a simulated receiver at this point, and not based on a particular resource. 
             std::string msg_out =  xml_writer_.ReturnCustomCommand("DER", "DCM", "Idle", "na", "na", "command");
-            https_client_->PostDTM(msg_out);
+            https_client_->Post("DTM", msg_out);
 
             response_from_der = receiver_->Idle();
-            https_client_->PostDTM(response_from_der);
+            https_client_->Post("DTM", response_from_der);
 
             return response_from_der;
         }
