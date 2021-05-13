@@ -22,6 +22,12 @@ class BaseInvoker
 
         BaseInvoker(flecs::world * shared) : shared_world_ptr_(shared)
         {}
+        BaseInvoker(flecs::world * shared, BaseCommand* imp, BaseCommand* exp, 
+                    BaseCommand* get_e, BaseCommand* get_n, BaseCommand* idle) 
+                        : shared_world_ptr_(shared), 
+                        import_(imp), export_(exp), get_energy_(get_e), 
+                        get_nameplate_(get_n), idle_(idle)
+        {}
         ~BaseInvoker() {}
     
     protected:
@@ -31,6 +37,7 @@ class BaseInvoker
         BaseCommand * export_;
         BaseCommand * get_energy_;
         BaseCommand * get_nameplate_;
+        BaseCommand * idle_;
 };
 
 class SimpleSimulatorInvoker : public BaseInvoker
@@ -38,6 +45,9 @@ class SimpleSimulatorInvoker : public BaseInvoker
     public:
 
         SimpleSimulatorInvoker(flecs::world * shared) : BaseInvoker(shared)
+        {std::cout<<"SimpleSimulatorInvoker"<<std::endl;}
+        SimpleSimulatorInvoker(flecs::world * shared, BaseCommand* imp, BaseCommand* exp, BaseCommand* get_e, BaseCommand* get_n, BaseCommand * idle) 
+                                : BaseInvoker(shared, imp, exp, get_e, get_n, idle)
         {std::cout<<"SimpleSimulatorInvoker"<<std::endl;}
         ~SimpleSimulatorInvoker() {}
     

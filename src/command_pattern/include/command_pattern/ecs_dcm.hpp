@@ -33,7 +33,9 @@ class ECS_DCM
             std::cout << " ECS_DCM root arg overload constructor " << std::endl;
             SetReceiver();
             combined_client_ = new CombinedHttpsClient(root);
-            sim_invoker_ = new SimpleSimulatorInvoker(&dcm_world_);
+            sim_invoker_ = new SimpleSimulatorInvoker(&dcm_world_, import_energy_c_, 
+                                                        export_energy_c_, get_energy_c_, 
+                                                        get_nameplate_c_, idle_c_);
             import_energy_c_ = new ImportEnergy(combined_client_, receiver_);
             export_energy_c_ = new ExportEnergy(combined_client_, receiver_);
             get_energy_c_ = new GetEnergy(combined_client_, receiver_);
