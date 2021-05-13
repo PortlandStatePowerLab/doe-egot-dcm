@@ -6,34 +6,52 @@ namespace bb = boost::beast;
 namespace net = boost::asio; 
 namespace ssl = net::ssl; 
 
+CombinedHttpsClient::CombinedHttpsClient(
+    const std::string &gsp_root, const std::string &gsp_host, const std::string &gsp_port,
+    const std::string &dtm_root, const std::string &dtm_host, const std::string &dtm_port)
+    : gsp_client_(gsp_host, gsp_port, gsp_root), dtm_client_(dtm_host, dtm_port, dtm_root)
+{
+    // do nothing
+}
+
 CombinedHttpsClient::~CombinedHttpsClient() 
 {
-    delete gsp_client_;
-    delete dtm_client_;
+    // do nothing
 }
 
 bb::http::response <bb::http::dynamic_body>
-CombinedHttpsClient::GetCombined(const std::string& target, const std::string& query)
+CombinedHttpsClient::Get(const std::string& target, const std::string& query)
 {
+    std::string msg = "From: DCM, To: GSP, Method: Get, Target: " + target + query;
+    dtm_client_.Post("/na", msg);
 
+    auto res = gsp_client_.Get(target, query);
+    msg = "From: GSP, To: DCM, Method: Response, Body: " + boost::beast::buffers_to_string(res.body().data());
+    dtm_client_.Post("/na", msg);
+    return res;
 }
 
 bb::http::response <bb::http::dynamic_body>
-CombinedHttpsClient::PostCombined(const std::string& target, const std::string& resource)
+CombinedHttpsClient::Post(const std::string& target, const std::string& resource)
 {
-    std::cout << "let's just pretend we also talked to the gsp" << std::endl;
-    dtm_client_->Post(target, resource);
+    std::string msg = "From: DCM, To: GSP, Method: Get, Target: " + target + ", Payload: " + resource;
+    dtm_client_.Post("/na", msg);
+
+    auto res = gsp_client_.Post(target, resource);
+    msg = "From: GSP, To: DCM, Method: Response, Body: ";
+
+    dtm_client_.Post("/na", msg);
+    return res;
 }
 
 bb::http::response <bb::http::dynamic_body>
-CombinedHttpsClient::PutCombined(const std::string& target, const std::string& resource)
+CombinedHttpsClient::Put(const std::string& target, const std::string& resource)
 {
-   
+    // do nothing
 }
 
 bb::http::response <bb::http::dynamic_body>
-CombinedHttpsClient::DeleteCombined(const std::string& target)
+CombinedHttpsClient::Delete(const std::string& target)
 {
-
+    // do nothing
 }
-

@@ -26,9 +26,9 @@ int main(int argc, char **argv)
   std::cout << "Parent path: " << g_program_path << std::endl;
 
 
-  HttpsClient client(g_program_path, "host.docker.internal", "8886");
-  CombinedHttpsClient combined_client(g_program_path);
-/*
+  HttpsClient client(g_program_path, "0.0.0.0", "443");
+  //CombinedHttpsClient combined_client();
+
   std::cout << client.Get("/dcap") << std::endl;
   std::cout << client.Get("/tm") << std::endl;
   std::cout << client.Get("/edev") << std::endl;
@@ -57,8 +57,8 @@ std::string freq = R"(<?xml version="1.0" encoding="utf-8"?>
     <requestStatus>0</requestStatus>
   </RequestStatus>
 </FlowReservationRequest>)";
-*/
-  std::string test_dtm_msg = R"(    <message>
+
+/*   std::string test_dtm_msg = R"(    <message>
         <from>DCM</from>
         <to>DER</to>
         <content>
@@ -72,13 +72,10 @@ std::string freq = R"(<?xml version="1.0" encoding="utf-8"?>
         <logged>1617498512</logged>
     </message>)";
    auto thing = client.Post("/na", test_dtm_msg);
-   auto thing2 = combined_client.PostCombined("/na", test_dtm_msg);
+   auto thing2 = combined_client.PostCombined("/na", test_dtm_msg); */
    
-   //std::cout << client.Get("/fres") << std::endl;
-   //std::cout << client.Get("/sdev") << std::endl;
-    //std::cout << response << std::endl;
-    //sep::DeviceCapability *dcap = new sep::DeviceCapability;
-    //xml::Parse(boost::beast::buffers_to_string(response.body().data()), dcap);
+    std::cout << client.Get("/fres") << std::endl;
+    std::cout << client.Get("/sdev") << std::endl;
 
     return 0;
 }

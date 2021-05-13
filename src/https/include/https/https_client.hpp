@@ -1,22 +1,11 @@
 #ifndef __HTTPS_CLIENT_H__
 #define __HTTPS_CLIENT_H__
-
-#include <boost/beast/core.hpp>
-#include <boost/beast/http.hpp>
-#include <boost/beast/ssl.hpp>
-#include <boost/beast/version.hpp>
-#include <boost/asio/connect.hpp>
-#include <boost/asio/ip/tcp.hpp>
-#include <boost/asio/ssl/error.hpp>
-#include <boost/asio/ssl/stream.hpp>
-
-#include <string>
-#include <memory>
+#include "abstract_client.hpp"
 
 extern std::string g_program_path;
 
 // Singleton Design Pattern
-class HttpsClient
+class HttpsClient : public AbstractClient
 {
 public:
     HttpsClient (const std::string &root, const std::string &host,const std::string &port);
