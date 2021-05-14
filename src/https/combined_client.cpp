@@ -23,7 +23,7 @@ bb::http::response <bb::http::dynamic_body>
 CombinedHttpsClient::Get(const std::string& target, const std::string& query)
 {
     std::string msg = "From: DCM, To: GSP, Method: Get, Target: " + target + query;
-    dtm_client_.Post("/na", msg);
+    std::cout << "DTM RESPONSE : " << dtm_client_.Post("/na", msg) << std::endl;
 
     auto res = gsp_client_.Get(target, query);
     msg = "From: GSP, To: DCM, Method: Response, Body: " + boost::beast::buffers_to_string(res.body().data());

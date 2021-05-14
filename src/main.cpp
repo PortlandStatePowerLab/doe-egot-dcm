@@ -26,8 +26,9 @@ int main(int argc, char **argv)
   std::cout << "Parent path: " << g_program_path << std::endl;
 
 
-  HttpsClient client(g_program_path, "0.0.0.0", "443");
-  //CombinedHttpsClient combined_client();
+  CombinedHttpsClient client(
+    g_program_path, "0.0.0.0", "443",
+    g_program_path, "0.0.0.0", "4430");
 
   std::cout << client.Get("/dcap") << std::endl;
   std::cout << client.Get("/tm") << std::endl;
