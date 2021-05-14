@@ -68,6 +68,12 @@ void Parse(const std::string &xml_str, sep::FlowReservationResponse *fr_response
     fr_response->power_available.multiplier = pt.get<uint8_t>("FlowReservationResponse.powerAvailable.multiplier", 0);
     fr_response->power_available.value = pt.get<int16_t>("FlowReservationResponse.powerAvailable.value", 0);
     fr_response->subject = pt.get<std::string>("FlowReservationResponse.subject", "");
+
+    std::stringstream ss;
+    //pt::write_xml(ss, tree_); //write tree to stringstream
+    boost::property_tree::write_xml(ss, pt, boost::property_tree::xml_writer_make_settings<std::string>(' ', 4)); //<- this works to format the tree nicely
+    std::cout << "TREE!: " << std::endl  << ss.str() << std::endl << std::endl; //output string created by stringstream
+
 }
 template<typename T>
 T Dehexify(const std::string hexidecimal) 
@@ -116,16 +122,17 @@ void ECS_DCM::AddFlowResRespEntity(sep::FlowReservationResponse & flowresresp)
 sep::FlowReservationResponse ECS_DCM::GetFlowResRespFromGSP(sep::FlowReservationRequest & freq)
 {
     auto res = combined_client_->Get("/freq", FLOW_RESERVATION_REQUEST);
+    
     std::cout << " xx GetFlowResFromGSP res: " << res << std::endl << "xx res over xx" << std::endl;
     std::string s = boost::beast::buffers_to_string(res.body().data());
     std::cout << " xx GetFlowResFromGSP s: " << res << std::endl << "xx s over xx" << std::endl;
     sep::FlowReservationResponse temp;
     Parse(s, &temp);
-    boost::property_tree::ptree pt_temp = Treeify(s);
-
-    xml::XMLCommandAdapter xml_bin( pt_temp );
-    xml_bin.OutputTreeToTerminal();
-
+    
+    //boost::property_tree::ptree pt_temp = Treeify(s);
+    //xml::XMLCommandAdapter xml_bin( pt_temp );
+    //xml_bin.OutputTreeToTerminal();
+    std::cout << " A href value from the receiver FlowResResponse : " << temp.href << std::endl;
     return temp;
 }
 void ECS_DCM::InitializeFlowResInvokingSystems()
