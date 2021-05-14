@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <iostream>
 
 std::string g_program_path;
 
@@ -11,6 +12,7 @@ void GetParentPath(char** arg)
 
 int main(int argc, char **argv) 
 {
+    std::cout << "tests main" << std::endl;
     GetParentPath(argv);
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

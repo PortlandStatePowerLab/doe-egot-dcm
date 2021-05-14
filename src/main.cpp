@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <https/https_client.hpp>
+#include <https/combined_client.hpp>
 #include <sep/models.hpp>
 #include <xml/adapter.hpp>
 #include <xml/xml_validator.hpp>
@@ -18,9 +19,16 @@ void GetParentPath(char** arg)
 
 int main(int argc, char **argv)
 {
+  //std::string ssl_path = "../ssl-ca/";
+  std::cout << "src main" << std::endl;
   GetParentPath(argv);
+  std::cout << "argv: " << *argv << std::endl;
+  std::cout << "Parent path: " << g_program_path << std::endl;
 
-  HttpsClient client(g_program_path, "localhost", "443");
+
+  CombinedHttpsClient client(
+    g_program_path, "0.0.0.0", "443",
+    g_program_path, "0.0.0.0", "4430");
 
   std::cout << client.Get("/dcap") << std::endl;
   std::cout << client.Get("/tm") << std::endl;
@@ -50,12 +58,25 @@ std::string freq = R"(<?xml version="1.0" encoding="utf-8"?>
     <requestStatus>0</requestStatus>
   </RequestStatus>
 </FlowReservationRequest>)";
-   client.Post("/freq", freq);
-   std::cout << client.Get("/fres") << std::endl;
-   std::cout << client.Get("/sdev") << std::endl;
-    //std::cout << response << std::endl;
-    //sep::DeviceCapability *dcap = new sep::DeviceCapability;
-    //xml::Parse(boost::beast::buffers_to_string(response.body().data()), dcap);
+
+/*   std::string test_dtm_msg = R"(    <message>
+        <from>DCM</from>
+        <to>DER</to>
+        <content>
+            <command>
+                <type>SHED</type>
+                <start>1617498512</start>
+                <duration>3.1415</duration>
+            </command>
+            <expect_response>1</expect_response>
+        </content>
+        <logged>1617498512</logged>
+    </message>)";
+   auto thing = client.Post("/na", test_dtm_msg);
+   auto thing2 = combined_client.PostCombined("/na", test_dtm_msg); */
+   
+    std::cout << client.Get("/fres") << std::endl;
+    std::cout << client.Get("/sdev") << std::endl;
 
     return 0;
 }

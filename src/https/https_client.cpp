@@ -113,20 +113,27 @@ HttpsClient::Send(bb::http::request<bb::http::string_body>& req)
 	// Declare a container to hold the response
 	bb::http::response<bb::http::dynamic_body> res;
 
-	// Receive the HTTP response
-	bb::http::read(stream, buffer, res);
 
+
+    
+    // Receive the HTTP response
     boost::system::error_code ec;
+	bb::http::read(stream, buffer, res, ec);
+    
     stream.shutdown(ec);
-    if(ec == net::error::eof)
+    if (ec)
     {
-        // Rationale:
-        // http://stackoverflow.com/questions/25587403/boost-asio-ssl-async-shutdown-always-finishes-with-an-error
-        ec = {};
-    }
-    if(ec)
-    {
-        throw bb::system_error{ec};
+        if(ec == net::error::eof || ec == boost::asio::ssl::error::stream_truncated)
+        {
+            // Rationale:
+            // http://stackoverflow.com/questions/25587403/boost-asio-ssl-async-shutdown-always-finishes-with-an-error
+            ec = {};
+        }
+        else
+        {
+            std::cout << "ec" << std::endl;
+            throw bb::system_error{ec};
+        }
     }
 
 	return res;
