@@ -94,7 +94,7 @@ class ECS_DCM
         void RunSimulatorLoop();
         void AddFlowResRespEntity(sep::FlowReservationResponse & flowresresp);
         sep::FlowReservationResponse GetFlowResRespFromGSP(sep::FlowReservationRequest & freq);
-    
+        void InitializeFlowResInvokingSystems();
     private:
 
         flecs::world dcm_world_;

@@ -82,12 +82,11 @@ void ECS_DCM::RunSimulatorLoop()
 {
     std::cout << "   ECS_DCM::RunSimulatorLoop() " << std::endl;
 
-    std::cout << " SimpleDER component count: " << dcm_world_.count<der::der_components::SimpleDER>() << std::endl;
-    import_energy_c_->Execute();
+    /* import_energy_c_->Execute();
     export_energy_c_->Execute();
     get_energy_c_->Execute();
     get_nameplate_c_->Execute();
-    idle_c_->Execute();
+    idle_c_->Execute(); */
 
     std::cout << "   Now test adding FlowResResponse to the flecs world " << std::endl;
     sep::FlowReservationRequest temp;
@@ -96,13 +95,18 @@ void ECS_DCM::RunSimulatorLoop()
     AddFlowResRespEntity(fresponse);
     
     std::cout << " FLowResResp component count: " << dcm_world_.count<sep::FlowReservationResponse>() << std::endl;
+
+    std::cout << " Testing FlowResInvoker Systems " << std::endl;
+    InitializeFlowResInvokingSystems();
+    dcm_world_.progress();
 }
 void ECS_DCM::AddFlowResRespEntity(sep::FlowReservationResponse & flowresresp)
 {
     dcm_world_.entity()
         .add<sep::FlowReservationResponse>().set<sep::FlowReservationResponse>({flowresresp})
         .add<sep::DateTimeInterval>().set<sep::DateTimeInterval>({flowresresp.interval})
-        .add<sep::CurrentStatus>().set<sep::CurrentStatus>(flowresresp.event_status.current_status);
+        .add<sep::CurrentStatus>().set<sep::CurrentStatus>(flowresresp.event_status.current_status)
+        .add<dcm_components_module::ECSResourceStatus>().set<dcm_components_module::ECSResourceStatus>({dcm_components_module::ECSResourceStatus::kNew});
 }
 sep::FlowReservationResponse ECS_DCM::GetFlowResRespFromGSP(sep::FlowReservationRequest & freq)
 {
@@ -114,6 +118,15 @@ sep::FlowReservationResponse ECS_DCM::GetFlowResRespFromGSP(sep::FlowReservation
     Parse(s, &temp);
     return temp;
 }
-
+void ECS_DCM::InitializeFlowResInvokingSystems()
+{
+    /*
+    dcm_world_.system<>()
+        .iter([](const flecs::iter&) {
+            std::cout << " Test System Printed This " << std::endl;
+        });
+        */
+    dcm_world_.system<sep::FlowReservationResponse, sep::CurrentStatus
+}
 
 } // namespace dcm

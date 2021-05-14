@@ -37,6 +37,17 @@ class dcm_components_module
             kError
         };
 
+        enum class ECSResourceStatus : short // last response received from the DER
+        {
+            kNew, 
+            kCurrentlyActive, 
+            kAlreadyEnacted, 
+            kAwaitingProcessing, 
+            kProcessed,
+            kScheduled,
+            kObsolete
+        };
+
         struct DERMirror
         {
             double available_import_energy, available_export_energy;
@@ -47,6 +58,8 @@ class dcm_components_module
         {
             int poll_rate;
         };
+
+
 
         dcm_components_module(flecs::world& world) 
         {
@@ -63,6 +76,7 @@ class dcm_components_module
             world.component<sep::FlowReservationRequest>();
             world.component<sep::FlowReservationResponse>();
             world.component<sep::CurrentStatus>();
+            world.component<ECSResourceStatus>();
             world.component<PollRate>();
 
             // register DER state tracking singletons
