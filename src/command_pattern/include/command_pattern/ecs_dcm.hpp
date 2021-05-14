@@ -18,7 +18,8 @@
 
 namespace dcm
 {
-
+template <typename T>
+        T Dehexify (const std::string hexidecimal);
 const std::string FLOW_RESERVATION_REQUEST = R"(<?xml version="1.0" encoding="utf-8"?>
 <FlowReservationRequest href="http://uri1" xmlns="urn:ieee:std:2030.5:ns">
   <mRID>0FB7</mRID>

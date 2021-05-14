@@ -92,7 +92,7 @@ void ECS_DCM::RunSimulatorLoop()
     std::cout << "   Now test adding FlowResResponse to the flecs world " << std::endl;
     sep::FlowReservationRequest temp;
     Parse(FLOW_RESERVATION_REQUEST, &temp);
-    GetFlowResRespFromGSP(temp);
+    
 }
 void ECS_DCM::AddFlowResRespEntity(sep::FlowReservationResponse & flowresresp)
 {
@@ -105,7 +105,7 @@ sep::FlowReservationResponse ECS_DCM::GetFlowResRespFromGSP(sep::FlowReservation
 {
     auto res = combined_client_->Get("/freq", FLOW_RESERVATION_REQUEST);
     std::cout << res << std::endl;
-    std::string s = boost::beast::buffers_to_string(res.body.data())
+    std::string s = boost::beast::buffers_to_string(res.body().data());
 
     sep::FlowReservationResponse temp;
     Parse(s, &temp);
