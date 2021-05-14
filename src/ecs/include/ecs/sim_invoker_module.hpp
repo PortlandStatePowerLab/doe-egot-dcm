@@ -19,7 +19,7 @@ class sim_invoker_module
         {
             //Register module with world 
             world_.module<sim_invoker_module>();
-            world_.import<der::der_components>();
+            //world_.import<der::der_components>();
         }
 };
 
