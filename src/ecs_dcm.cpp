@@ -102,11 +102,16 @@ void ECS_DCM::RunSimulatorLoop()
 }
 void ECS_DCM::AddFlowResRespEntity(sep::FlowReservationResponse & flowresresp)
 {
-    dcm_world_.entity()
+    auto e_temp = dcm_world_.entity()
         .add<sep::FlowReservationResponse>().set<sep::FlowReservationResponse>({flowresresp})
         .add<sep::DateTimeInterval>().set<sep::DateTimeInterval>({flowresresp.interval})
-        .add<sep::CurrentStatus>().set<sep::CurrentStatus>(flowresresp.event_status.current_status)
-        .add<dcm_components_module::ECSResourceStatus>().set<dcm_components_module::ECSResourceStatus>({dcm_components_module::ECSResourceStatus::kNew});
+        .add<sep::CurrentStatus>().set<sep::CurrentStatus>({flowresresp.event_status.current_status})
+        .add<dcm_components_module::ECSResourceStatus>().set<dcm_components_module::ECSResourceStatus>({dcm_components_module::ECSResourceStatus::kNew})
+        .add<dcm_components_module::ResourceType>().set<dcm_components_module::ResourceType>({dcm_components_module::ResourceType::kFlowReservationResponse});
+
+    // for testing
+    e_temp.set<sep::CurrentStatus>({sep::CurrentStatus::kActive});
+
 }
 sep::FlowReservationResponse ECS_DCM::GetFlowResRespFromGSP(sep::FlowReservationRequest & freq)
 {
@@ -126,7 +131,14 @@ void ECS_DCM::InitializeFlowResInvokingSystems()
             std::cout << " Test System Printed This " << std::endl;
         });
         */
-    dcm_world_.system<sep::FlowReservationResponse, sep::CurrentStatus
+    dcm_world_.system<sep::FlowReservationResponse, sep::CurrentStatus, dcm_components_module::ECSResourceStatus, dcm_components_module::ResourceType>("ProcessFlowResRespResources")
+        .each([this](flecs::entity e, sep::FlowReservationResponse& fresp, sep::CurrentStatus& cs, dcm_components_module::ECSResourceStatus& ers, dcm_components_module::ResourceType& type)
+        {
+            std::cout << " FlowResResp Invoking System Printed This " << std::endl;
+            flecs::entity* e_ptr = &e;
+            sim_flow_invoker_->ProcessResource(e_ptr);
+        }
+        );
 }
 
 } // namespace dcm

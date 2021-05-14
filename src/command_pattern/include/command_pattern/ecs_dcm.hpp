@@ -67,7 +67,7 @@ class ECS_DCM
             get_energy_c_ = new GetEnergy(combined_client_, receiver_);
             get_nameplate_c_ = new GetNameplate(combined_client_, receiver_);
             idle_c_ = new Idle(combined_client_, receiver_);
-            sim_invoker_ = new SimpleSimulatorInvoker(&dcm_world_, import_energy_c_, 
+            sim_flow_invoker_ = new SimpleSimulatorFlowResInvoker(&dcm_world_, import_energy_c_, 
                                                         export_energy_c_, get_energy_c_, 
                                                         get_nameplate_c_, idle_c_);
             dcm_world_.import<dcm::dcm_components_module>();
@@ -76,7 +76,7 @@ class ECS_DCM
         {
             std::cout << "  ECS_DCM Destructor" << std::endl;
             delete combined_client_;
-            delete sim_invoker_;
+            delete sim_flow_invoker_;
             delete receiver_;
             delete import_energy_c_;
             delete export_energy_c_;
@@ -95,11 +95,12 @@ class ECS_DCM
         void AddFlowResRespEntity(sep::FlowReservationResponse & flowresresp);
         sep::FlowReservationResponse GetFlowResRespFromGSP(sep::FlowReservationRequest & freq);
         void InitializeFlowResInvokingSystems();
+    
     private:
 
         flecs::world dcm_world_;
         CombinedHttpsClient * combined_client_;
-        BaseInvoker * sim_invoker_;
+        BaseInvoker * sim_flow_invoker_;
         BaseReceiver * receiver_;
         BaseCommand * import_energy_c_;
         BaseCommand * export_energy_c_;

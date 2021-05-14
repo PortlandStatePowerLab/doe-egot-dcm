@@ -48,6 +48,13 @@ class dcm_components_module
             kObsolete
         };
 
+        enum class ResourceType : short // last response received from the DER
+        {
+            kFlowReservationResponse,
+            kSelfDevice, 
+            kEndDevice, 
+            kDeviceCapability
+        };
         struct DERMirror
         {
             double available_import_energy, available_export_energy;
@@ -77,6 +84,7 @@ class dcm_components_module
             world.component<sep::FlowReservationResponse>();
             world.component<sep::CurrentStatus>();
             world.component<ECSResourceStatus>();
+            world.component<ResourceType>();
             world.component<PollRate>();
 
             // register DER state tracking singletons
