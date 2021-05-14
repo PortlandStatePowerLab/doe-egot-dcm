@@ -30,17 +30,21 @@ CombinedHttpsClient::Post(const std::string& target, const std::string& resource
 {
     if (target == "DTM")
     {
-        dtm_client_.Post("/na", resource);
-
+        std::cout << "DTM Specific POST" << std::endl;
+        auto res = dtm_client_.Post("/na", resource);
+        return res;
     }
-    std::string msg = "From: DCM, To: GSP, Method: Get, Target: " + target + ", Payload: " + resource;
-    dtm_client_.Post("/na", msg);
+    else
+    {
+        std::string msg = "From: DCM, To: GSP, Method: Get, Target: " + target + ", Payload: " + resource;
+        dtm_client_.Post("/na", msg);
 
-    auto res = gsp_client_.Post(target, resource);
-    msg = "From: GSP, To: DCM, Method: Response, Body: ";
+        auto res = gsp_client_.Post(target, resource);
+        msg = "From: GSP, To: DCM, Method: Response, Body: ";
 
-    dtm_client_.Post("/na", msg);
-    return res;
+        dtm_client_.Post("/na", msg);
+        return res;
+    }
 }
 
 bb::http::response <bb::http::dynamic_body>
