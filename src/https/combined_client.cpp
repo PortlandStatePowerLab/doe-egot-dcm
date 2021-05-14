@@ -16,11 +16,17 @@ CombinedHttpsClient::~CombinedHttpsClient()
 bb::http::response <bb::http::dynamic_body>
 CombinedHttpsClient::Get(const std::string& target, const std::string& query)
 {
-    std::string msg = "From: DCM, To: GSP, Method: Get, Target: " + target + query;
+    //First notify the DTM of outgoing msg to GSP
+    // Return Custom command args: to, from, type, target, body
+    std::string msg = xml_writer_.ReturnCustomGSPNotify("GSP", "DCM", "GET_request", target, query);//"From: DCM, To: GSP, Method: Get, Target: " + target + query;
     dtm_client_.Post("/na", msg);
 
+    // Now send request to the GSP
     auto res = gsp_client_.Get(target, query);
-    msg = "From: GSP, To: DCM, Method: Response, Body: " + boost::beast::buffers_to_string(res.body().data());
+    std::string response_body = boost::beast::buffers_to_string(res.body().data());
+    
+    // Now notify DTM of response from GSP
+    msg = xml_writer_.ReturnCustomGSPNotify("DCM", "GSP", "GET_response", "na", response_body); // "From: GSP, To: DCM, Method: Response, Body: " + boost::beast::buffers_to_string(res.body().data());
     dtm_client_.Post("/na", msg);
     return res;
 }

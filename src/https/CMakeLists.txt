@@ -11,6 +11,7 @@ add_library( ${PROJECT_NAME}::${COMPONENT_NAME} ALIAS ${COMPONENT_NAME} )
 target_link_libraries(${COMPONENT_NAME} PUBLIC 
   Boost::boost
   OpenSSL::SSL
+  dtm_msg_writer
   pthread
 )
 

@@ -1,5 +1,8 @@
 #ifndef __COMBINED_CLIENT_H__
 #define __COMBINED_CLIENT_H__
+
+#include <iostream>
+#include <dtm_msg_writer/announce_xml.h>
 #include "https_client.hpp"
 
 
@@ -47,6 +50,7 @@ class CombinedHttpsClient
     private:
         HttpsClient dtm_client_;
         HttpsClient gsp_client_;
+        dcm::xml::XMLCommandAdapter xml_writer_;
 };
 
 #endif // __COMBINED_CLIENT_H__
