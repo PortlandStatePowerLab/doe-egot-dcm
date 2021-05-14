@@ -150,7 +150,10 @@ std::string XMLCommandAdapter::ReturnCustomCommand(const std::string& to, const 
 std::string XMLCommandAdapter::ReturnCustomGSPNotify(const std::string& to, const std::string& from, const std::string& type, const std::string& target,
                                                     const std::string& body)
 {
-    boost::property_tree::ptree t;
+    boost::property_tree::ptree t, st;
+    std::stringstream ss;
+    ss << body;
+    boost::property_tree::xml_parser::read_xml(ss, st, boost::property_tree::xml_parser::trim_whitespace);
 
     std::time_t start_time = std::time(0);
     string str_time = ctime(&start_time);
@@ -166,7 +169,7 @@ std::string XMLCommandAdapter::ReturnCustomGSPNotify(const std::string& to, cons
     
     if (target != "na")
         t.put(target_path, target);
-    t.put(body_path, body);
+    t.add_child(body_path, st);
     
     //t.put("message.content.command.duration", duration);
     //t.put("message.content.expect_response", 1);
