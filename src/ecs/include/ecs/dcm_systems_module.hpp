@@ -20,7 +20,6 @@ class dcm_systems_module
         {
             //Register module with world 
             world_.module<dcm_systems_module>();
-            world_.import<der::der_components>();
             world_.import<dcm_components_module>();
         }
 };

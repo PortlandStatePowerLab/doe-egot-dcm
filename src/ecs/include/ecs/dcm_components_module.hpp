@@ -70,7 +70,7 @@ class dcm_components_module
             world.set<DERMostRecentResponse>({DERMostRecentResponse::kNone});
             world.set<DERPrevCommand>({DERPrevCommand::kNone});
 
-            auto flowres_resp = world.type("FlowResRespEntity")
+            auto flowres_resp_type = world.type("FlowResRespEntity")
                 .add<sep::FlowReservationResponse>()
                 .add<sep::CurrentStatus>()
                 .add<sep::DateTimeInterval>();

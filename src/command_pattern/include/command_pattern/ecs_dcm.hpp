@@ -19,6 +19,31 @@
 namespace dcm
 {
 
+const std::string FLOW_RESERVATION_REQUEST = R"(<?xml version="1.0" encoding="utf-8"?>
+<FlowReservationRequest href="http://uri1" xmlns="urn:ieee:std:2030.5:ns">
+  <mRID>0FB7</mRID>
+  <description>description1</description>
+  <version>0</version>
+  <creationTime>1</creationTime>
+  <durationRequested>0</durationRequested>
+  <energyRequested>
+    <multiplier>1</multiplier>
+    <value>-140737488355328</value>
+  </energyRequested>
+  <intervalRequested>
+    <duration>0</duration>
+    <start>1</start>
+  </intervalRequested>
+  <powerRequested>
+    <multiplier>1</multiplier>
+    <value>1</value>
+  </powerRequested>
+  <RequestStatus>
+    <dateTime>1</dateTime>
+    <requestStatus>0</requestStatus>
+  </RequestStatus>
+</FlowReservationRequest>)";
+
 class ECS_DCM 
 {
     public:
@@ -66,6 +91,8 @@ class ECS_DCM
             receiver_ = new SimpleSimulatorReceiver; //emulated DER
         }
         void RunSimulatorLoop();
+        void AddFlowResRespEntity(sep::FlowReservationResponse & flowresresp);
+        sep::FlowReservationResponse GetFlowResRespFromGSP(sep::FlowReservationRequest & freq);
     
     private:
 
@@ -78,6 +105,7 @@ class ECS_DCM
         BaseCommand * get_energy_c_;
         BaseCommand * get_nameplate_c_;
         BaseCommand * idle_c_;
+        
 
         //BaseInvoker * sim_invoker_;
 
