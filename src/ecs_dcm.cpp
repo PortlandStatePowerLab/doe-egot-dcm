@@ -116,11 +116,16 @@ void ECS_DCM::AddFlowResRespEntity(sep::FlowReservationResponse & flowresresp)
 sep::FlowReservationResponse ECS_DCM::GetFlowResRespFromGSP(sep::FlowReservationRequest & freq)
 {
     auto res = combined_client_->Get("/freq", FLOW_RESERVATION_REQUEST);
-    std::cout << res << std::endl;
+    std::cout << " xx GetFlowResFromGSP res: " << res << std::endl << "xx res over xx" << std::endl;
     std::string s = boost::beast::buffers_to_string(res.body().data());
-
+    std::cout << " xx GetFlowResFromGSP s: " << res << std::endl << "xx s over xx" << std::endl;
     sep::FlowReservationResponse temp;
     Parse(s, &temp);
+    boost::property_tree::ptree pt_temp = Treeify(s);
+
+    xml::XMLCommandAdapter xml_bin( pt_temp );
+    xml_bin.OutputTreeToTerminal();
+
     return temp;
 }
 void ECS_DCM::InitializeFlowResInvokingSystems()

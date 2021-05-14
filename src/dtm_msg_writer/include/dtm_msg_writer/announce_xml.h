@@ -33,6 +33,9 @@ class XMLCommandAdapter
     public:
         XMLCommandAdapter() : xml_notification_("NO DATA"), test_file_name_(testing_file_name), saved_("unknown")
         {}
+        XMLCommandAdapter(boost::property_tree::ptree& t) : xml_notification_("NO DATA"), test_file_name_(testing_file_name), saved_("unknown"),
+                                                            tree_(t)
+        {}
         ~XMLCommandAdapter();
         void GenerateTestFile();
         void GenerateNamedTestFile(std::string src);

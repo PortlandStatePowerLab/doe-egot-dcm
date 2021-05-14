@@ -24,6 +24,7 @@ CombinedHttpsClient::Get(const std::string& target, const std::string& query)
     // Now send request to the GSP
     auto res = gsp_client_.Get(target, query);
     std::string response_body = boost::beast::buffers_to_string(res.body().data());
+    std::cout << " RESPONSE BODY: " << response_body << std::endl << "___RESPONSE BODY OVER__" << std::endl;
     
     // Now notify DTM of response from GSP
     msg = xml_writer_.ReturnCustomGSPNotify("DCM", "GSP", "GET_response", "na", response_body); // "From: GSP, To: DCM, Method: Response, Body: " + boost::beast::buffers_to_string(res.body().data());
