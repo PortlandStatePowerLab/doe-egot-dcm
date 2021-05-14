@@ -17,6 +17,7 @@ void ECS_DCM::RunSimulatorLoop()
 {
     std::cout << "   ECS_DCM::RunSimulatorLoop() " << std::endl;
 
+    std::cout << " SimpleDER component count: " << dcm_world_.count<der::der_components::SimpleDER>() << std::endl;
     import_energy_c_->Execute();
     export_energy_c_->Execute();
     get_energy_c_->Execute();

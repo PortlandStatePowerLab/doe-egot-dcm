@@ -46,8 +46,6 @@ class SimpleSimulatorInvoker : public BaseInvoker
 {
     public:
 
-        SimpleSimulatorInvoker(flecs::world * shared) : BaseInvoker(shared)
-        {std::cout<<"SimpleSimulatorInvoker"<<std::endl;}
         SimpleSimulatorInvoker(flecs::world * shared, BaseCommand* imp, BaseCommand* exp, BaseCommand* get_e, BaseCommand* get_n, BaseCommand * idle) 
                                 : BaseInvoker(shared, imp, exp, get_e, get_n, idle)
         {std::cout<<"SimpleSimulatorInvoker"<<std::endl;}

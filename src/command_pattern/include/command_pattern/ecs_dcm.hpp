@@ -13,6 +13,7 @@
 #include <xml/xml_validator.hpp>
 #include <ecs/der_simulator.hpp>
 #include <ecs/der_components_module.hpp>
+#include <ecs/dcm_components_module.hpp>
 #include "s_sim_invoker.hpp"
 
 namespace dcm
@@ -29,7 +30,6 @@ class ECS_DCM
         {
             //SetReceiver();
             //need a program path
-            
         }
         ECS_DCM(const std::string& root) 
         {
@@ -44,6 +44,7 @@ class ECS_DCM
             sim_invoker_ = new SimpleSimulatorInvoker(&dcm_world_, import_energy_c_, 
                                                         export_energy_c_, get_energy_c_, 
                                                         get_nameplate_c_, idle_c_);
+            dcm_world_.import<dcm::dcm_components_module>();
         }
         ~ECS_DCM() 
         {
