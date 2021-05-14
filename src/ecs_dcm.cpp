@@ -92,7 +92,10 @@ void ECS_DCM::RunSimulatorLoop()
     std::cout << "   Now test adding FlowResResponse to the flecs world " << std::endl;
     sep::FlowReservationRequest temp;
     Parse(FLOW_RESERVATION_REQUEST, &temp);
+    sep::FlowReservationResponse fresponse = GetFlowResRespFromGSP(temp);
+    AddFlowResRespEntity(fresponse);
     
+    std::cout << " FLowResResp component count: " << dcm_world_.count<sep::FlowReservationRequest>() << std::endl;
 }
 void ECS_DCM::AddFlowResRespEntity(sep::FlowReservationResponse & flowresresp)
 {
