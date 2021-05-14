@@ -95,7 +95,7 @@ void ECS_DCM::RunSimulatorLoop()
     sep::FlowReservationResponse fresponse = GetFlowResRespFromGSP(temp);
     AddFlowResRespEntity(fresponse);
     
-    std::cout << " FLowResResp component count: " << dcm_world_.count<sep::FlowReservationRequest>() << std::endl;
+    std::cout << " FLowResResp component count: " << dcm_world_.count<sep::FlowReservationResponse>() << std::endl;
 }
 void ECS_DCM::AddFlowResRespEntity(sep::FlowReservationResponse & flowresresp)
 {
