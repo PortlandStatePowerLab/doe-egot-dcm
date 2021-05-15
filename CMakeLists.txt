@@ -50,7 +50,7 @@ FetchContent_Declare(
 FetchContent_Declare(
   SEP
   GIT_REPOSITORY https://github.com/PortlandStatePowerLab/doe-egot-sep.git
-  GIT_TAG        XMLAdapter
+  GIT_TAG        main
 )
 
 FetchContent_Declare(
