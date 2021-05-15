@@ -97,7 +97,7 @@ void ECS_DCM::RunSimulatorLoop()
     std::cout << "   Now test adding FlowResResponse to the flecs world " << std::endl;
     sep::FlowReservationRequest temp;
     Parse(FLOW_RESERVATION_REQUEST, &temp);
-    sep::FlowReservationResponse fresponse = GetFlowResRespFromGSP(temp);
+    sep::FlowReservationResponse fresponse = GetFlowResRespFromGSP();
     AddFlowResRespEntity(fresponse);
     
     std::cout << " FLowResResp component count: " << dcm_world_.count<sep::FlowReservationResponse>() << std::endl;
@@ -119,9 +119,9 @@ void ECS_DCM::AddFlowResRespEntity(sep::FlowReservationResponse & flowresresp)
     e_temp.set<sep::CurrentStatus>({sep::CurrentStatus::kActive});
 
 }
-sep::FlowReservationResponse ECS_DCM::GetFlowResRespFromGSP(sep::FlowReservationRequest & freq)
+sep::FlowReservationResponse ECS_DCM::GetFlowResRespFromGSP()
 {
-    auto res = combined_client_->Get("/freq", FLOW_RESERVATION_REQUEST);
+    auto res = combined_client_->Get("/fres");
     
     std::cout << " xx GetFlowResFromGSP res: " << res << std::endl << "xx res over xx" << std::endl;
     std::string s = boost::beast::buffers_to_string(res.body().data());
