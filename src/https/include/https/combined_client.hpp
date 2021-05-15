@@ -10,8 +10,7 @@ class CombinedHttpsClient : public AbstractClient
 {
     public:
         CombinedHttpsClient(const std::string &gsp_root, const std::string &gsp_host, const std::string &gsp_port,
-                            const std::string &dtm_root, const std::string &dtm_host, const std::string &dtm_port)
-                            : gsp_client_(gsp_root, gsp_host, gsp_port), dtm_client_(dtm_root, dtm_host, dtm_port);
+                            const std::string &dtm_root, const std::string &dtm_host, const std::string &dtm_port);
         ~CombinedHttpsClient();
         boost::beast::http::response <boost::beast::http::dynamic_body> Get
         (
