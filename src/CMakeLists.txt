@@ -14,7 +14,7 @@ add_executable(${COMPONENT_NAME}
 target_link_libraries(${COMPONENT_NAME} PUBLIC 
   https_client
   SEP::Model
-  ecs
+  ecs_client
   command_pattern
   dtm_msg_writer
   SEP::XML
