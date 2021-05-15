@@ -4,31 +4,14 @@
 #include <iostream>
 #include <dtm_msg_writer/announce_xml.h>
 #include "https_client.hpp"
+#include "abstract_client.hpp"
 
-
-
-struct DTMDetails
-{
-    std::string dtm_root;
-    std::string dtm_host = "host.docker.internal";
-    std::string dtm_port = "8886";
-};
-struct GSPDetails
-{
-    std::string gsp_root;
-    std::string gsp_host = "localhost";
-    std::string gsp_port = "443";
-};
-
-class CombinedHttpsClient
+class CombinedHttpsClient : public AbstractClient
 {
     public:
         CombinedHttpsClient(const std::string &gsp_root, const std::string &gsp_host, const std::string &gsp_port,
                             const std::string &dtm_root, const std::string &dtm_host, const std::string &dtm_port)
-                            : gsp_client_(gsp_root, gsp_host, gsp_port), dtm_client_(dtm_root, dtm_host, dtm_port)
-        {
-            // do nothing
-        }
+                            : gsp_client_(gsp_root, gsp_host, gsp_port), dtm_client_(dtm_root, dtm_host, dtm_port);
         ~CombinedHttpsClient();
         boost::beast::http::response <boost::beast::http::dynamic_body> Get
         (
@@ -52,5 +35,6 @@ class CombinedHttpsClient
         HttpsClient gsp_client_;
         dcm::xml::XMLCommandAdapter xml_writer_;
 };
+
 
 #endif // __COMBINED_CLIENT_H__

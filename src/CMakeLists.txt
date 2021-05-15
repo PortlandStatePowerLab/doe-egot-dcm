@@ -12,7 +12,7 @@ add_executable(${COMPONENT_NAME}
 )
 
 target_link_libraries(${COMPONENT_NAME} PUBLIC 
-  https
+  https_client
   SEP::Model
   ecs
   command_pattern
@@ -22,7 +22,7 @@ target_link_libraries(${COMPONENT_NAME} PUBLIC
 )
 
 target_include_directories(${COMPONENT_NAME} PUBLIC
-  ${https_INCLUDE_DIRS}
   ${ecs_INCLUDE_DIRS}
+  ${https_client_INCLUDE_DIRS}
   ${SEP_INCLUDES_DIRS}
 )
