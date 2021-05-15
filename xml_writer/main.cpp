@@ -5,7 +5,7 @@
 using std::string;
 using std::cout;
 using std::endl;
-namespace announcer = dcm_src::xml;
+namespace announcer = dcm::xml;
 
 const string MSG_LOG_PATH = "../../msg_logs/dtm_messages_testing.xml"; //path to msg log
 

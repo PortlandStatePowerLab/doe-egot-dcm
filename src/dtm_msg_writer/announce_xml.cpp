@@ -1,4 +1,4 @@
-#include "announce_xml.h"
+#include "include/dtm_msg_writer/announce_xml.h"
 //
 // Created by Whitman on 3/25/2021.
 //
@@ -103,7 +103,6 @@ void XMLCommandAdapter::Shed()
 }
 void XMLCommandAdapter::MakeCommand(string type)
 {
-    float dur = 3.1415; //duration for testing
     std::time_t start_time = std::time(0);
     string str_time = ctime(&start_time);
     //std::tm* gmtm = gmtime(&t);
@@ -112,10 +111,76 @@ void XMLCommandAdapter::MakeCommand(string type)
     tree_.put("message.to", "DER");
     tree_.put("message.content.command.type", type);
     tree_.put("message.content.command.start", start_time);
-    tree_.put("message.content.command.duration", dur);
+    //tree_.put("message.content.command.duration", dur);
     tree_.put("message.content.expect_response", 1);
     tree_.put("message.logged", std::time(0));
 }
+std::string XMLCommandAdapter::ReturnCustomCommand(const std::string& to, const std::string& from, const std::string& type, 
+                                                    const std::string& start, const std::string& duration, const std::string& content)
+{
+    boost::property_tree::ptree t;
+
+    std::time_t start_time = std::time(0);
+    string str_time = ctime(&start_time);
+    //std::tm* gmtm = gmtime(&t);
+    //std::string str_time = std::asctime(gmtm);
+    std::string content_path = "message.content." + content; 
+    std::string type_path = content_path + ".type";
+    std::string start_path = content_path + ".start";
+    std::string duration_path = content_path + ".duration";
+    
+    t.put("message.from", from);
+    t.put("message.to", to);
+    t.put(type_path, type);
+    if (start != "na")
+    {
+        t.put(start_path, start);
+    }
+    //t.put("message.content.command.start", start_time);
+    if (duration != "na")
+    {
+        t.put(duration_path, duration);
+    }
+    //t.put("message.content.command.duration", duration);
+    //t.put("message.content.expect_response", 1);
+    t.put("message.DCM_timestamp", std::time(0));
+    return ReturnCommandAsStr(t);
+}
+
+std::string XMLCommandAdapter::ReturnCustomGSPNotify(const std::string& to, const std::string& from, const std::string& type, const std::string& target,
+                                                    const std::string& body)
+{
+    boost::property_tree::ptree t, st;
+    std::stringstream ss;
+    ss << body;
+    boost::property_tree::xml_parser::read_xml(ss, st, boost::property_tree::xml_parser::trim_whitespace);
+
+    std::time_t start_time = std::time(0);
+    string str_time = ctime(&start_time);
+    //std::tm* gmtm = gmtime(&t);
+    //std::string str_time = std::asctime(gmtm);
+    std::string type_path = "message.content." + type; 
+    std::string target_path = type_path + ".target";
+    std::string body_path = type_path + ".body";
+    
+    
+    t.put("message.from", from);
+    t.put("message.to", to);
+    
+    if (target != "na")
+        t.put(target_path, target);
+    t.add_child(body_path, st);
+    
+    //t.put("message.content.command.duration", duration);
+    //t.put("message.content.expect_response", 1);
+    t.put("message.DCM_timestamp", std::time(0));
+
+    std::cout << "Now outputing custom msg tree to terminal: " << std::endl;
+    OutputTreeToTerminal(t);
+    std::cout << "----------------Done outputting msg tree----------- " << std::endl;
+    return ReturnCommandAsStr(t);
+}
+
 
 }//namespace xml
 }//namespace dcm

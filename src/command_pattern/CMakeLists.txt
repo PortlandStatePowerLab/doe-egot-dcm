@@ -1,8 +1,7 @@
-set(COMPONENT_NAME https_client)
+set(COMPONENT_NAME command_pattern)
 
 add_library(${COMPONENT_NAME} STATIC
-  https_client.cpp
-  combined_client.cpp
+  main.cpp
 )
 
 # Create ALIAS targets.
@@ -11,7 +10,6 @@ add_library( ${PROJECT_NAME}::${COMPONENT_NAME} ALIAS ${COMPONENT_NAME} )
 target_link_libraries(${COMPONENT_NAME} PUBLIC 
   Boost::boost
   OpenSSL::SSL
-  dtm_msg_writer
   pthread
 )
 

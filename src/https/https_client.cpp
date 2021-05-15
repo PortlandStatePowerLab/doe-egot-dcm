@@ -113,9 +113,6 @@ HttpsClient::Send(bb::http::request<bb::http::string_body>& req)
 	// Declare a container to hold the response
 	bb::http::response<bb::http::dynamic_body> res;
 
-
-
-    
     // Receive the HTTP response
     boost::system::error_code ec;
 	bb::http::read(stream, buffer, res, ec);
@@ -131,10 +128,9 @@ HttpsClient::Send(bb::http::request<bb::http::string_body>& req)
         }
         else
         {
-            std::cout << "ec" << std::endl;
+            //std::cout << "ec" << std::endl;
             throw bb::system_error{ec};
         }
     }
-
 	return res;
 }
