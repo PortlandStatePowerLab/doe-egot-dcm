@@ -1,6 +1,6 @@
 #include "include/https/combined_client.hpp"
 #include <iostream>
-
+#include <string>
 
 // alias to make things easier to read
 namespace bb = boost::beast;
@@ -52,9 +52,10 @@ CombinedHttpsClient::Post(const std::string& target, const std::string& resource
         dtm_client_.Post("/na", msg);
 
         auto res = gsp_client_.Post(target, resource);
-        std::string response_body = boost::beast::buffers_to_string(res.result()); 
 
-        std::string msg = xml_writer_.ReturnCustomGSPNotify("DCM", "GSP", "POST_response", target, response_body);        
+        std::string response_body = std::to_string(res.result_int());
+
+        msg = xml_writer_.ReturnCustomGSPNotify("DCM", "GSP", "POST_response", target, response_body);        
         dtm_client_.Post("/na", msg);
         return res;
     }
