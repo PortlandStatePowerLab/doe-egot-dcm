@@ -25,16 +25,15 @@ CombinedHttpsClient::Get(const std::string& target, const std::string& query)
 {
     //First notify the DTM of outgoing msg to GSP
     // Return Custom command args: to, from, type, target, body
-    std::string msg = xml_writer_.ReturnCustomGSPNotify("GSP", "DCM", "GET_request", target, query);//"From: DCM, To: GSP, Method: Get, Target: " + target + query;
+    std::string msg = xml_writer_.ReturnCustomGSPNotify("GSP", "DCM", "GET_request", target+query, "");
     dtm_client_.Post("/na", msg);
 
     // Now send request to the GSP
     auto res = gsp_client_.Get(target, query);
     std::string response_body = boost::beast::buffers_to_string(res.body().data());
-    std::cout << " RESPONSE BODY: " << response_body << std::endl << "___RESPONSE BODY OVER__" << std::endl;
-    
+
     // Now notify DTM of response from GSP
-    msg = xml_writer_.ReturnCustomGSPNotify("DCM", "GSP", "GET_response", "na", response_body); // "From: GSP, To: DCM, Method: Response, Body: " + boost::beast::buffers_to_string(res.body().data());
+    msg = xml_writer_.ReturnCustomGSPNotify("DCM", "GSP", "GET_response", target, response_body);
     dtm_client_.Post("/na", msg);
     return res;
 }
@@ -44,18 +43,18 @@ CombinedHttpsClient::Post(const std::string& target, const std::string& resource
 {
     if (target == "DTM")
     {
-        std::cout << "DTM Specific POST" << std::endl;
         auto res = dtm_client_.Post("/na", resource);
         return res;
     }
     else
     {
-        std::string msg = "From: DCM, To: GSP, Method: Get, Target: " + target + ", Payload: " + resource;
+        std::string msg = xml_writer_.ReturnCustomGSPNotify("DCM", "GSP", "POST_request", target, resource);        
         dtm_client_.Post("/na", msg);
 
         auto res = gsp_client_.Post(target, resource);
-        msg = "From: GSP, To: DCM, Method: Response, Body: ";
+        std::string response_body = boost::beast::buffers_to_string(res.result()); 
 
+        std::string msg = xml_writer_.ReturnCustomGSPNotify("DCM", "GSP", "POST_response", target, response_body);        
         dtm_client_.Post("/na", msg);
         return res;
     }
