@@ -61,7 +61,7 @@ class ECS_DCM
         {
             std::cout << " ECS_DCM root arg overload constructor " << std::endl;
             SetReceiver();
-            combined_client_ = new CombinedHttpsClient(root, "localhost", "443", root, "localhost", "4430");
+            combined_client_ = new CombinedHttpsClient(root, "localhost", "443", root, "localhost", "4430"); 
             import_energy_c_ = new ImportEnergy(combined_client_, receiver_);
             export_energy_c_ = new ExportEnergy(combined_client_, receiver_);
             get_energy_c_ = new GetEnergy(combined_client_, receiver_);
