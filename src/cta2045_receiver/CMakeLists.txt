@@ -20,6 +20,7 @@ target_include_directories(${COMPONENT_NAME} PUBLIC
   $<INSTALL_INTERFACE:include>
   ${Boost_INCLUDE_DIRS}
   ${OpenSSL_INCLUDE_DIRS}
+  ${cea2045_SOURCE_DIR}/cea2045
 )
 
 # install the target and create export-set

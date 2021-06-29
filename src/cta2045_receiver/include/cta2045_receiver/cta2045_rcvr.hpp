@@ -1,5 +1,5 @@
-#ifndef __CTA2045_RECEIVER_H__
-#define __CTA2045_RECEIVER_H__
+#ifndef __CTA2045_RCVR_H__
+#define __CTA2045_RCVR_H__
 
 #include <iostream>
 #include <stdio.h>

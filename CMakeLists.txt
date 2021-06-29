@@ -79,7 +79,6 @@ endif()
 add_subdirectory(src)
 add_subdirectory(tests)
 add_subdirectory(xml_writer)
-add_subdirectory(cea2045_receiver)
 
 # include CMakePackageConfigHelpers macro
 include(CMakePackageConfigHelpers)
