@@ -21,12 +21,11 @@ target_link_libraries(${COMPONENT_NAME} PUBLIC
   cta2045_receiver
   SEP::XML
   pthread
- 
 )
 
 target_include_directories(${COMPONENT_NAME} PUBLIC
   ${ecs_INCLUDE_DIRS}
   ${https_client_INCLUDE_DIRS}
   ${SEP_INCLUDES_DIRS}
-  ${cta2045_receiver_INCLUDE_DIRS}
+  ${cea2045_SOURCE_DIR}/cea2045
 )

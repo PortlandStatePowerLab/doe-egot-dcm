@@ -1,7 +1,7 @@
 set(COMPONENT_NAME cta2045_receiver)
 
 add_library(${COMPONENT_NAME} STATIC
-  main.cpp
+  cta2045_rcvr.cpp
 )
 
 # Create ALIAS targets.
@@ -10,8 +10,8 @@ add_library( ${PROJECT_NAME}::${COMPONENT_NAME} ALIAS ${COMPONENT_NAME} )
 target_link_libraries(${COMPONENT_NAME} PUBLIC 
   Boost::boost
   OpenSSL::SSL
-  dtm_msg_writer
   pthread
+  command_pattern
   cea2045
 )
 

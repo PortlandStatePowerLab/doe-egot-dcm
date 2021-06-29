@@ -11,6 +11,11 @@ target_link_libraries(${COMPONENT_NAME} PUBLIC
   Boost::boost
   OpenSSL::SSL
   pthread
+  flecs
+  https_client
+  SEP::XML
+  ecs_client
+  dtm_msg_writer
 )
 
 target_include_directories(${COMPONENT_NAME} PUBLIC
