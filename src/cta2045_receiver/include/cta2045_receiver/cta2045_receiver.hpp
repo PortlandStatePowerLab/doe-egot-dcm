@@ -4,17 +4,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include <flecs.h>
 #include <sstream>
-#include <https/https_client.hpp>
-#include <https/combined_client.hpp>
-#include <sep/models.hpp>
-#include <xml/adapter.hpp>
-#include <xml/xml_validator.hpp>
-#include <ecs/der_simulator.hpp>
-#include <ecs/der_components_module.hpp>
-#include <ecs/dcm_components_module.hpp>
-#include <command_pattern/simple_sim_receiver.hpp>
 #include <cea2045/processmessage/IUCM.h>
 
 namespace dcm
@@ -60,6 +50,7 @@ class CTA2045Receiver : public BaseReceiver
         }
 
     private:
+        std::string response;
         xml::XMLCommandAdapter xml_writer_;
 };
 

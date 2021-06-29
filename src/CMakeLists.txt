@@ -18,14 +18,15 @@ target_link_libraries(${COMPONENT_NAME} PUBLIC
   ecs_client
   command_pattern
   dtm_msg_writer
+  cta2045_receiver
   SEP::XML
   pthread
-  cta2045_receiver
+ 
 )
 
 target_include_directories(${COMPONENT_NAME} PUBLIC
   ${ecs_INCLUDE_DIRS}
   ${https_client_INCLUDE_DIRS}
   ${SEP_INCLUDES_DIRS}
-  ${cea2045_SOURCE_DIR}/cea2045
+  ${cta2045_receiver_INCLUDE_DIRS}
 )
