@@ -1,7 +1,9 @@
 
 set(COMPONENT_NAME cta2045_receiver)
 
-add_executable(${COMPONENT_NAME} cta2045_rcvr.cpp) 
+add_library(${COMPONENT_NAME} STATIC
+  cta2045_rcvr.cpp
+)
 #re-add https_simple
 target_link_libraries(${COMPONENT_NAME} PUBLIC cea2045 command_pattern dtm_msg_writer https_client Boost::boost OpenSSL::SSL pthread)
 
