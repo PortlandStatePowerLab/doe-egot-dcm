@@ -35,6 +35,10 @@ class CTA2045Receiver : public BaseReceiver
         xml::XMLCommandAdapter xml_writer_;
         UCMImpl epri_ucm;
         cea2045::CEA2045SerialPort serial_port;
+        cea2045::ResponseCodes responseCodes;
+        cea2045::MSTimer timer;
+        bool shutdown;
+        cea2045::ICEA2045DeviceUCM * device;
 };
 
 } // namespace dcm
