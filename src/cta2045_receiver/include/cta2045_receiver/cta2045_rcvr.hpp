@@ -5,9 +5,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sstream>
+#include <condition_variable>
+#include <mutex>
+#include <chrono>
 #include <command_pattern/simple_sim_receiver.hpp>
-#include <cea2045/processmessage/IUCM.h>
-
+#include <cea2045/device/DeviceFactory.h>
+#include <cea2045/communicationport/CEA2045SerialPort.h>
+#include <cea2045/util/MSTimer.h>
+#include "UCMImpl.h"
+#include "easylogging++.h"
 
 namespace dcm
 {
@@ -27,6 +33,8 @@ class CTA2045Receiver : public BaseReceiver
     private:
         std::string response;
         xml::XMLCommandAdapter xml_writer_;
+        UCMImpl epri_ucm;
+        cea2045::CEA2045SerialPort serial_port;
 };
 
 } // namespace dcm
