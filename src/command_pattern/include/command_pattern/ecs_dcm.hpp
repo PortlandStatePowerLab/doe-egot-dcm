@@ -15,6 +15,7 @@
 #include <ecs/der_components_module.hpp>
 #include <ecs/dcm_components_module.hpp>
 #include "s_sim_invoker.hpp"
+#include "cta2045_rcvr.hpp"
 
 namespace dcm
 {
@@ -92,6 +93,7 @@ class ECS_DCM
             receiver_ = new SimpleSimulatorReceiver; //emulated DER
         }
         void RunSimulatorLoop();
+        void TestCTA2045Comms();
         void AddFlowResRespEntity(sep::FlowReservationResponse & flowresresp);
         sep::FlowReservationResponse GetFlowResRespFromGSP();
         void InitializeFlowResInvokingSystems();
@@ -102,6 +104,7 @@ class ECS_DCM
         CombinedHttpsClient * combined_client_;
         BaseInvoker * sim_flow_invoker_;
         BaseReceiver * receiver_;
+        BaseReceiver * cta2045_receiver_;
         BaseCommand * import_energy_c_;
         BaseCommand * export_energy_c_;
         BaseCommand * get_energy_c_;

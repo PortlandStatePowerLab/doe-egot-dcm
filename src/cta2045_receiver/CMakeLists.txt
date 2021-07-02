@@ -15,3 +15,8 @@ target_include_directories(${COMPONENT_NAME} PUBLIC
         ${ecs_client_INCLUDE_DIRS}
         ${https_client_INCLUDE_DIRS}
         ${command_pattern_INCLUDE_DIRS})
+
+
+
+#this might not work
+

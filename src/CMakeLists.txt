@@ -2,7 +2,7 @@ add_subdirectory(https)
 add_subdirectory(ecs)
 add_subdirectory(command_pattern)
 add_subdirectory(dtm_msg_writer)
-add_subdirectory(cta2045_receiver)
+#add_subdirectory(cta2045_receiver)
 
 set(COMPONENT_NAME dcm)
 
@@ -12,13 +12,13 @@ add_executable(${COMPONENT_NAME}
   ecs_dcm.cpp
 )
 
+FetchContent_MakeAvailable(cea2045)
 target_link_libraries(${COMPONENT_NAME} PUBLIC 
   https_client
   SEP::Model
   ecs_client
   command_pattern
   dtm_msg_writer
-  cea2045
   SEP::XML
   pthread
 )
