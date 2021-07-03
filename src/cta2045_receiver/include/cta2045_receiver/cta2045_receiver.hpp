@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <sstream>
 #include <cea2045/processmessage/IUCM.h>
+#include <command_pattern/simple_sim_receiver.hpp>
 
 namespace dcm
 {
@@ -15,39 +16,13 @@ class CTA2045Receiver : public BaseReceiver
 {
     public:
 
-        CTA2045Receiver() 
-        {
-            std::cout << " CTA2045Receiver default constructor " << std::endl;
-        }
-        ~CTA2045Receiver() 
-        {
-            
-        }
-        std::string Import() 
-        {
-            
-            return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
-        }
-        std::string Export() 
-        {
-            
-            return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
-        }
-        std::string GetEnergy() 
-        {
-            
-            return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
-        }
-        std::string GetNameplate() 
-        {
-          
-            return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
-        }
-        std::string Idle() 
-        {
-         
-            return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
-        }
+        CTA2045Receiver();
+        ~CTA2045Receiver();
+        std::string Import(); 
+        std::string Export(); 
+        std::string GetEnergy(); 
+        std::string GetNameplate(); 
+        std::string Idle(); 
 
     private:
         std::string response;

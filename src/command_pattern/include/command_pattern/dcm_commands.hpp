@@ -17,157 +17,74 @@
 namespace dcm
 {
 
-class BaseCommand 
-{
+    class BaseCommand
+    {
     public:
-
-        BaseCommand() : https_client_(nullptr), receiver_(nullptr) {}
-        BaseCommand(CombinedHttpsClient * c, BaseReceiver * r) : https_client_(c), receiver_(r)
-        {}
-        ~BaseCommand() 
-        {
-            https_client_ = nullptr;
-            receiver_ = nullptr;
-        }
+        BaseCommand();
+        BaseCommand(CombinedHttpsClient *c, BaseReceiver *r);
+        ~BaseCommand();
         virtual std::string Execute() = 0;
 
     protected:
-
-        CombinedHttpsClient * https_client_;
-        BaseReceiver * receiver_;
+        CombinedHttpsClient *https_client_;
+        BaseReceiver *receiver_;
         xml::XMLCommandAdapter xml_writer_;
+    };
 
-};
-
-class ImportEnergy : public BaseCommand
-{
+    class ImportEnergy : public BaseCommand
+    {
     public:
-
-        ImportEnergy() {}
-        ImportEnergy(CombinedHttpsClient * c, BaseReceiver * r) : BaseCommand(c, r) 
-        {std::cout << "ImportEnergy Command Constructed " << std::endl;}
-        ~ImportEnergy() {}
-        std::string Execute() 
-        {
-            std::string response_from_der = "der response not supported yet";
-            std::cout << "  ImportEnergy Command Executing... " << std::endl;
-            
-            //this is specific to a simulated receiver at this point, and not based on a particular resource. 
-            std::string msg_out =  xml_writer_.ReturnCustomCommand("DER", "DCM", "ImportEnergy", "na", "na", "command");
-            https_client_->Post("DTM", msg_out);
-
-            response_from_der = receiver_->Import();
-            https_client_->Post("DTM", response_from_der);
-            
-            //std::cout << "response from DER was: " << response_from_der << std::endl;
-            //std::string msg_in =  xml_writer_.ReturnCustomCommand("DCM", "DER", response_from_der, "na", "na", "response");
-            //https_client_->Post("DTM",msg_in);
-
-            return response_from_der;
-        }
+        ImportEnergy();
+        ImportEnergy(CombinedHttpsClient *client, BaseReceiver *receiver);
+        ~ImportEnergy();
+        std::string Execute();
 
     private:
-};
+    };
 
-class ExportEnergy : public BaseCommand
-{
+    class ExportEnergy : public BaseCommand
+    {
     public:
-
-        ExportEnergy() {}
-        ExportEnergy(CombinedHttpsClient * c, BaseReceiver * r) : BaseCommand(c, r) {}
-        ~ExportEnergy() {}
-        std::string Execute() 
-        {
-            std::string response_from_der = "der response not supported yet";
-            std::cout << "  ExportEnergy Command Executing... " << std::endl;
-            
-            //this is specific to a simulated receiver at this point, and not based on a particular resource. 
-            std::string msg_out =  xml_writer_.ReturnCustomCommand("DER", "DCM", "ExportEnergy", "na", "na", "command");
-            https_client_->Post("DTM", msg_out);
-
-            response_from_der = receiver_->Export();
-            https_client_->Post("DTM", response_from_der);
-
-            return response_from_der;
-        }
+        ExportEnergy();
+        ExportEnergy(CombinedHttpsClient *client, BaseReceiver *receiver); 
+        ~ExportEnergy();
+        std::string Execute();
 
     private:
-};
+    };
 
-class GetEnergy : public BaseCommand
-{
+    class GetEnergy : public BaseCommand
+    {
     public:
-
-        GetEnergy() {}
-        GetEnergy(CombinedHttpsClient * c, BaseReceiver * r) : BaseCommand(c, r) {}
-        ~GetEnergy() {}
-        std::string Execute() 
-        {
-            std::string response_from_der = "der response not supported yet";
-            std::cout << "  GetEnergy Command Executing... " << std::endl;
-            
-            //this is specific to a simulated receiver at this point, and not based on a particular resource. 
-            std::string msg_out =  xml_writer_.ReturnCustomCommand("DER", "DCM", "GetEnergy", "na", "na", "command");
-            https_client_->Post("DTM", msg_out);
-
-            response_from_der = receiver_->GetEnergy();
-            https_client_->Post("DTM", response_from_der);
-
-            return response_from_der;
-        }
+        GetEnergy();
+        GetEnergy(CombinedHttpsClient *client, BaseReceiver *receiver);
+        ~GetEnergy();
+        std::string Execute();
 
     private:
-};
+    };
 
-class GetNameplate : public BaseCommand
-{
+    class GetNameplate : public BaseCommand
+    {
     public:
-
-        GetNameplate() {}
-        GetNameplate(CombinedHttpsClient * c, BaseReceiver * r) : BaseCommand(c, r) {}
-        ~GetNameplate() {}
-        std::string Execute() 
-        {
-            std::string response_from_der = "der response not supported yet";
-            std::cout << "  GetNameplate Command Executing... " << std::endl;
-            
-            //this is specific to a simulated receiver at this point, and not based on a particular resource. 
-            std::string msg_out =  xml_writer_.ReturnCustomCommand("DER", "DCM", "GetNameplate", "na", "na", "command");
-            https_client_->Post("DTM", msg_out);
-
-            response_from_der = receiver_->GetNameplate();
-            https_client_->Post("DTM", response_from_der);
-
-            return response_from_der;
-        }
+        GetNameplate();
+        GetNameplate(CombinedHttpsClient *client, BaseReceiver *receiver);
+        ~GetNameplate();
+        std::string Execute();
 
     private:
-};
+    };
 
-class Idle : public BaseCommand
-{
+    class Idle : public BaseCommand
+    {
     public:
-
-        Idle() {}
-        Idle(CombinedHttpsClient * c, BaseReceiver * r) : BaseCommand(c, r) {}
-        ~Idle() {}
-        std::string Execute() 
-        {
-            std::string response_from_der = "der response not supported yet";
-            std::cout << "  Idle Command Executing... " << std::endl;
-            
-            //this is specific to a simulated receiver at this point, and not based on a particular resource. 
-            std::string msg_out =  xml_writer_.ReturnCustomCommand("DER", "DCM", "Idle", "na", "na", "command");
-            https_client_->Post("DTM", msg_out);
-
-            response_from_der = receiver_->Idle();
-            https_client_->Post("DTM", response_from_der);
-
-            return response_from_der;
-        }
+        Idle();
+        Idle(CombinedHttpsClient *client, BaseReceiver *receiver);
+        ~Idle();
+        std::string Execute();
 
     private:
-};
+    };
 
 } // namespace dcm
 

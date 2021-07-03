@@ -1,7 +1,7 @@
 set(COMPONENT_NAME cta2045_receiver)
 
 add_library(${COMPONENT_NAME} STATIC
-  main.cpp
+  cta2045_receiver.cpp
 )
 
 # Create ALIAS targets.
@@ -11,6 +11,7 @@ target_link_libraries(${COMPONENT_NAME} PUBLIC
   Boost::boost
   OpenSSL::SSL
   dtm_msg_writer
+  command_pattern
   pthread
   cea2045
 )
@@ -20,21 +21,6 @@ target_include_directories(${COMPONENT_NAME} PUBLIC
   $<INSTALL_INTERFACE:include>
   ${Boost_INCLUDE_DIRS}
   ${OpenSSL_INCLUDE_DIRS}
-)
-
-# install the target and create export-set
-install(
-    TARGETS ${COMPONENT_NAME}
-    EXPORT ${COMPONENT_NAME}Targets
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-    RUNTIME DESTINATION bin
-    INCLUDES DESTINATION include
-)
-
-install(
-    EXPORT ${COMPONENT_NAME}Targets
-    FILE ${COMPONENT_NAME}Targets.cmake
-    NAMESPACE ${PROJECT_NAME}::
-    DESTINATION lib/cmake
+  ${cea2045_SOURCE_DIR}/cea2045
+  ${command_pattern_INCLUDE_DIRS}
 )
