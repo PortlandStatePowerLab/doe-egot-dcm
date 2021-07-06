@@ -55,14 +55,14 @@ std::string CTA2045Receiver::GetEnergy()
 {
     std::cout << "cta2045receiver GetEnergy() " << std::endl;
     std::string nothing = "nothing";
-    responseCodes_ = device_->intermediateGetCommodity().get();
+    device_->intermediateGetCommodity().get();
     return nothing;
 }
 std::string CTA2045Receiver::GetNameplate() 
 {
     std::cout << "cta2045receiver GetNameplate() " << std::endl;
     std::string nothing = "nothing";
-    responseCodes_ = device_->intermediateGetDeviceInformation().get();
+    device_->intermediateGetDeviceInformation().get();
     return nothing;
     //return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
 }
