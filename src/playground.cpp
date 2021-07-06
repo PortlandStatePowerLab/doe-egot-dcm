@@ -22,7 +22,8 @@ void SimulateDCMSystem()
 {
   std::cout << "Now simulating dcm system" << std::endl;
   dcm::ECS_DCM dcm(g_program_path);
-  dcm.RunSimulatorLoop();
+  dcm.TestCTA2045Commands();
+  //dcm.RunSimulatorLoop();
 
 }
 void SimulateDER()
