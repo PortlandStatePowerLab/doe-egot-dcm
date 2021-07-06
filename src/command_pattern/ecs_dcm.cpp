@@ -33,15 +33,30 @@ ECS_DCM::ECS_DCM(const std::string &root)
 ECS_DCM::~ECS_DCM()
 {
     std::cout << "  ECS_DCM Destructor" << std::endl;
-    delete combined_client_;
+    if (combined_client_)
+        delete combined_client_;
+    std::cout << "1" << std::endl;
     if (sim_flow_invoker_)
         delete sim_flow_invoker_;
-    delete receiver_;
-    delete import_energy_c_;
-    delete export_energy_c_;
-    delete get_energy_c_;
-    delete get_nameplate_c_;
-    delete idle_c_;
+    std::cout << "2" << std::endl;
+    if (receiver_)
+        delete receiver_;
+    std::cout << "3" << std::endl;
+    if (import_energy_c_)
+        delete import_energy_c_;
+    std::cout << "4" << std::endl;
+    if (export_energy_c_)
+        delete export_energy_c_;
+    std::cout << "5" << std::endl;
+    if (get_energy_c_)
+        delete get_energy_c_;
+    std::cout << "6" << std::endl;
+    if (get_nameplate_c_)
+        delete get_nameplate_c_;
+    std::cout << "7" << std::endl;
+    if (idle_c_)
+        delete idle_c_;
+    std::cout << "8" << std::endl;
 }
 
 void ECS_DCM::SetReceiver()
