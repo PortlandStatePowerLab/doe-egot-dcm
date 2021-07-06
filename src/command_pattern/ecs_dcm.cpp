@@ -34,7 +34,8 @@ ECS_DCM::~ECS_DCM()
 {
     std::cout << "  ECS_DCM Destructor" << std::endl;
     delete combined_client_;
-    delete sim_flow_invoker_;
+    if (sim_flow_invoker_)
+        delete sim_flow_invoker_;
     delete receiver_;
     delete import_energy_c_;
     delete export_energy_c_;
