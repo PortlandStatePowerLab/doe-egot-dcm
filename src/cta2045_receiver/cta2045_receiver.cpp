@@ -54,6 +54,7 @@ std::string CTA2045Receiver::Export()
 
 std::string CTA2045Receiver::GetEnergy() 
 {
+    std::cout << "cta2045receiver GetEnergy() " << std::endl;
     std::string nothing = "nothing";
     device_->intermediateGetCommodity().get();
     return nothing;
