@@ -63,6 +63,11 @@ void ECS_DCM::RunSimulatorLoop()
     // TODO
 }
 
+void ECS_DCM::TestCTA2045Commands()
+{
+    receiver_->GetNameplate();
+}
+
 void ECS_DCM::AddFlowResRespEntity(sep::FlowReservationResponse &flowresresp)
 {
     // TODO

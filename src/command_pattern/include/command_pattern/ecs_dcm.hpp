@@ -55,6 +55,7 @@ namespace dcm
     ~ECS_DCM();
     void SetReceiver();
     void RunSimulatorLoop();
+    void TestCTA2045Commands();
     void AddFlowResRespEntity(sep::FlowReservationResponse &flowresresp);
     sep::FlowReservationResponse GetFlowResRespFromGSP();
     void InitializeFlowResInvokingSystems();
