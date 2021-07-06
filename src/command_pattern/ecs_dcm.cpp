@@ -43,7 +43,10 @@ ECS_DCM::~ECS_DCM()
         delete combined_client_;
     std::cout << "1" << std::endl;
     if (sim_flow_invoker_)
+    {
+        std::cout << "1.5" << std::endl;
         delete sim_flow_invoker_;
+    }
     std::cout << "2" << std::endl;
     if (receiver_)
         delete receiver_;
