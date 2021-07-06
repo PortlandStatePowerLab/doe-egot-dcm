@@ -170,9 +170,10 @@ void UCMImpl::processCommodityResponse(cea2045::cea2045CommodityResponse* messag
 	LOG(INFO) << "commodity response received.  count: " << message->getCommodityDataCount();
 
 	int count = message->getCommodityDataCount();
-
+	std::cout << "Commodity Response count: " << count << std::endl;
 	for (int x = 0; x < count; x++)
 	{
+		std::cout << "Commodity Response loop x: " << x << std::endl;
 		cea2045::cea2045CommodityData *data = message->getCommodityData(x);
 
 		LOG(INFO) << "commodity data: " << x;

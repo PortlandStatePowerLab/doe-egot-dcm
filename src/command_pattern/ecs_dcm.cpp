@@ -82,7 +82,7 @@ void ECS_DCM::RunSimulatorLoop()
 void ECS_DCM::TestCTA2045Commands()
 {
     std::cout << "TESTING CTA-2045 COMMANDS" << std::endl;
-    receiver_->GetNameplate();
+    //receiver_->GetNameplate();
     receiver_->GetEnergy();
 }
 

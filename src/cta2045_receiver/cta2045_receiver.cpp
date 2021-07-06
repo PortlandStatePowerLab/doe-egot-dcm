@@ -53,7 +53,7 @@ std::string CTA2045Receiver::Export()
 
 std::string CTA2045Receiver::GetEnergy() 
 {
-    responseCodes_ = device_->intermediateGetCommodity().get();
+    device_->intermediateGetCommodity().get();
     return xml_writer_.ReturnCustomCommand("DCM", "DER", response_, "na", "na", "response");
 }
 
