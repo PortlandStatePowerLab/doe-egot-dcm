@@ -1,6 +1,6 @@
 #include "include/cta2045_receiver/cta2045_receiver.hpp"
 
-INITIALIZE_EASYLOGGINGPP
+
 
 namespace dcm
 {
