@@ -35,8 +35,9 @@ CTA2045Receiver::CTA2045Receiver(): serial_port_("/dev/ttyAMA0"), shutdown_(fals
 
 CTA2045Receiver::~CTA2045Receiver() 
 {
+    std::cout << "cta2045receiver destructor" << std::endl;
     device_->shutDown();
-    delete device_;
+    delete (device_);
 }
 
 std::string CTA2045Receiver::Import() 
@@ -53,14 +54,15 @@ std::string CTA2045Receiver::Export()
 
 std::string CTA2045Receiver::GetEnergy() 
 {
+    std::string nothing = "nothing";
     device_->intermediateGetCommodity().get();
-    return xml_writer_.ReturnCustomCommand("DCM", "DER", response_, "na", "na", "response");
+    return nothing;
 }
-
 std::string CTA2045Receiver::GetNameplate() 
 {
+    std::string nothing = "nothing";
     device_->intermediateGetDeviceInformation().get();
-    return "nothing";
+    return nothing;
     //return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
 }
 
