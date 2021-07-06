@@ -34,14 +34,14 @@ class CTA2045Receiver : public BaseReceiver
         std::string Idle(); 
 
     private:
-        std::string response;
+        std::string response_;
         xml::XMLCommandAdapter xml_writer_;
-        UCMImpl epri_ucm;
-        cea2045::CEA2045SerialPort serial_port;
-        cea2045::ResponseCodes responseCodes;
-        cea2045::MSTimer timer;
-        bool shutdown;
-        cea2045::ICEA2045DeviceUCM * device;
+        UCMImpl epri_ucm_;
+        cea2045::CEA2045SerialPort serial_port_;
+        cea2045::ResponseCodes responseCodes_;
+        cea2045::MSTimer timer_;
+        bool shutdown_;
+        cea2045::ICEA2045DeviceUCM * device_;
 };
 
 } // namespace dcm
