@@ -60,6 +60,7 @@ std::string CTA2045Receiver::GetEnergy()
 }
 std::string CTA2045Receiver::GetNameplate() 
 {
+    std::cout << "cta2045receiver GetNameplate() " << std::endl;
     std::string nothing = "nothing";
     device_->intermediateGetDeviceInformation().get();
     return nothing;
