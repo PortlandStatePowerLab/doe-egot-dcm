@@ -59,8 +59,9 @@ std::string CTA2045Receiver::GetEnergy()
 
 std::string CTA2045Receiver::GetNameplate() 
 {
-    
-    return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
+    device->intermediateGetDeviceInformation().get();
+    return "nothing";
+    //return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
 }
 
 std::string CTA2045Receiver::Idle() 
