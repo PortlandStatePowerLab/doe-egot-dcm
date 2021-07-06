@@ -15,6 +15,7 @@ target_link_libraries(${COMPONENT_NAME} PUBLIC
   SEP::Model
   ecs_client
   dtm_msg_writer
+  cta2045_receiver
   SEP::XML
   pthread
 )
@@ -24,5 +25,6 @@ target_include_directories(${COMPONENT_NAME} PUBLIC
   ${ecs_client_INCLUDE_DIRS}
   ${https_client_INCLUDE_DIRS}
   ${dtm_msg_writer_INCLUDE_DIRS}
+  ${cta2045_receiver_INCLUDE_DIRS}
   ${SEP_INCLUDES_DIRS}
 )

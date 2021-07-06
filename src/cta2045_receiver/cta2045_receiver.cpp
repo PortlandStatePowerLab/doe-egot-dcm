@@ -1,5 +1,7 @@
 #include "include/cta2045_receiver/cta2045_receiver.hpp"
 
+INITIALIZE_EASYLOGGINGPP
+
 namespace dcm
 {
 
@@ -30,7 +32,8 @@ CTA2045Receiver::CTA2045Receiver(): serial_port("/dev/ttyUSB0"), shutdown(false)
 
 CTA2045Receiver::~CTA2045Receiver() 
 {
-    
+    device->shutDown();
+    delete device;
 }
 
 std::string CTA2045Receiver::Import() 

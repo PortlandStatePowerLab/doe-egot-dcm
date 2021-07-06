@@ -10,6 +10,7 @@
 #include <ecs/der_simulator.hpp>
 #include <command_pattern/ecs_dcm.hpp>
 
+INITIALIZE_EASYLOGGINGPP
 
 void GetParentPath(char** arg)
 {

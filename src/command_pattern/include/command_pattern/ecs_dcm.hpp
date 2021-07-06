@@ -14,6 +14,7 @@
 #include <ecs/der_simulator.hpp>
 #include <ecs/der_components_module.hpp>
 #include <ecs/dcm_components_module.hpp>
+#include "../../../cta2045_receiver/include/cta2045_receiver/cta2045_receiver.hpp"
 #include "s_sim_invoker.hpp"
 
 static const std::string FLOW_RESERVATION_REQUEST = R"(<?xml version="1.0" encoding="utf-8"?>
