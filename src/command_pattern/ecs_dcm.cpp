@@ -5,6 +5,7 @@ using namespace dcm;
 ECS_DCM::ECS_DCM() : 
         combined_client_(nullptr),
         receiver_(nullptr),
+        sim_flow_invoker_(nullptr),
         import_energy_c_(nullptr),
         export_energy_c_(nullptr),
         get_nameplate_c_(nullptr),
