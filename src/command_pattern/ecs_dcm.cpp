@@ -8,6 +8,7 @@ ECS_DCM::ECS_DCM() :
         sim_flow_invoker_(nullptr),
         import_energy_c_(nullptr),
         export_energy_c_(nullptr),
+        get_energy_c_(nullptr),
         get_nameplate_c_(nullptr),
         idle_c_(nullptr)
 {
@@ -21,6 +22,7 @@ ECS_DCM::ECS_DCM(const std::string &root) :
         sim_flow_invoker_(nullptr),
         import_energy_c_(nullptr),
         export_energy_c_(nullptr),
+        get_energy_c_(nullptr),
         get_nameplate_c_(nullptr),
         idle_c_(nullptr)
 {
