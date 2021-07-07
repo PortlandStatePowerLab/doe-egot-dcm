@@ -29,8 +29,8 @@ ECS_DCM::ECS_DCM(const std::string &root) :
     //combined_client_ = new CombinedHttpsClient(root, "localhost", "443", root, "localhost", "4430");
     //import_energy_c_ = new ImportEnergy(combined_client_, receiver_);
     //export_energy_c_ = new ExportEnergy(combined_client_, receiver_);
-    get_energy_c_ = new GetEnergy(combined_client_, receiver_);
-    get_nameplate_c_ = new GetNameplate(combined_client_, receiver_);
+    //get_energy_c_ = new GetEnergy(combined_client_, receiver_);
+    //get_nameplate_c_ = new GetNameplate(combined_client_, receiver_);
     //idle_c_ = new Idle(combined_client_, receiver_);
     /*sim_flow_invoker_ = new SimpleSimulatorFlowResInvoker(&dcm_world_, import_energy_c_,
                                                           export_energy_c_, get_energy_c_,
