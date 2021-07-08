@@ -15,71 +15,36 @@
 
 namespace dcm
 {
-
-class BaseReceiver
-{
+    // abstract class
+    class BaseReceiver
+    {
     public:
-
-        BaseReceiver() {}
-        ~BaseReceiver() {}
-        virtual std::string Import() {}
-        virtual std::string Export() {}
-        virtual std::string GetEnergy() {}
-        virtual std::string GetNameplate() {}
-        virtual std::string Idle() {}
+        virtual std::string Import() = 0;
+        virtual std::string Export() = 0;
+        virtual std::string GetEnergy() = 0;
+        virtual std::string GetNameplate() = 0;
+        virtual std::string Idle() = 0;
 
     private:
+    };
 
-
-};
-// This is a receiver class for interacting with a simulated DER
-class SimpleSimulatorReceiver : public BaseReceiver
-{
+    // This is a receiver class for interacting with a simulated DER
+    class SimpleSimulatorReceiver : public BaseReceiver
+    {
     public:
-
-        SimpleSimulatorReceiver() 
-        {
-            std::cout << " SimpleSimulatorReceiver default constructor " << std::endl;
-            sim_der_ = new der::DERSimulator;
-        }
-        ~SimpleSimulatorReceiver() 
-        {
-            delete sim_der_;
-        }
-        std::string Import() 
-        {
-            std::string response = sim_der_->ImportEnergy();
-            return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
-        }
-        std::string Export() 
-        {
-            std::string response = sim_der_->ExportEnergy();
-            return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
-        }
-        std::string GetEnergy() 
-        {
-            std::string response = sim_der_->GetEnergy();
-            return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
-        }
-        std::string GetNameplate() 
-        {
-            std::string response = sim_der_->GetNameplate();
-            return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
-        }
-        std::string Idle() 
-        {
-            std::string response = sim_der_->Idle();
-            return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
-        }
-        void IncrementSimulatorProgress()
-        {
-            sim_der_->IncrementProgress();
-        }
+        SimpleSimulatorReceiver();
+        ~SimpleSimulatorReceiver();
+        std::string Import();
+        std::string Export();
+        std::string GetEnergy();
+        std::string GetNameplate();
+        std::string Idle();
+        void IncrementSimulatorProgress();
 
     private:
         xml::XMLCommandAdapter xml_writer_;
-        der::DERSimulator* sim_der_;
-};
+        der::DERSimulator *sim_der_;
+    };
 
 } // namespace dcm
 

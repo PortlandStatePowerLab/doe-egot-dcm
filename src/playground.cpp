@@ -10,6 +10,7 @@
 #include <ecs/der_simulator.hpp>
 #include <command_pattern/ecs_dcm.hpp>
 
+INITIALIZE_EASYLOGGINGPP //this is needed for part of the cea2045 deps
 
 void GetParentPath(char** arg)
 {
@@ -21,7 +22,8 @@ void SimulateDCMSystem()
 {
   std::cout << "Now simulating dcm system" << std::endl;
   dcm::ECS_DCM dcm(g_program_path);
-  dcm.RunSimulatorLoop();
+  dcm.TestCTA2045Commands();
+  //dcm.RunSimulatorLoop();
 
 }
 void SimulateDER()
