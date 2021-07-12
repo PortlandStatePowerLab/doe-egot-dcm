@@ -7,7 +7,14 @@ namespace dcm
 {
 using namespace std;
 
-EPRI_UCM::EPRI_UCM() : comm_log_("VOID")
+EPRI_UCM::EPRI_UCM() : comm_log_(nullptr)
+{
+	m_sgdMaxPayload = cea2045::MaxPayloadLengthCode::LENGTH2;
+}
+
+//======================================================================================
+
+EPRI_UCM::EPRI_UCM(std::string * r) : comm_log_(r)
 {
 	m_sgdMaxPayload = cea2045::MaxPayloadLengthCode::LENGTH2;
 }
@@ -16,15 +23,8 @@ EPRI_UCM::EPRI_UCM() : comm_log_("VOID")
 
 EPRI_UCM::~EPRI_UCM()
 {
-}
-
-//======================================================================================
-
-std::string EPRI_UCM::commLog()
-{
-    std::string temp = comm_log_;
-    comm_log_.erase(); //erase the log during each access
-    return temp;
+    if (comm_log_)
+        delete comm_log_;
 }
 
 //======================================================================================
@@ -63,6 +63,7 @@ void EPRI_UCM::processDeviceInfoResponse(cea2045::cea2045DeviceInfoResponse* mes
 {
     int yr, mnth, day;
     std::string sep = "-";
+    std::string temp = " ";
 
 	LOG(INFO) << "device info response received";
 
@@ -72,23 +73,25 @@ void EPRI_UCM::processDeviceInfoResponse(cea2045::cea2045DeviceInfoResponse* mes
 	LOG(INFO) << "  firmware date: "
 			<< 2000 + (int)message->firmwareYear20xx << "-" << (int)message->firmwareMonth << "-" << (int)message->firmwareDay;
 
-    comm_log_ += "device type: " + message->getDeviceType();
-    comm_log_ += ", vendor ID: " + message->getVendorID();
+    temp += "device type: " + message->getDeviceType();
+    temp += ", vendor ID: " + message->getVendorID();
     yr = 2000 + (int)message->firmwareYear20xx;
     mnth = (int)message->firmwareMonth;
     day = (int)message->firmwareDay;
-    comm_log_ += ", firmware date: " + std::to_string(yr) + sep + std::to_string(mnth) + sep + std::to_string(day);
-    std::cout << "COMM LOG: " << comm_log_ << std::endl;
+    temp += ", firmware date: " + std::to_string(yr) + sep + std::to_string(mnth) + sep + std::to_string(day);
+    std::cout << "COMM LOG: " << temp << std::endl;
+    *comm_log_ = temp;
 }
 
 //======================================================================================
 
 void EPRI_UCM::processCommodityResponse(cea2045::cea2045CommodityResponse* message)
 {
+    int code, cumltv, rate;
+    std::string temp = " ";
 	LOG(INFO) << "commodity response received.  count: " << message->getCommodityDataCount();
 
 	int count = message->getCommodityDataCount();
-	std::cout << "Commodity Response count: " << count << std::endl;
 	for (int x = 0; x < count; x++)
 	{
 		std::cout << "Commodity Response loop x: " << x << std::endl;
@@ -96,10 +99,14 @@ void EPRI_UCM::processCommodityResponse(cea2045::cea2045CommodityResponse* messa
 
 		LOG(INFO) << "commodity data: " << x;
 
-		LOG(INFO) << "        code: " << (int)data->commodityCode;
-		LOG(INFO) << "  cumulative: " << data->getCumulativeAmount();
-		LOG(INFO) << "   inst rate: " << data->getInstantaneousRate();
+        code = (int)data->commodityCode;
+        cumltv = data->getCumulativeAmount();
+        rate = data->getInstantaneousRate();
+
+        temp += " commodity code: " + std::to_string(code) + ", cumulative amount: " + std::to_string(cumltv) + ", instantaneous rate: " + std::to_string(rate);
 	}
+    std::cout << " COMMODITY RESPONSE: " << temp << std::endl;
+    *comm_log_ = temp;
 }
 
 //======================================================================================

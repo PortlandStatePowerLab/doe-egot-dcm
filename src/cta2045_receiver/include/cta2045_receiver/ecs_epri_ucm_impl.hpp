@@ -13,14 +13,13 @@ class EPRI_UCM : public cea2045::IUCM
 {
 private:
 	cea2045::MaxPayloadLengthCode m_sgdMaxPayload;
-    std::string comm_log_; //no data structure to simplify/avoid rquirement for memory/clearing old data
+    std::string * comm_log_; //no data structure to simplify/avoid rquirement for memory/clearing old data
     
 
 public:
 	EPRI_UCM();
+    EPRI_UCM(std::string * ref);
 	virtual ~EPRI_UCM();
-
-    std::string commLog(); //log is erased each time it's accessed externally
 
 	virtual bool isMessageTypeSupported(cea2045::MessageTypeCode messageType);
 	virtual cea2045::MaxPayloadLengthCode getMaxPayload();

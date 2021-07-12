@@ -5,7 +5,7 @@
 namespace dcm
 {
 using namespace cea2045;
-CTA2045Receiver::CTA2045Receiver(): serial_port_("/dev/ttyAMA0"), shutdown_(false)
+CTA2045Receiver::CTA2045Receiver() : epri_ucm_(&response_), serial_port_("/dev/ttyAMA0"), shutdown_(false)
 {
     std::cout << "CTA2045 Receiver Default Constructor" << std::endl;
     if (!serial_port_.open())
@@ -53,10 +53,20 @@ std::string CTA2045Receiver::Export()
 
 std::string CTA2045Receiver::GetEnergy() 
 {
+    unsigned long elapsed = 0;
+    std::string log;
     std::cout << "cta2045receiver GetEnergy() " << std::endl;
     std::string nothing = "nothing";
+
+    timer_.reset();
     device_->intermediateGetCommodity().get();
-    return nothing;
+    elapsed = timer_.getElapsedMS();
+
+    log = response_;
+    response_.erase();
+    std::cout << " cta2045receiver getenergy() log: " << log << std::endl;
+
+    return log;
 }
 std::string CTA2045Receiver::GetNameplate() 
 {

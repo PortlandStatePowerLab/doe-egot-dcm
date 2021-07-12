@@ -28,16 +28,16 @@ ECS_DCM::ECS_DCM(const std::string &root) :
 {
     std::cout << " ECS_DCM root arg overload constructor reduced" << std::endl;
     SetReceiver();
-    //combined_client_ = new CombinedHttpsClient(root, "localhost", "443", root, "localhost", "4430");
-    //import_energy_c_ = new ImportEnergy(combined_client_, receiver_);
-    //export_energy_c_ = new ExportEnergy(combined_client_, receiver_);
-    //get_energy_c_ = new GetEnergy(combined_client_, receiver_);
-    //get_nameplate_c_ = new GetNameplate(combined_client_, receiver_);
-    //idle_c_ = new Idle(combined_client_, receiver_);
-    /*sim_flow_invoker_ = new SimpleSimulatorFlowResInvoker(&dcm_world_, import_energy_c_,
+    combined_client_ = new CombinedHttpsClient(root, "localhost", "443", root, "localhost", "4430");
+    import_energy_c_ = new ImportEnergy(combined_client_, receiver_);
+    export_energy_c_ = new ExportEnergy(combined_client_, receiver_);
+    get_energy_c_ = new GetEnergy(combined_client_, receiver_);
+    get_nameplate_c_ = new GetNameplate(combined_client_, receiver_);
+    idle_c_ = new Idle(combined_client_, receiver_);
+    sim_flow_invoker_ = new SimpleSimulatorFlowResInvoker(&dcm_world_, import_energy_c_,
                                                           export_energy_c_, get_energy_c_,
-                                                          get_nameplate_c_, idle_c_); */
-    //dcm_world_.import<dcm::dcm_components_module>();
+                                                          get_nameplate_c_, idle_c_); 
+    dcm_world_.import<dcm::dcm_components_module>();
 }
 
 ECS_DCM::~ECS_DCM()
@@ -97,6 +97,7 @@ void ECS_DCM::TestCTA2045Commands()
     std::cout << "TESTING CTA-2045 COMMANDS" << std::endl;
     receiver_->GetNameplate();
     receiver_->GetEnergy();
+    
 }
 
 void ECS_DCM::AddFlowResRespEntity(sep::FlowReservationResponse &flowresresp)
