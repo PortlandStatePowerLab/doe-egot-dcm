@@ -14,6 +14,7 @@
 #include <cea2045/communicationport/CEA2045SerialPort.h>
 #include <cea2045/util/MSTimer.h>
 #include "UCMImpl.h"
+#include "ecs_epri_ucm_impl.hpp"
 #include "easylogging++.h"
 
 
@@ -36,7 +37,8 @@ class CTA2045Receiver : public BaseReceiver
     private:
         std::string response_;
         xml::XMLCommandAdapter xml_writer_;
-        UCMImpl epri_ucm_;
+        //UCMImpl epri_ucm_;
+        dcm::EPRI_UCM epri_ucm_;
         cea2045::CEA2045SerialPort serial_port_;
         cea2045::ResponseCodes responseCodes_;
         cea2045::MSTimer timer_;
