@@ -101,9 +101,33 @@ void ECS_DCM::RunSimulatorLoop()
 void ECS_DCM::TestCTA2045Commands()
 {
     std::cout << "TESTING CTA-2045 COMMANDS" << std::endl;
-    receiver_->GetNameplate();
-    receiver_->GetEnergy();
-    get_energy_c_->Execute();
+    std::cout << "c - GetEnergy() " << std::endl;
+    std::cout << "n - GetNameplate() " << std::endl;
+    std::cout << "q - quit " << std::endl;
+    
+    bool shutdown = true;
+
+    while (!shutdown)
+	{
+		char c = getchar();
+		switch (c)
+		{
+			case 'c':
+				get_energy_c_->Execute();
+				break;
+			case 'n':
+				get_nameplate_c_->Execute();
+				break;
+			case '\n':
+				break;
+			case 'q':
+				shutdown = true;
+				break;
+			default:
+				std::cout << "invalid command" << std::endl;;
+				break;
+		}
+	}
     
 }
 

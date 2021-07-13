@@ -44,8 +44,10 @@ CombinedHttpsClient::Post(const std::string& target, const std::string& resource
 {
     if (target == "DTM")
     {
-        std::cout << "DTM Specific POST" << std::endl;
+        std::cout << "combinedhttpsclient::Post DTM Specific POST" << std::endl;
         auto res = dtm_client_.Post("/na", resource);
+        std::string response_body = boost::beast::buffers_to_string(res.body().data());
+        std::cout << "combinedhttpsclient::Post DTM Specific POST Response Body: " << response_body << std::endl;
         return res;
     }
     else
