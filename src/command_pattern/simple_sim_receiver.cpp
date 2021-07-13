@@ -44,6 +44,11 @@ std::string SimpleSimulatorReceiver::Idle()
     return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");
 }
 
+std::string SimpleSimulatorReceiver::CriticalPeakEvent()
+{
+    std::cout << "SimpleSimReceiver CriticalPeakEvent, not supported currently" << std::endl;
+}
+
 void SimpleSimulatorReceiver::IncrementSimulatorProgress()
 {
     sim_der_->IncrementProgress();

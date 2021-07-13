@@ -24,6 +24,7 @@ namespace dcm
         virtual std::string GetEnergy() = 0;
         virtual std::string GetNameplate() = 0;
         virtual std::string Idle() = 0;
+        virtual std::string CriticalPeakEvent() = 0;
 
     private:
     };
@@ -39,6 +40,7 @@ namespace dcm
         std::string GetEnergy();
         std::string GetNameplate();
         std::string Idle();
+        std::string CriticalPeakEvent();
         void IncrementSimulatorProgress();
 
     private:

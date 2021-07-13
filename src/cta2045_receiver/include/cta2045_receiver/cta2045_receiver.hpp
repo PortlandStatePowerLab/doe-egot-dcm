@@ -33,6 +33,7 @@ class CTA2045Receiver : public BaseReceiver
         std::string GetEnergy(); 
         std::string GetNameplate(); 
         std::string Idle(); 
+        std::string CriticalPeakEvent();
 
     private:
         std::string response_;

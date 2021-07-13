@@ -83,5 +83,10 @@ std::string CTA2045Receiver::Idle()
     return xml_writer_.ReturnCustomCommand("DCM", "DER", response_, "na", "na", "response");
 }
     
+std::string CTA2045Receiver::CriticalPeakEvent()
+{
+
+}
+
 } // namespace dcm
 
