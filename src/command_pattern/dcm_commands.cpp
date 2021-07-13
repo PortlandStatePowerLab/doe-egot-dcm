@@ -115,10 +115,9 @@ std::string GetEnergy::Execute()
     //this is specific to a simulated receiver at this point, and not based on a particular resource.
     std::string msg_out = xml_writer_.ReturnCustomCommand("DER", "DCM", "GetEnergy", "na", "na", "command");
     https_client_->Post("DTM", msg_out);
-
     response_from_der = receiver_->GetEnergy();
     https_client_->Post("DTM", response_from_der);
-
+    std::cout << "GetEnergy::Execute() response from der: " << response_from_der << std::endl;
     return response_from_der;
 }
 
@@ -148,7 +147,6 @@ std::string GetNameplate::Execute()
     //this is specific to a simulated receiver at this point, and not based on a particular resource.
     std::string msg_out = xml_writer_.ReturnCustomCommand("DER", "DCM", "GetNameplate", "na", "na", "command");
     https_client_->Post("DTM", msg_out);
-
     response_from_der = receiver_->GetNameplate();
     https_client_->Post("DTM", response_from_der);
 
@@ -214,7 +212,6 @@ std::string CriticalPeakEvent::Execute()
     //this is specific to a simulated receiver at this point, and not based on a particular resource.
     std::string msg_out = xml_writer_.ReturnCustomCommand("DER", "DCM", "CriticalPeakEvent", "na", "na", "command");
     https_client_->Post("DTM", msg_out);
-
     response_from_der = receiver_->CriticalPeakEvent();
     https_client_->Post("DTM", response_from_der);
 

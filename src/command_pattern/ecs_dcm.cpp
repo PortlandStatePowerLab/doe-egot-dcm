@@ -103,6 +103,7 @@ void ECS_DCM::TestCTA2045Commands()
     std::cout << "TESTING CTA-2045 COMMANDS" << std::endl;
     receiver_->GetNameplate();
     receiver_->GetEnergy();
+    get_energy_c_->Execute();
     
 }
 
