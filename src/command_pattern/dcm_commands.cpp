@@ -15,8 +15,8 @@ BaseCommand::BaseCommand(CombinedHttpsClient *c, BaseReceiver *r)
 
 BaseCommand::~BaseCommand()
 {
-    delete https_client_;
-    delete receiver_;
+    //delete https_client_;
+    //delete receiver_;
 }
 
 ImportEnergy::ImportEnergy()
