@@ -21,13 +21,19 @@ BaseInvoker::BaseInvoker(
 
 BaseInvoker::~BaseInvoker()
 {
-    std::cout << " BaseInvoker Destructor " << std::endl;
+    std::cout << " a" << std::endl;
     delete idle_;
+    std::cout << " b " << std::endl;
     delete get_nameplate_;
+    std::cout << " c " << std::endl;
     delete get_energy_;
+    std::cout << " d " << std::endl;
     delete export_;
+    std::cout << " e " << std::endl;
     delete import_;
+    std::cout << " f " << std::endl;
     delete shared_world_ptr_;
+    std::cout << " g " << std::endl;
 }
 
 SimpleSimulatorFlowResInvoker::SimpleSimulatorFlowResInvoker(
