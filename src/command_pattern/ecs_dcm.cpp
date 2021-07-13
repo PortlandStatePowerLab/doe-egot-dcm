@@ -119,8 +119,6 @@ void ECS_DCM::TestCTA2045Commands()
 			case 'n':
 				get_nameplate_c_->Execute();
 				break;
-			case '\n':
-				break;
 			case 'q':
 				shutdown = true;
 				break;

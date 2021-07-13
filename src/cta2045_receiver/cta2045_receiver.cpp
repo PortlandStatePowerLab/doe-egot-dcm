@@ -62,7 +62,7 @@ std::string CTA2045Receiver::GetEnergy()
     device_->intermediateGetCommodity().get();
     elapsed = timer_.getElapsedMS();
 
-    log = response_;
+    log = "CTA2045: " + response_; //for command
     response_.erase();
     std::cout << " cta2045receiver getenergy() log: " << log << std::endl;
 
@@ -80,7 +80,7 @@ std::string CTA2045Receiver::GetNameplate()
     device_->intermediateGetDeviceInformation().get();
     elapsed = timer_.getElapsedMS();
     
-    log = response_;
+    log = "CTA2045: " + response_; //for command
     response_.erase();
     std::cout << " cta2045receiver getenergy() log: " << log << std::endl;
 
