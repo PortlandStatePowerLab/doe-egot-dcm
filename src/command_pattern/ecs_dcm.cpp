@@ -105,7 +105,7 @@ void ECS_DCM::TestCTA2045Commands()
     std::cout << "n - GetNameplate() " << std::endl;
     std::cout << "q - quit " << std::endl;
     
-    bool shutdown = true;
+    bool shutdown = false;
 
     while (!shutdown)
 	{
