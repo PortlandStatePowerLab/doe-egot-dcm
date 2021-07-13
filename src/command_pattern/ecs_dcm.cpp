@@ -30,7 +30,7 @@ ECS_DCM::ECS_DCM(const std::string &root) :
 {
     std::cout << " ECS_DCM root arg overload constructor reduced" << std::endl;
     SetReceiver();
-    combined_client_ = new CombinedHttpsClient(root, "localhost", "443", root, "localhost", "4430");
+    combined_client_ = new CombinedHttpsClient(root, "localhost", "4430", root, "localhost", "4430");
     import_energy_c_ = new ImportEnergy(combined_client_, receiver_);
     export_energy_c_ = new ExportEnergy(combined_client_, receiver_);
     get_energy_c_ = new GetEnergy(combined_client_, receiver_);
@@ -104,6 +104,7 @@ void ECS_DCM::TestCTA2045Commands()
     std::cout << "c - GetEnergy() " << std::endl;
     std::cout << "n - GetNameplate() " << std::endl;
     std::cout << "q - quit " << std::endl;
+    std::cout << "==============" << std::endl;
     
     bool shutdown = false;
 
@@ -127,6 +128,7 @@ void ECS_DCM::TestCTA2045Commands()
 				std::cout << "invalid command" << std::endl;;
 				break;
 		}
+        std::cout << "==============" << std::endl;
 	}
     
 }
