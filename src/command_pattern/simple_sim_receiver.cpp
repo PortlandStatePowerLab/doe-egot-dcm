@@ -10,6 +10,7 @@ SimpleSimulatorReceiver::SimpleSimulatorReceiver()
 
 SimpleSimulatorReceiver::~SimpleSimulatorReceiver()
 {
+    std::cout << "SimpleSimulatorReceiver Destructor " << std::endl;
     delete sim_der_;
 }
 

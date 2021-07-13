@@ -21,6 +21,7 @@ BaseInvoker::BaseInvoker(
 
 BaseInvoker::~BaseInvoker()
 {
+    std::cout << " BaseInvoker Destructor " << std::endl;
     delete idle_;
     delete get_nameplate_;
     delete get_energy_;
@@ -43,6 +44,7 @@ SimpleSimulatorFlowResInvoker::SimpleSimulatorFlowResInvoker(
 
 SimpleSimulatorFlowResInvoker::~SimpleSimulatorFlowResInvoker()
 {
+    std::cout << "SimpleSimulatorFlowResInvoker Destructor " << std::endl;
     // do nothing
 }
 
