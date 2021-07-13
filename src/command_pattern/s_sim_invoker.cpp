@@ -21,7 +21,7 @@ BaseInvoker::BaseInvoker(
 
 BaseInvoker::~BaseInvoker()
 {
-    std::cout << " a" << std::endl;
+    std::cout << " BaseInvoker destructor a" << std::endl;
     delete idle_;
     std::cout << " b " << std::endl;
     delete get_nameplate_;
@@ -32,7 +32,7 @@ BaseInvoker::~BaseInvoker()
     std::cout << " e " << std::endl;
     delete import_;
     std::cout << " f " << std::endl;
-    delete shared_world_ptr_;
+    //delete shared_world_ptr_;
     std::cout << " g " << std::endl;
 }
 

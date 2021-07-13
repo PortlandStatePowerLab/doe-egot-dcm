@@ -19,6 +19,8 @@ BaseCommand::~BaseCommand()
     //delete receiver_;
 }
 
+//=================================================================================
+
 ImportEnergy::ImportEnergy()
 {
     // do nothing
@@ -54,6 +56,8 @@ std::string ImportEnergy::Execute()
     return response_from_der;
 }
 
+//=================================================================================
+
 ExportEnergy::ExportEnergy()
 {
     // do nothing
@@ -84,6 +88,8 @@ std::string ExportEnergy::Execute()
 
     return response_from_der;
 }
+
+//=================================================================================
 
 GetEnergy::GetEnergy()
 {
@@ -116,6 +122,8 @@ std::string GetEnergy::Execute()
     return response_from_der;
 }
 
+//=================================================================================
+
 GetNameplate::GetNameplate()
 {
     // do nothing
@@ -147,6 +155,8 @@ std::string GetNameplate::Execute()
     return response_from_der;
 }
 
+//=================================================================================
+
 Idle::Idle()
 {
     // do nothing
@@ -173,6 +183,39 @@ std::string Idle::Execute()
     https_client_->Post("DTM", msg_out);
 
     response_from_der = receiver_->Idle();
+    https_client_->Post("DTM", response_from_der);
+
+    return response_from_der;
+}
+
+//=================================================================================
+
+CriticalPeakEvent::CriticalPeakEvent()
+{
+    // do nothing
+}
+
+CriticalPeakEvent::CriticalPeakEvent(CombinedHttpsClient *client, BaseReceiver *receiver)
+    : BaseCommand(client, receiver)
+{
+    // do nothing
+}
+
+CriticalPeakEvent::~CriticalPeakEvent()
+{
+    // do nothing
+}
+
+std::string CriticalPeakEvent::Execute()
+{
+    std::string response_from_der = "der response not supported yet";
+    std::cout << "  CriticalPeakEvent Command Executing... " << std::endl;
+
+    //this is specific to a simulated receiver at this point, and not based on a particular resource.
+    std::string msg_out = xml_writer_.ReturnCustomCommand("DER", "DCM", "CriticalPeakEvent", "na", "na", "command");
+    https_client_->Post("DTM", msg_out);
+
+    response_from_der = receiver_->CriticalPeakEvent();
     https_client_->Post("DTM", response_from_der);
 
     return response_from_der;

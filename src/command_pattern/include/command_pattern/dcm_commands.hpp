@@ -86,6 +86,17 @@ namespace dcm
     private:
     };
 
+    class CriticalPeakEvent : public BaseCommand
+    {
+    public:
+        CriticalPeakEvent();
+        CriticalPeakEvent(CombinedHttpsClient *client, BaseReceiver *receiver);
+        ~CriticalPeakEvent();
+        std::string Execute();
+
+    private:
+    };
+
 } // namespace dcm
 
 #endif //__DCM_COMMANDS_H__
