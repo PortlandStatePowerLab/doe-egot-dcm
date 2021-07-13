@@ -44,35 +44,34 @@ static const std::string FLOW_RESERVATION_REQUEST = R"(<?xml version="1.0" encod
 
 namespace dcm
 {
-  template <typename T>
-  T Dehexify(const std::string hexidecimal);
 
-  class ECS_DCM
-  {
-  public:
-    ECS_DCM();
-    ECS_DCM(const std::string &root);
-    ~ECS_DCM();
-    void SetReceiver();
-    void RunSimulatorLoop();
-    void TestCTA2045Commands();
-    void AddFlowResRespEntity(sep::FlowReservationResponse &flowresresp);
-    sep::FlowReservationResponse GetFlowResRespFromGSP();
-    void InitializeFlowResInvokingSystems();
+class ECS_DCM
+{
+public:
+  ECS_DCM();
+  ECS_DCM(const std::string &root);
+  ~ECS_DCM();
+  void SetReceiver();
+  void RunSimulatorLoop();
+  void TestCTA2045Commands();
+  void AddFlowResRespEntity(sep::FlowReservationResponse &flowresresp);
+  sep::FlowReservationResponse GetFlowResRespFromGSP();
+  void InitializeFlowResInvokingSystems();
 
-  private:
-    flecs::world dcm_world_;
-    CombinedHttpsClient *combined_client_;
-    BaseInvoker *sim_flow_invoker_;
-    BaseReceiver *receiver_;
-    ImportEnergy *import_energy_c_;
-    ExportEnergy *export_energy_c_;
-    GetEnergy *get_energy_c_;
-    GetNameplate *get_nameplate_c_;
-    Idle *idle_c_;
+private:
+  flecs::world dcm_world_;
+  CombinedHttpsClient *combined_client_;
+  BaseInvoker *sim_flow_invoker_;
+  BaseReceiver *receiver_;
+  ImportEnergy *import_energy_c_;
+  ExportEnergy *export_energy_c_;
+  GetEnergy *get_energy_c_;
+  GetNameplate *get_nameplate_c_;
+  Idle *idle_c_;
+  CriticalPeakEvent *crit_peak_c_;
 
-    //BaseInvoker * sim_invoker_;
-  };
+  //BaseInvoker * sim_invoker_;
+};
 
 } //namespace dcm
 #endif //__ECS_DCM_H__

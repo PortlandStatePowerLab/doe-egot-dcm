@@ -8,13 +8,15 @@ BaseInvoker::BaseInvoker(
     ExportEnergy *exp,
     GetEnergy *get_e,
     GetNameplate *get_n,
-    Idle *idle)
+    Idle *idle,
+    CriticalPeakEvent *crit)
     : shared_world_ptr_(shared),
       import_(imp),
       export_(exp),
       get_energy_(get_e),
       get_nameplate_(get_n),
-      idle_(idle)
+      idle_(idle),
+      crit_(crit)
 {
     shared_world_ptr_->import<sim_invoker_module>();
 }
@@ -22,7 +24,7 @@ BaseInvoker::BaseInvoker(
 BaseInvoker::~BaseInvoker()
 {
     std::cout << " BaseInvoker destructor a" << std::endl;
-    delete idle_;
+    /* delete idle_;
     std::cout << " b " << std::endl;
     delete get_nameplate_;
     std::cout << " c " << std::endl;
@@ -33,7 +35,7 @@ BaseInvoker::~BaseInvoker()
     delete import_;
     std::cout << " f " << std::endl;
     //delete shared_world_ptr_;
-    std::cout << " g " << std::endl;
+    std::cout << " g " << std::endl; */
 }
 
 SimpleSimulatorFlowResInvoker::SimpleSimulatorFlowResInvoker(
@@ -42,8 +44,9 @@ SimpleSimulatorFlowResInvoker::SimpleSimulatorFlowResInvoker(
     ExportEnergy *exp,
     GetEnergy *get_e,
     GetNameplate *get_n,
-    Idle *idle)
-    : BaseInvoker(shared, imp, exp, get_e, get_n, idle)
+    Idle *idle,
+    CriticalPeakEvent *crit)
+    : BaseInvoker(shared, imp, exp, get_e, get_n, idle, crit)
 {
     std::cout << "SimpleSimulatorFlowResInvoker" << std::endl;
 }

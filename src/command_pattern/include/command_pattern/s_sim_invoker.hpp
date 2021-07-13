@@ -26,7 +26,8 @@ namespace dcm
             ExportEnergy *exp,
             GetEnergy *get_e,
             GetNameplate *get_n,
-            Idle *idle);
+            Idle *idle,
+            CriticalPeakEvent *crit);
         ~BaseInvoker();
         virtual void ProcessResource(flecs::entity *e) = 0;
 
@@ -37,6 +38,7 @@ namespace dcm
         GetEnergy *get_energy_;
         GetNameplate *get_nameplate_;
         Idle *idle_;
+        CriticalPeakEvent *crit_;
     };
 
     class SimpleSimulatorFlowResInvoker : public BaseInvoker
@@ -48,7 +50,8 @@ namespace dcm
             ExportEnergy *exp,
             GetEnergy *get_e,
             GetNameplate *get_n,
-            Idle *idle);
+            Idle *idle,
+            CriticalPeakEvent *crit);
         ~SimpleSimulatorFlowResInvoker();
         void ProcessResource(flecs::entity *e);
 

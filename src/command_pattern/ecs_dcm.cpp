@@ -10,7 +10,8 @@ ECS_DCM::ECS_DCM() :
         export_energy_c_(nullptr),
         get_energy_c_(nullptr),
         get_nameplate_c_(nullptr),
-        idle_c_(nullptr)
+        idle_c_(nullptr),
+        crit_peak_c_(nullptr)
 {
     //SetReceiver();
     //need a program path
@@ -24,7 +25,8 @@ ECS_DCM::ECS_DCM(const std::string &root) :
         export_energy_c_(nullptr),
         get_energy_c_(nullptr),
         get_nameplate_c_(nullptr),
-        idle_c_(nullptr)
+        idle_c_(nullptr),
+        crit_peak_c_(nullptr)
 {
     std::cout << " ECS_DCM root arg overload constructor reduced" << std::endl;
     SetReceiver();
@@ -36,7 +38,8 @@ ECS_DCM::ECS_DCM(const std::string &root) :
     idle_c_ = new Idle(combined_client_, receiver_);
     sim_flow_invoker_ = new SimpleSimulatorFlowResInvoker(&dcm_world_, import_energy_c_,
                                                           export_energy_c_, get_energy_c_,
-                                                          get_nameplate_c_, idle_c_); 
+                                                          get_nameplate_c_, idle_c_, crit_peak_c_); 
+    crit_peak_c_ = new CriticalPeakEvent(combined_client_, receiver_);
     dcm_world_.import<dcm::dcm_components_module>();
 }
 
@@ -70,6 +73,9 @@ ECS_DCM::~ECS_DCM()
     if (idle_c_)
         delete idle_c_;
     std::cout << "8" << std::endl;
+    if (crit_peak_c_)
+        delete crit_peak_c_;
+    std::cout << "9" << std::endl;
 }
 
 void ECS_DCM::SetReceiver()
