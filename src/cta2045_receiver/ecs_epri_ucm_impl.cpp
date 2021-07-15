@@ -73,13 +73,13 @@ void EPRI_UCM::processDeviceInfoResponse(cea2045::cea2045DeviceInfoResponse* mes
 	LOG(INFO) << "  firmware date: "
 			<< 2000 + (int)message->firmwareYear20xx << "-" << (int)message->firmwareMonth << "-" << (int)message->firmwareDay;
 
-    temp += "device type: " + message->getDeviceType();
-    temp += ", vendor ID: " + message->getVendorID();
+    temp += "device type: " + std::to_string((int)message->getDeviceType());
+    temp += ", vendor ID: " + std::to_string((int)message->getVendorID());
     yr = 2000 + (int)message->firmwareYear20xx;
     mnth = (int)message->firmwareMonth;
     day = (int)message->firmwareDay;
     temp += ", firmware date: " + std::to_string(yr) + sep + std::to_string(mnth) + sep + std::to_string(day);
-    std::cout << "COMM LOG: " << temp << std::endl;
+    std::cout << "EPRI_UCM::processDeviceInfoResponse COMM LOG: " << temp << std::endl;
     *comm_log_ = temp;
 }
 
@@ -105,7 +105,7 @@ void EPRI_UCM::processCommodityResponse(cea2045::cea2045CommodityResponse* messa
 
         temp += " commodity code: " + std::to_string(code) + ", cumulative amount: " + std::to_string(cumltv) + ", instantaneous rate: " + std::to_string(rate);
 	}
-    std::cout << " COMMODITY RESPONSE: " << temp << std::endl;
+    std::cout << "EPRI_UCM::processCommodityResponse COMMODITY RESPONSE: " << temp << std::endl;
     *comm_log_ = temp;
 }
 

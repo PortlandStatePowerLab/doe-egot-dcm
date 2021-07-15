@@ -148,7 +148,7 @@ std::string GetNameplate::Execute()
     std::string response_from_der = "der response not supported yet";
     std::cout << "  GetNameplate Command Executing... " << std::endl;
 
-    //this is specific to a simulated receiver at this point, and not based on a particular resource.
+    //
     std::string msg_out = xml_writer_.ReturnCustomCommand("DER", "DCM", "GetNameplate", "na", "na", "command");
     https_client_->Post("DTM", msg_out);
     response_from_der = receiver_->GetNameplate();
