@@ -82,7 +82,7 @@ std::string CTA2045Receiver::GetNameplate()
     
     log = "CTA2045: " + response_; //for command
     response_.erase();
-    std::cout << " cta2045receiver getenergy() log: " << log << std::endl;
+    std::cout << " cta2045receiver::getNamePlate GetNameplate() log: " << log << std::endl;
 
     return log + ", elapsed: " + std::to_string(elapsed);
     //return xml_writer_.ReturnCustomCommand("DCM", "DER", response, "na", "na", "response");

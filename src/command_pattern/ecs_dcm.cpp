@@ -111,6 +111,8 @@ void ECS_DCM::TestCTA2045Commands()
     while (!shutdown)
 	{
 		char c = getchar();
+        std::cin.ignore(100, '\n');
+        
 		switch (c)
 		{
 			case 'c':
