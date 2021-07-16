@@ -149,9 +149,10 @@ std::string GetNameplate::Execute()
     std::cout << "  GetNameplate Command Executing... " << std::endl;
 
     //
-    std::string msg_out = xml_writer_.ReturnCustomCommand("DER", "DCM", "GetNameplate", "na", "na", "command");
+    std::string msg_out = xml_writer_.WriteMsg("DCM", "DER", "GetNameplate", "na", "na");
     https_client_->Post("DTM", msg_out);
     response_from_der = receiver_->GetNameplate();
+    std::string msg_in = xml_writer_.WriteMsg("DCM", "DER", "GetNameplate", "na", response_from_der);
     https_client_->Post("DTM", response_from_der);
 
     return response_from_der;

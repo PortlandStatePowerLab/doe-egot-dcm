@@ -181,6 +181,49 @@ std::string XMLCommandAdapter::ReturnCustomGSPNotify(const std::string& to, cons
     return ReturnCommandAsStr(t);
 }
 
+std::string XMLCommandAdapter::WriteMsg(const std::string& from, const std::string& to, const std::string& type, 
+                                        const std::string& target, const std::string& body)
+{
+    boost::property_tree::ptree t, st;
+    std::stringstream ss;
+
+    std::time_t start_time = std::time(0);
+    string str_time = ctime(&start_time);
+    //std::tm* gmtm = gmtime(&t);
+    //std::string str_time = std::asctime(gmtm);
+    std::string type_path = "message.content." + type; 
+    std::string target_path = type_path + ".target";
+    std::string body_path = type_path + ".body";
+    
+    t.put("message.from", from);
+    t.put("message.to", to);
+    
+    if (target != "na")
+        t.put(target_path, target);
+    if (body != "na")
+    {
+        std::size_t check_for_xml = body.find('</'); //check for present of xml syntax as substring
+        if (check_for_xml != std::string::npos) //if body is xml encoded as str
+        {
+            ss << body; //save body as string stream for xml encoding
+            boost::property_tree::xml_parser::read_xml(ss, st, boost::property_tree::xml_parser::trim_whitespace); //convert body to xml tree
+            t.add_child(body_path, st); //add body as xml subtree
+        }
+        else
+        {
+            t.put(body_path, body);
+        }
+    }
+    
+    //t.put("message.content.command.duration", duration);
+    //t.put("message.content.expect_response", 1);
+    t.put("message.DCM_timestamp", std::time(0));
+
+    std::cout << "Now outputing custom msg tree to terminal: " << std::endl;
+    OutputTreeToTerminal(t);
+    std::cout << "----------------Done outputting msg tree----------- " << std::endl;
+    return ReturnCommandAsStr(t);
+}
 
 }//namespace xml
 }//namespace dcm

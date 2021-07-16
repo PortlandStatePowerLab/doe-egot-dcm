@@ -50,7 +50,8 @@ class XMLCommandAdapter
                                         const std::string& start, const std::string& duration, const std::string& content);
         std::string ReturnCustomGSPNotify(const std::string& to, const std::string& from, const std::string& type, const std::string& target,
                                         const std::string& body);
-        
+        std::string WriteMsg(const std::string& from, const std::string& to, const std::string& type, const std::string& target,
+                                        const std::string& body);
         std::string ReturnCommandAsStr()
         {
             std::stringstream ss;
