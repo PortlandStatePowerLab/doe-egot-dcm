@@ -202,7 +202,8 @@ std::string XMLCommandAdapter::WriteMsg(const std::string& from, const std::stri
         t.put(target_path, target);
     if (body != "na")
     {
-        std::size_t check_for_xml = body.find('</'); //check for present of xml syntax as substring
+        std::string xml_syntax = "</";
+        std::size_t check_for_xml = body.find(xml_syntax); //check for present of xml syntax as substring
         if (check_for_xml != std::string::npos) //if body is xml encoded as str
         {
             ss << body; //save body as string stream for xml encoding

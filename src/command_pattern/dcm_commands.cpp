@@ -153,7 +153,7 @@ std::string GetNameplate::Execute()
     https_client_->Post("DTM", msg_out);
     response_from_der = receiver_->GetNameplate();
     std::string msg_in = xml_writer_.WriteMsg("DCM", "DER", "GetNameplate", "na", response_from_der);
-    https_client_->Post("DTM", response_from_der);
+    https_client_->Post("DTM", msg_in);
 
     return response_from_der;
 }
