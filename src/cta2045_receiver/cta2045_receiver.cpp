@@ -41,14 +41,36 @@ CTA2045Receiver::~CTA2045Receiver()
 
 std::string CTA2045Receiver::Import() 
 {
-    
-    return xml_writer_.ReturnCustomCommand("DCM", "DER", response_, "na", "na", "response");
+    unsigned long elapsed = 0;
+    std::string log;
+    std::cout << "cta2045receiver Import() " << std::endl;
+
+    timer_.reset();
+    device_->basicLoadUp(0).get();
+    elapsed = timer_.getElapsedMS();
+
+    log = "CTA2045: " + response_; //for command
+    response_.erase();
+    std::cout << " cta2045receiver Import() log: " << log << std::endl;
+
+    return log + ", elapsed: " + std::to_string(elapsed);
 }
 
 std::string CTA2045Receiver::Export() 
 {
-    
-    return xml_writer_.ReturnCustomCommand("DCM", "DER", response_, "na", "na", "response");
+    unsigned long elapsed = 0;
+    std::string log;
+    std::cout << "cta2045receiver Export() " << std::endl;
+
+    timer_.reset();
+    device_->basicShed(0).get();
+    elapsed = timer_.getElapsedMS();
+
+    log = "CTA2045: " + response_; //for command
+    response_.erase();
+    std::cout << " cta2045receiver Expor() log: " << log << std::endl;
+
+    return log + ", elapsed: " + std::to_string(elapsed);
 }
 
 std::string CTA2045Receiver::GetEnergy() 
@@ -56,7 +78,6 @@ std::string CTA2045Receiver::GetEnergy()
     unsigned long elapsed = 0;
     std::string log;
     std::cout << "cta2045receiver GetEnergy() " << std::endl;
-    std::string nothing = "nothing";
 
     timer_.reset();
     device_->intermediateGetCommodity().get();
@@ -74,7 +95,6 @@ std::string CTA2045Receiver::GetNameplate()
     unsigned long elapsed = 0;
     std::string log;
     std::cout << "cta2045receiver GetNameplate() " << std::endl;
-    std::string nothing = "nothing";
 
     timer_.reset();
     device_->intermediateGetDeviceInformation().get();
@@ -90,13 +110,36 @@ std::string CTA2045Receiver::GetNameplate()
 
 std::string CTA2045Receiver::Idle() 
 {
-    
-    return xml_writer_.ReturnCustomCommand("DCM", "DER", response_, "na", "na", "response");
+    unsigned long elapsed = 0;
+    std::string log;
+    std::cout << "cta2045receiver Idle() " << std::endl;
+
+    timer_.reset();
+    device_->basicEndShed(0).get();
+    elapsed = timer_.getElapsedMS();
+
+    log = "CTA2045: " + response_; //for command
+    response_.erase();
+    std::cout << " cta2045receiver Idle() log: " << log << std::endl;
+
+    return log + ", elapsed: " + std::to_string(elapsed);
 }
 
 std::string CTA2045Receiver::CriticalPeakEvent()
 {
+    unsigned long elapsed = 0;
+    std::string log;
+    std::cout << "cta2045receiver CriticalPeak() " << std::endl;
 
+    timer_.reset();
+    device_->basicCriticalPeakEvent(0).get();
+    elapsed = timer_.getElapsedMS();
+
+    log = "CTA2045: " + response_; //for command
+    response_.erase();
+    std::cout << " cta2045receiver criticalPeak() log: " << log << std::endl;
+
+    return log + ", elapsed: " + std::to_string(elapsed);
 }
 
 } // namespace dcm
