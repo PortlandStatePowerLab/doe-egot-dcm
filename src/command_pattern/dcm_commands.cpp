@@ -113,15 +113,15 @@ std::string GetEnergy::Execute()
     std::cout << "  GetEnergy Command Executing... " << std::endl;
 
     //this is specific to a simulated receiver at this point, and not based on a particular resource.
-    std::string msg_out = xml_writer_.ReturnCustomCommand("DER", "DCM", "GetEnergy", "na", "na", "command");
+    std::string msg_out = xml_writer_.WriteMsg("DCM", "DER", "GetNameplate", "na", "na");
     https_client_->Post("DTM", msg_out);
     response_from_der = receiver_->GetEnergy();
     if (response_from_der[0] == 'C') //if cta2045receiver
     {
         std::cout << "GetEnergy::Execute() response from der: " << response_from_der << std::endl;
     }
-    https_client_->Post("DTM", response_from_der);
-   
+    std::string msg_in = xml_writer_.WriteMsg("DCM", "DER", "GetNameplate", "na", response_from_der);
+    https_client_->Post("DTM", msg_in);
     return response_from_der;
 }
 
