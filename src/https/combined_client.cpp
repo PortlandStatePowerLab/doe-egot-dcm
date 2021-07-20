@@ -42,6 +42,7 @@ CombinedHttpsClient::Get(const std::string& target, const std::string& query)
 bb::http::response <bb::http::dynamic_body>
 CombinedHttpsClient::Post(const std::string& target, const std::string& resource)
 {
+    std::cout << "combined client::Post" << std::endl;
     if (target == "DTM")
     {
         std::cout << "combinedhttpsclient::Post DTM Specific POST" << std::endl;
