@@ -199,6 +199,7 @@ void EPRI_UCM::processAppNakReceived(cea2045::cea2045Basic* message)
 void EPRI_UCM::processAppCustomerOverride(cea2045::cea2045Basic* message)
 {
 	LOG(INFO) << "app cust override received: " << (int)message->opCode2;
+	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "App Customer Override Received", "na", "AppCustOverride"));
 }
 
 //======================================================================================
@@ -206,6 +207,7 @@ void EPRI_UCM::processAppCustomerOverride(cea2045::cea2045Basic* message)
 void EPRI_UCM::processIncompleteMessage(const unsigned char *buffer, unsigned int numBytes)
 {
 	LOG(WARNING) << "incomplete message received: " << numBytes;
+	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "Incomplete Msg Received", "na", "IncompleteMsg"));
 }
 
 } //namespace dcm
