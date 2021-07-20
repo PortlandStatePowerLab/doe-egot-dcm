@@ -7,7 +7,7 @@ namespace dcm
 {
 using namespace std;
 
-EPRI_UCM::EPRI_UCM() : comm_log_(nullptr)
+EPRI_UCM::EPRI_UCM() : comm_log_(nullptr), combined_client_(nullptr)
 {
 	m_sgdMaxPayload = cea2045::MaxPayloadLengthCode::LENGTH2;
 }

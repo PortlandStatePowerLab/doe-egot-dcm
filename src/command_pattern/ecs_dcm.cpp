@@ -29,8 +29,9 @@ ECS_DCM::ECS_DCM(const std::string &root) :
         crit_peak_c_(nullptr)
 {
     std::cout << " ECS_DCM root arg overload constructor reduced" << std::endl;
-    SetReceiver();
+    
     combined_client_ = new CombinedHttpsClient(root, "localhost", "4430", root, "localhost", "4430");
+    SetReceiver(); //have to init after https init
     import_energy_c_ = new ImportEnergy(combined_client_, receiver_);
     export_energy_c_ = new ExportEnergy(combined_client_, receiver_);
     get_energy_c_ = new GetEnergy(combined_client_, receiver_);
