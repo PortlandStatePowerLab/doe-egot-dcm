@@ -26,7 +26,7 @@ class CTA2045Receiver : public BaseReceiver
 {
     public:
 
-        CTA2045Receiver();
+        CTA2045Receiver(CombinedHttpsClient *client);
         ~CTA2045Receiver();
         std::string Import(); 
         std::string Export(); 
@@ -38,6 +38,7 @@ class CTA2045Receiver : public BaseReceiver
     private:
         std::string response_;
         xml::XMLCommandAdapter xml_writer_;
+        CombinedHttpsClient *c_client_;
         //UCMImpl epri_ucm_;
         dcm::EPRI_UCM epri_ucm_;
         cea2045::CEA2045SerialPort serial_port_;
