@@ -113,7 +113,7 @@ std::string GetEnergy::Execute()
     std::cout << "  GetEnergy Command Executing... " << std::endl;
 
     //this is specific to a simulated receiver at this point, and not based on a particular resource.
-    std::string msg_out = xml_writer_.WriteMsg("DCM", "DER", "GetNameplate", "na", "na");
+    std::string msg_out = xml_writer_.WriteMsg("DCM", "DER", "Command", "na", "GetEnergy");
     https_client_->Post("DTM", msg_out);
     response_from_der = receiver_->GetEnergy();
     if (response_from_der[0] == 'C') //if cta2045receiver
@@ -149,7 +149,7 @@ std::string GetNameplate::Execute()
     std::cout << "  GetNameplate Command Executing... " << std::endl;
 
     //
-    std::string msg_out = xml_writer_.WriteMsg("DCM", "DER", "GetNameplate", "na", "na");
+    std::string msg_out = xml_writer_.WriteMsg("DCM", "DER", "Command", "na", "GetNameplate");
     https_client_->Post("DTM", msg_out);
     response_from_der = receiver_->GetNameplate();
     std::string msg_in = xml_writer_.WriteMsg("DCM", "DER", "GetNameplate", "na", response_from_der);
