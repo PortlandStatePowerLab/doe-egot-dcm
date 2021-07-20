@@ -133,6 +133,7 @@ void EPRI_UCM::processAckReceived(cea2045::MessageCode messageCode)
 	default:
 		break;
 	}
+	outgoing = xml_writer_.WriteMsg("DER", "DCM", "AckReceived", "na", body);
 }
 
 //======================================================================================
