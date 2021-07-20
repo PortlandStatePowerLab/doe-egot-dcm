@@ -169,7 +169,7 @@ void EPRI_UCM::processNakReceived(cea2045::LinkLayerNakCode nak, cea2045::Messag
 void EPRI_UCM::processOperationalStateReceived(cea2045::cea2045Basic *message)
 {
 	int op = (int)message->opCode2;
-	LOG(INFO) << "operational state received " << (int)message->opCode2; //changing this to the op int crashed it
+	LOG(INFO) << "operational state received " << op;
 	std::string outgoing = "Op State Received: " + std::to_string(op);
 	combined_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", outgoing, "na", "na"));
 }
