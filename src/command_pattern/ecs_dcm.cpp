@@ -87,7 +87,7 @@ void ECS_DCM::SetReceiver()
     std::cin.ignore(100, '\n');
     if (choice)
     {
-        receiver_ = new CTA2045Receiver(combined_client_);
+        receiver_ = new CTA2045Receiver;
     }
     else
         receiver_ = new SimpleSimulatorReceiver; //emulated DER

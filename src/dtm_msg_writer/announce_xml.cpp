@@ -191,13 +191,12 @@ std::string XMLCommandAdapter::WriteMsg(const std::string& from, const std::stri
     string str_time = ctime(&start_time);
     //std::tm* gmtm = gmtime(&t);
     //std::string str_time = std::asctime(gmtm);
-    std::string type_path = "message.content.type";
+    std::string type_path = "message.content." + type; 
     std::string target_path = type_path + ".target";
     std::string body_path = type_path + ".body";
     
     t.put("message.from", from);
     t.put("message.to", to);
-    t.put(type_path, type);
     
     if (target != "na")
         t.put(target_path, target);

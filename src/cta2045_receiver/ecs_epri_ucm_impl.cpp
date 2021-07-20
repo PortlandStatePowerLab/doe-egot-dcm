@@ -14,7 +14,7 @@ EPRI_UCM::EPRI_UCM() : comm_log_(nullptr)
 
 //======================================================================================
 
-EPRI_UCM::EPRI_UCM(std::string *l, CombinedHttpsClient *c) : comm_log_(l), combined_client_(c)
+EPRI_UCM::EPRI_UCM(std::string * r) : comm_log_(r)
 {
 	m_sgdMaxPayload = cea2045::MaxPayloadLengthCode::LENGTH2;
 }
@@ -114,25 +114,21 @@ void EPRI_UCM::processCommodityResponse(cea2045::cea2045CommodityResponse* messa
 void EPRI_UCM::processAckReceived(cea2045::MessageCode messageCode)
 {
 	LOG(INFO) << "ack received: " << (int)messageCode;
-	std::string outgoing = "Ack Received: ";
 
 	switch (messageCode)
 	{
 
 	case cea2045::MessageCode::SUPPORT_DATALINK_MESSAGES:
 		LOG(INFO) << "supports data link messages";
-		outgoing += "supports data link messages";
 		break;
 
 	case cea2045::MessageCode::SUPPORT_INTERMEDIATE_MESSAGES:
 		LOG(INFO) << "supports intermediate messages";
-		outgoing += "supports intermediate messages";
 		break;
 
 	default:
 		break;
 	}
-	combined_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", outgoing, "na", "na"));
 }
 
 //======================================================================================
@@ -140,7 +136,6 @@ void EPRI_UCM::processAckReceived(cea2045::MessageCode messageCode)
 void EPRI_UCM::processNakReceived(cea2045::LinkLayerNakCode nak, cea2045::MessageCode messageCode)
 {
 	LOG(WARNING) << "nak received";
-	std::string outgoing = "Nak Received: ";
 
 	if (nak == cea2045::LinkLayerNakCode::UNSUPPORTED_MESSAGE_TYPE)
 	{
@@ -149,29 +144,23 @@ void EPRI_UCM::processNakReceived(cea2045::LinkLayerNakCode nak, cea2045::Messag
 
 		case cea2045::MessageCode::SUPPORT_DATALINK_MESSAGES:
 			LOG(WARNING) << "does not support data link";
-			outgoing += "does not support data link";
 			break;
 
 		case cea2045::MessageCode::SUPPORT_INTERMEDIATE_MESSAGES:
 			LOG(WARNING) << "does not support intermediate";
-			outgoing += "does not support intermediate";
 			break;
 
 		default:
 			break;
 		}
 	}
-	combined_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", outgoing, "na", "na"));
 }
 
 //======================================================================================
 
 void EPRI_UCM::processOperationalStateReceived(cea2045::cea2045Basic *message)
 {
-	int op = (int)message->opCode2;
-	LOG(INFO) << "operational state received " << op;
-	std::string outgoing = "Op State Received: " + std::to_string(op);
-	combined_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", outgoing, "na", "na"));
+	LOG(INFO) << "operational state received " << (int)message->opCode2;
 }
 
 //======================================================================================
@@ -179,7 +168,6 @@ void EPRI_UCM::processOperationalStateReceived(cea2045::cea2045Basic *message)
 void EPRI_UCM::processAppAckReceived(cea2045::cea2045Basic* message)
 {
 	LOG(INFO) << "app ack received";
-	combined_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", "App Ack Received", "na", "na"));
 }
 
 //======================================================================================
@@ -187,7 +175,6 @@ void EPRI_UCM::processAppAckReceived(cea2045::cea2045Basic* message)
 void EPRI_UCM::processAppNakReceived(cea2045::cea2045Basic* message)
 {
 	LOG(INFO) << "app nak received";
-	combined_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", "App Nack Received", "na", "na"));
 }
 
 //======================================================================================
@@ -195,7 +182,6 @@ void EPRI_UCM::processAppNakReceived(cea2045::cea2045Basic* message)
 void EPRI_UCM::processAppCustomerOverride(cea2045::cea2045Basic* message)
 {
 	LOG(INFO) << "app cust override received: " << (int)message->opCode2;
-	combined_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", "App Customer Override Received", "na", "na"));
 }
 
 //======================================================================================
@@ -203,7 +189,6 @@ void EPRI_UCM::processAppCustomerOverride(cea2045::cea2045Basic* message)
 void EPRI_UCM::processIncompleteMessage(const unsigned char *buffer, unsigned int numBytes)
 {
 	LOG(WARNING) << "incomplete message received: " << numBytes;
-	combined_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", "Incomplete Msg Received", "na", "na"));
 }
 
 } //namespace dcm

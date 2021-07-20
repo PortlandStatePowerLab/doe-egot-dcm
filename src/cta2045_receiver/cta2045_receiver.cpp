@@ -5,7 +5,7 @@
 namespace dcm
 {
 using namespace cea2045;
-CTA2045Receiver::CTA2045Receiver(CombinedHttpsClient *client) : c_client_(client), epri_ucm_(&response_, client), serial_port_("/dev/ttyAMA0"), shutdown_(false)
+CTA2045Receiver::CTA2045Receiver() : epri_ucm_(&response_), serial_port_("/dev/ttyAMA0"), shutdown_(false)
 {
     std::cout << "CTA2045 Receiver Default Constructor" << std::endl;
     if (!serial_port_.open())
