@@ -175,6 +175,7 @@ void EPRI_UCM::processNakReceived(cea2045::LinkLayerNakCode nak, cea2045::Messag
 void EPRI_UCM::processOperationalStateReceived(cea2045::cea2045Basic *message)
 {
 	LOG(INFO) << "operational state received " << (int)message->opCode2;
+	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "Op State Received", "na", std::to_string((int)message->opCode2)));
 }
 
 //======================================================================================
@@ -182,6 +183,7 @@ void EPRI_UCM::processOperationalStateReceived(cea2045::cea2045Basic *message)
 void EPRI_UCM::processAppAckReceived(cea2045::cea2045Basic* message)
 {
 	LOG(INFO) << "app ack received";
+	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "App Ack Received", "na", "AppAck"));
 }
 
 //======================================================================================
@@ -189,6 +191,7 @@ void EPRI_UCM::processAppAckReceived(cea2045::cea2045Basic* message)
 void EPRI_UCM::processAppNakReceived(cea2045::cea2045Basic* message)
 {
 	LOG(INFO) << "app nak received";
+	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "App Nak Received", "na", "AppNak"));
 }
 
 //======================================================================================
