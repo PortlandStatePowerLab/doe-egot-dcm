@@ -113,17 +113,21 @@ void EPRI_UCM::processCommodityResponse(cea2045::cea2045CommodityResponse* messa
 
 void EPRI_UCM::processAckReceived(cea2045::MessageCode messageCode)
 {
+	std::string body, outgoing;
 	LOG(INFO) << "ack received: " << (int)messageCode;
+	body += "ack received: " + std::to_string((int)messageCode);
 
 	switch (messageCode)
 	{
 
 	case cea2045::MessageCode::SUPPORT_DATALINK_MESSAGES:
 		LOG(INFO) << "supports data link messages";
+		body += ", supports data link messages";
 		break;
 
 	case cea2045::MessageCode::SUPPORT_INTERMEDIATE_MESSAGES:
 		LOG(INFO) << "supports intermediate messages";
+		body += ", supports intermediate messages";
 		break;
 
 	default:
