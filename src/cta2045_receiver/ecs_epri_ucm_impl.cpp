@@ -142,7 +142,9 @@ void EPRI_UCM::processAckReceived(cea2045::MessageCode messageCode)
 
 void EPRI_UCM::processNakReceived(cea2045::LinkLayerNakCode nak, cea2045::MessageCode messageCode)
 {
+	std::string body, outgoing;
 	LOG(WARNING) << "nak received";
+	body += "nak received: ";
 
 	if (nak == cea2045::LinkLayerNakCode::UNSUPPORTED_MESSAGE_TYPE)
 	{
@@ -151,16 +153,21 @@ void EPRI_UCM::processNakReceived(cea2045::LinkLayerNakCode nak, cea2045::Messag
 
 		case cea2045::MessageCode::SUPPORT_DATALINK_MESSAGES:
 			LOG(WARNING) << "does not support data link";
+			body += "does not support data link";
 			break;
 
 		case cea2045::MessageCode::SUPPORT_INTERMEDIATE_MESSAGES:
 			LOG(WARNING) << "does not support intermediate";
+			body += "does not support intermediate";
 			break;
 
 		default:
 			break;
 		}
 	}
+	outgoing = xml_writer_.WriteMsg("DER", "DCM", "NakReceived", "na", body);
+	std::cout << "about to POST from processNakReceived" << std::endl;
+	combined_client_->Post("DTM", outgoing);
 }
 
 //======================================================================================
