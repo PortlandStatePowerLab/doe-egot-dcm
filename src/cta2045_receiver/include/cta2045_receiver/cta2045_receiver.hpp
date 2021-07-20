@@ -26,7 +26,7 @@ class CTA2045Receiver : public BaseReceiver
 {
     public:
 
-        CTA2045Receiver();
+        CTA2045Receiver(CombinedHttpsClient *c);
         ~CTA2045Receiver();
         std::string Import(); 
         std::string Export(); 

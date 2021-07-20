@@ -2,9 +2,9 @@
 #define ECS_EPRI_UCM_IMPL_H_
 
 #include <cea2045/processmessage/IUCM.h>
-
 #include <condition_variable>
 #include <mutex>
+#include "cta2045_receiver.hpp"
 
 namespace dcm
 {
@@ -13,12 +13,13 @@ class EPRI_UCM : public cea2045::IUCM
 {
 private:
 	cea2045::MaxPayloadLengthCode m_sgdMaxPayload;
-    std::string * comm_log_; //no data structure to simplify/avoid rquirement for memory/clearing old data
-    
+    std::string *comm_log_; //no data structure to simplify/avoid rquirement for memory/clearing old data
+    CombinedHttpsClient *combined_client_;
+	xml::XMLCommandAdapter xml_writer_;
 
 public:
 	EPRI_UCM();
-    EPRI_UCM(std::string * ref);
+    EPRI_UCM(std::string * comm, CombinedHttpsClient *client);
 	virtual ~EPRI_UCM();
 
 	virtual bool isMessageTypeSupported(cea2045::MessageTypeCode messageType);

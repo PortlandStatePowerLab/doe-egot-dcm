@@ -1,6 +1,6 @@
 #include <chrono>
 #include <cea2045/util/MSTimer.h>
-#include "include/cta2045_receiver/ecs_epri_ucm_impl.hpp"
+#include <command_pattern/ecs_dcm.hpp>
 #include "include/cta2045_receiver/easylogging++.h"
 
 namespace dcm
@@ -14,7 +14,7 @@ EPRI_UCM::EPRI_UCM() : comm_log_(nullptr)
 
 //======================================================================================
 
-EPRI_UCM::EPRI_UCM(std::string * r) : comm_log_(r)
+EPRI_UCM::EPRI_UCM(std::string * comm, CombinedHttpsClient *client) : comm_log_(comm), combined_client_(client)
 {
 	m_sgdMaxPayload = cea2045::MaxPayloadLengthCode::LENGTH2;
 }
