@@ -120,7 +120,7 @@ std::string GetEnergy::Execute()
     {
         std::cout << "GetEnergy::Execute() response from der: " << response_from_der << std::endl;
     }
-    std::string msg_in = xml_writer_.WriteMsg("DCM", "DER", "GetEnergyResponse", "na", response_from_der);
+    std::string msg_in = xml_writer_.WriteMsg("DER", "DCM", "GetEnergyResponse", "na", response_from_der);
     https_client_->Post("DTM", msg_in);
     return response_from_der;
 }
@@ -152,7 +152,7 @@ std::string GetNameplate::Execute()
     std::string msg_out = xml_writer_.WriteMsg("DCM", "DER", "GetNameplateCommand", "na", "GetNameplate");
     https_client_->Post("DTM", msg_out);
     response_from_der = receiver_->GetNameplate();
-    std::string msg_in = xml_writer_.WriteMsg("DCM", "DER", "GetNameplateResponse", "na", response_from_der);
+    std::string msg_in = xml_writer_.WriteMsg("DER", "DCM", "GetNameplateResponse", "na", response_from_der);
     https_client_->Post("DTM", msg_in);
 
     return response_from_der;
