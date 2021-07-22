@@ -43,11 +43,12 @@ std::string ImportEnergy::Execute()
     std::cout << "  ImportEnergy Command Executing... " << std::endl;
 
     //this is specific to a simulated receiver at this point, and not based on a particular resource.
-    std::string msg_out = xml_writer_.ReturnCustomCommand("DER", "DCM", "ImportEnergy", "na", "na", "command");
+    std::string msg_out = xml_writer_.WriteMsg("DCM", "DER", "ImportEnergyCommand", "na", "ImportEnergy");
     https_client_->Post("DTM", msg_out);
 
     response_from_der = receiver_->Import();
-    https_client_->Post("DTM", response_from_der);
+    
+    //https_client_->Post("DTM", response_from_der);
 
     //std::cout << "response from DER was: " << response_from_der << std::endl;
     //std::string msg_in =  xml_writer_.ReturnCustomCommand("DCM", "DER", response_from_der, "na", "na", "response");
@@ -80,11 +81,11 @@ std::string ExportEnergy::Execute()
     std::cout << "  ExportEnergy Command Executing... " << std::endl;
 
     //this is specific to a simulated receiver at this point, and not based on a particular resource.
-    std::string msg_out = xml_writer_.ReturnCustomCommand("DER", "DCM", "ExportEnergy", "na", "na", "command");
+    std::string msg_out = xml_writer_.WriteMsg("DCM", "DER", "ExportEnergyCommand", "na", "ExportEnergy");
     https_client_->Post("DTM", msg_out);
 
     response_from_der = receiver_->Export();
-    https_client_->Post("DTM", response_from_der);
+    //https_client_->Post("DTM", response_from_der);
 
     return response_from_der;
 }
@@ -182,11 +183,11 @@ std::string Idle::Execute()
     std::cout << "  Idle Command Executing... " << std::endl;
 
     //this is specific to a simulated receiver at this point, and not based on a particular resource.
-    std::string msg_out = xml_writer_.ReturnCustomCommand("DER", "DCM", "Idle", "na", "na", "command");
+    std::string msg_out = xml_writer_.WriteMsg("DCM", "DER", "IdleCommand", "na", "Idle");
     https_client_->Post("DTM", msg_out);
 
     response_from_der = receiver_->Idle();
-    https_client_->Post("DTM", response_from_der);
+    //https_client_->Post("DTM", response_from_der);
 
     return response_from_der;
 }
@@ -215,10 +216,10 @@ std::string CriticalPeakEvent::Execute()
     std::cout << "  CriticalPeakEvent Command Executing... " << std::endl;
 
     //this is specific to a simulated receiver at this point, and not based on a particular resource.
-    std::string msg_out = xml_writer_.ReturnCustomCommand("DER", "DCM", "CriticalPeakEvent", "na", "na", "command");
+    std::string msg_out = xml_writer_.WriteMsg("DCM", "DER", "CriticalPeakEventCommand", "na", "CriticalPeakEvent");
     https_client_->Post("DTM", msg_out);
     response_from_der = receiver_->CriticalPeakEvent();
-    https_client_->Post("DTM", response_from_der);
+    //https_client_->Post("DTM", response_from_der);
 
     return response_from_der;
 }

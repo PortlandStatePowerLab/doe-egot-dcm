@@ -122,6 +122,18 @@ void ECS_DCM::TestCTA2045Commands()
 			case 'n':
 				get_nameplate_c_->Execute();
 				break;
+            case 'i':
+				import_energy_c_->Execute();
+				break;
+            case 'e':
+				export_energy_c_->Execute();
+				break;
+            case 'd':
+				idle_c_->Execute();
+				break;
+            case 'p':
+				crit_peak_c_->Execute();
+				break;
 			case 'q':
 				shutdown = true;
 				break;
