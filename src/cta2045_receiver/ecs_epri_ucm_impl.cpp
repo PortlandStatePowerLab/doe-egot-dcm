@@ -182,18 +182,22 @@ void EPRI_UCM::processOperationalStateReceived(cea2045::cea2045Basic *message)
 
 void EPRI_UCM::processAppAckReceived(cea2045::cea2045Basic* message)
 {
+	std::string body, outgoing;
 	LOG(INFO) << "app ack received";
-	std::string msg_out = xml_writer_.WriteMsg("DER", "DCM", "App Ack Received", "na", "AppAck");
-	combined_client_->Post("DTM", msg_out);
+	body += "app ack received";
+	outgoing = xml_writer_.WriteMsg("DER", "DCM", "AppAck", "na", body);
+	combined_client_->Post("DTM", outgoing);
 }
 
 //======================================================================================
 
 void EPRI_UCM::processAppNakReceived(cea2045::cea2045Basic* message)
 {
+	std::string body, outgoing;
 	LOG(INFO) << "app nak received";
-	std::string msg_out = xml_writer_.WriteMsg("DER", "DCM", "App Nak Received", "na", "AppNak");
-	combined_client_->Post("DTM", msg_out);
+	body += "app nak received"
+	outgoing = xml_writer_.WriteMsg("DER", "DCM", "AppNak", "na", body);
+	combined_client_->Post("DTM", outgoing);
 }
 
 //======================================================================================
