@@ -42,10 +42,14 @@ ECS_DCM::ECS_DCM(const std::string &root) :
                                                           get_nameplate_c_, idle_c_, crit_peak_c_); 
     crit_peak_c_ = new CriticalPeakEvent(combined_client_, receiver_);
     dcm_world_.import<dcm::dcm_components_module>();
+    std::string startup_msg = xml_writer_.WriteMsg("DCM", "DTM", "DCM_Startup", "na", "DCM system starting up");
+    combined_client_->Post("DTM", startup_msg);
 }
 
 ECS_DCM::~ECS_DCM()
 {
+    std::string shutdown_msg = xml_writer_.WriteMsg("DCM", "DTM", "DCM_Shutdown", "na", "DCM system shutting down");
+    combined_client_->Post("DTM", shutdown_msg);
     std::cout << "  ECS_DCM Destructor" << std::endl;
     if (combined_client_)
         delete combined_client_;
@@ -115,7 +119,7 @@ void ECS_DCM::TestCTA2045Commands()
         std::cout << "p - CriticalPeakEvent() " << std::endl;
         std::cout << "q - quit " << std::endl;
         std::cout << "==============" << std::endl;
-        
+
 		char c = getchar();
         std::cin.ignore(100, '\n');
         

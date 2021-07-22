@@ -60,6 +60,7 @@ public:
 
 private:
   flecs::world dcm_world_;
+  xml::XMLCommandAdapter xml_writer_;
   CombinedHttpsClient *combined_client_;
   BaseInvoker *sim_flow_invoker_;
   BaseReceiver *receiver_;
