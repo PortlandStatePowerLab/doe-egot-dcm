@@ -14,6 +14,8 @@ CTA2045Receiver::CTA2045Receiver(CombinedHttpsClient *c) : epri_ucm_(&response_,
 	}
     else
     {
+        std::string msg_out = xml_writer_.WriteMsg("DCM", "DER", "Startup", "na", "Startup... Initiating CTA2045 Communications");
+        c->Post("DTM", msg_out);
         device_ = cea2045::DeviceFactory::createUCM(&serial_port_, &epri_ucm_);
         device_->start();
         timer_.reset();
@@ -29,6 +31,7 @@ CTA2045Receiver::CTA2045Receiver(CombinedHttpsClient *c) : epri_ucm_(&response_,
         responseCodes_ = device_->intermediateGetDeviceInformation().get();
         LOG(INFO) << "  device info elapsed time: " << timer_.getElapsedMS();
         LOG(INFO) << "startup complete";
+        
     }
 }
 
