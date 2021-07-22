@@ -195,7 +195,7 @@ void EPRI_UCM::processAppNakReceived(cea2045::cea2045Basic* message)
 {
 	std::string body, outgoing;
 	LOG(INFO) << "app nak received";
-	body += "app nak received"
+	body += "app nak received";
 	outgoing = xml_writer_.WriteMsg("DER", "DCM", "AppNak", "na", body);
 	combined_client_->Post("DTM", outgoing);
 }
