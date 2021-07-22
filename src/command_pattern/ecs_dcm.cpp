@@ -101,20 +101,21 @@ void ECS_DCM::RunSimulatorLoop()
 
 void ECS_DCM::TestCTA2045Commands()
 {
-    std::cout << "TESTING CTA-2045 COMMANDS" << std::endl;
-    std::cout << "c - GetEnergy() " << std::endl;
-    std::cout << "n - GetNameplate() " << std::endl;
-    std::cout << "i - ImportEnergy() " << std::endl;
-    std::cout << "e - ExportEnergy() " << std::endl;
-    std::cout << "d - Idle() " << std::endl;
-    std::cout << "p - CriticalPeakEvent() " << std::endl;
-    std::cout << "q - quit " << std::endl;
-    std::cout << "==============" << std::endl;
     
     bool shutdown = false;
 
     while (!shutdown)
 	{
+        std::cout << "TESTING CTA-2045 COMMANDS" << std::endl;
+        std::cout << "c - GetEnergy() " << std::endl;
+        std::cout << "n - GetNameplate() " << std::endl;
+        std::cout << "i - ImportEnergy() " << std::endl;
+        std::cout << "e - ExportEnergy() " << std::endl;
+        std::cout << "d - Idle() " << std::endl;
+        std::cout << "p - CriticalPeakEvent() " << std::endl;
+        std::cout << "q - quit " << std::endl;
+        std::cout << "==============" << std::endl;
+        
 		char c = getchar();
         std::cin.ignore(100, '\n');
         
