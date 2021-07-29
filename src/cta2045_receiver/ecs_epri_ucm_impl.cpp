@@ -32,10 +32,11 @@ EPRI_UCM::~EPRI_UCM()
 bool EPRI_UCM::isMessageTypeSupported(cea2045::MessageTypeCode messageType)
 {
 	LOG(INFO) << "message type supported received: " << (int)messageType;
+	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "MsgTypeSupportedRcvd", "na", "message type supported received: " + std::to_string((int)messageType)));
 
 	if (messageType == cea2045::MessageTypeCode::NONE)
 		return false;
-
+	
 	return true;
 }
 
@@ -44,7 +45,7 @@ bool EPRI_UCM::isMessageTypeSupported(cea2045::MessageTypeCode messageType)
 cea2045::MaxPayloadLengthCode EPRI_UCM::getMaxPayload()
 {
 	LOG(INFO) << "max payload request received";
-
+	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "MaxPayloadRequest", "na", "max payload request received"));
 	return cea2045::MaxPayloadLengthCode::LENGTH4096;
 }
 
@@ -53,12 +54,17 @@ cea2045::MaxPayloadLengthCode EPRI_UCM::getMaxPayload()
 void EPRI_UCM::processMaxPayloadResponse(cea2045::MaxPayloadLengthCode maxPayload)
 {
 	LOG(INFO) << "max payload response received";
-
 	m_sgdMaxPayload = maxPayload;
+	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "MaxPayloadResponse", "na", "max payload response received"));
 }
 
 //======================================================================================
-
+/*
+	The reason that processDeviceInfoResponse and processCommodityResponse aren't 
+	communicating with the DTM directly the way that the other processing methods are
+	is that the DCM needs to access the information returned in the body of these responses 
+	directly in order to update the GSP and implement control.
+*/
 void EPRI_UCM::processDeviceInfoResponse(cea2045::cea2045DeviceInfoResponse* message)
 {
     int yr, mnth, day;
@@ -80,7 +86,7 @@ void EPRI_UCM::processDeviceInfoResponse(cea2045::cea2045DeviceInfoResponse* mes
     day = (int)message->firmwareDay;
     temp += ", firmware date: " + std::to_string(yr) + sep + std::to_string(mnth) + sep + std::to_string(day);
     std::cout << "EPRI_UCM::processDeviceInfoResponse COMM LOG: " << temp << std::endl;
-    *comm_log_ = temp;
+    *comm_log_ = temp; //this saves temp to a shared string so that the calling command class can access the contents
 }
 
 //======================================================================================
@@ -106,7 +112,7 @@ void EPRI_UCM::processCommodityResponse(cea2045::cea2045CommodityResponse* messa
         temp += " commodity code: " + std::to_string(code) + ", cumulative amount: " + std::to_string(cumltv) + ", instantaneous rate: " + std::to_string(rate);
 	}
     std::cout << "EPRI_UCM::processCommodityResponse COMMODITY RESPONSE: " << temp << std::endl;
-    *comm_log_ = temp;
+    *comm_log_ = temp; //this saves temp to a shared string so that the calling command class can access the contents
 }
 
 //======================================================================================
@@ -175,29 +181,23 @@ void EPRI_UCM::processNakReceived(cea2045::LinkLayerNakCode nak, cea2045::Messag
 void EPRI_UCM::processOperationalStateReceived(cea2045::cea2045Basic *message)
 {
 	LOG(INFO) << "operational state received " << (int)message->opCode2;
-	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "Op State Received", "na", std::to_string((int)message->opCode2)));
+	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "OpStateReceived", "na", std::to_string((int)message->opCode2)));
 }
 
 //======================================================================================
 
 void EPRI_UCM::processAppAckReceived(cea2045::cea2045Basic* message)
 {
-	std::string body, outgoing;
 	LOG(INFO) << "app ack received";
-	body += "app ack received";
-	outgoing = xml_writer_.WriteMsg("DER", "DCM", "AppAck", "na", body);
-	combined_client_->Post("DTM", outgoing);
+	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "AppAck", "na", "app ack received"));
 }
 
 //======================================================================================
 
 void EPRI_UCM::processAppNakReceived(cea2045::cea2045Basic* message)
 {
-	std::string body, outgoing;
 	LOG(INFO) << "app nak received";
-	body += "app nak received";
-	outgoing = xml_writer_.WriteMsg("DER", "DCM", "AppNak", "na", body);
-	combined_client_->Post("DTM", outgoing);
+	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "AppNak", "na", "app nak received"));
 }
 
 //======================================================================================
@@ -205,7 +205,7 @@ void EPRI_UCM::processAppNakReceived(cea2045::cea2045Basic* message)
 void EPRI_UCM::processAppCustomerOverride(cea2045::cea2045Basic* message)
 {
 	LOG(INFO) << "app cust override received: " << (int)message->opCode2;
-	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "App Customer Override Received", "na", "AppCustOverride"));
+	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "AppCustOverride", "na", "App Customer Override Received"));
 }
 
 //======================================================================================
@@ -213,7 +213,7 @@ void EPRI_UCM::processAppCustomerOverride(cea2045::cea2045Basic* message)
 void EPRI_UCM::processIncompleteMessage(const unsigned char *buffer, unsigned int numBytes)
 {
 	LOG(WARNING) << "incomplete message received: " << numBytes;
-	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "Incomplete Msg Received", "na", "IncompleteMsg"));
+	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "IncompleteMsg", "na", "Incomplete Msg Received"));
 }
 
 } //namespace dcm
