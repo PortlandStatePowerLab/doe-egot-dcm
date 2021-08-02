@@ -212,7 +212,7 @@ std::string XMLCommandAdapter::WriteMsg(const std::string& from, const std::stri
         }
         else
         {
-            t.put(body_path, body);
+            t.put(body_path, body); //add body as plain text
         }
     }
     
