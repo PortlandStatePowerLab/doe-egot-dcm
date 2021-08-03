@@ -19,94 +19,105 @@ namespace dcm
 
 class BaseCommand
 {
-public:
-    BaseCommand();
-    BaseCommand(CombinedHttpsClient *c, BaseReceiver *r);
-    ~BaseCommand();
-    virtual std::string Execute() = 0;
+    public:
+        BaseCommand();
+        BaseCommand(CombinedHttpsClient *c, BaseReceiver *r);
+        ~BaseCommand();
+        virtual std::string Execute() = 0;
 
-protected:
-    CombinedHttpsClient *https_client_;
-    BaseReceiver *receiver_;
-    xml::XMLCommandAdapter xml_writer_;
+    protected:
+        CombinedHttpsClient *https_client_;
+        BaseReceiver *receiver_;
+        xml::XMLCommandAdapter xml_writer_;
 };
 
 //===============================================================================
 
 class ImportEnergy : public BaseCommand
 {
-public:
-    ImportEnergy();
-    ImportEnergy(CombinedHttpsClient *client, BaseReceiver *receiver);
-    ~ImportEnergy();
-    std::string Execute();
+    public:
+        ImportEnergy();
+        ImportEnergy(CombinedHttpsClient *client, BaseReceiver *receiver);
+        ~ImportEnergy();
+        std::string Execute();
 
-private:
+    private:
 };
 
 //===============================================================================
 
 class ExportEnergy : public BaseCommand
 {
-public:
-    ExportEnergy();
-    ExportEnergy(CombinedHttpsClient *client, BaseReceiver *receiver); 
-    ~ExportEnergy();
-    std::string Execute();
+    public:
+        ExportEnergy();
+        ExportEnergy(CombinedHttpsClient *client, BaseReceiver *receiver); 
+        ~ExportEnergy();
+        std::string Execute();
 
-private:
+    private:
 };
 
 //===============================================================================
 
 class GetEnergy : public BaseCommand
 {
-public:
-    GetEnergy();
-    GetEnergy(CombinedHttpsClient *client, BaseReceiver *receiver);
-    ~GetEnergy();
-    std::string Execute();
+    public:
+        GetEnergy();
+        GetEnergy(CombinedHttpsClient *client, BaseReceiver *receiver);
+        ~GetEnergy();
+        std::string Execute();
 
-private:
+    private:
 };
 
 //===============================================================================
 
 class GetNameplate : public BaseCommand
 {
-public:
-    GetNameplate();
-    GetNameplate(CombinedHttpsClient *client, BaseReceiver *receiver);
-    ~GetNameplate();
-    std::string Execute();
+    public:
+        GetNameplate();
+        GetNameplate(CombinedHttpsClient *client, BaseReceiver *receiver);
+        ~GetNameplate();
+        std::string Execute();
 
-private:
+    private:
 };
 
 //===============================================================================
 
 class Idle : public BaseCommand
 {
-public:
-    Idle();
-    Idle(CombinedHttpsClient *client, BaseReceiver *receiver);
-    ~Idle();
-    std::string Execute();
+    public:
+        Idle();
+        Idle(CombinedHttpsClient *client, BaseReceiver *receiver);
+        ~Idle();
+        std::string Execute();
 
-private:
+    private:
 };
 
 //===============================================================================
 
 class CriticalPeakEvent : public BaseCommand
 {
-public:
-    CriticalPeakEvent();
-    CriticalPeakEvent(CombinedHttpsClient *client, BaseReceiver *receiver);
-    ~CriticalPeakEvent();
-    std::string Execute();
+    public:
+        CriticalPeakEvent();
+        CriticalPeakEvent(CombinedHttpsClient *client, BaseReceiver *receiver);
+        ~CriticalPeakEvent();
+        std::string Execute();
 
-private:
+    private:
+};
+
+class GridEmergencyEvent : public BaseCommand
+{
+    public:
+        GridEmergencyEvent();
+        GridEmergencyEvent(CombinedHttpsClient *client, BaseReceiver *receiver);
+        ~GridEmergencyEvent();
+        std::string Execute();
+
+    private:
 };
 
 } // namespace dcm
