@@ -34,6 +34,7 @@ class CTA2045Receiver : public BaseReceiver
         std::string GetNameplate(); 
         std::string Idle(); 
         std::string CriticalPeakEvent();
+        std::string GridEmergencyEvent();
 
     private:
         std::string response_;

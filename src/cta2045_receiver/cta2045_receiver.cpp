@@ -145,5 +145,22 @@ std::string CTA2045Receiver::CriticalPeakEvent()
     return log + ", elapsed: " + std::to_string(elapsed);
 }
 
+std::string CTA2045Receiver::GridEmergencyEvent()
+{
+    unsigned long elapsed = 0;
+    std::string log;
+    std::cout << "cta2045receiver GridEmergencyEvent() " << std::endl;
+
+    timer_.reset();
+    device_->basicGridEmergency(0).get();
+    elapsed = timer_.getElapsedMS();
+
+    log = "CTA2045: " + response_; //for command
+    response_.erase();
+    std::cout << " cta2045receiver GridEmergencyEvent() log: " << log << std::endl;
+
+    return log + ", elapsed: " + std::to_string(elapsed);
+}
+
 } // namespace dcm
 

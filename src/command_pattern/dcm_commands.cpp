@@ -217,12 +217,12 @@ std::string CriticalPeakEvent::Execute()
 
 std::string GridEmergencyEvent::Execute()
 {
-    std::string response_from_der = "der response not supported yet";
+    std::string response_from_der;
     std::cout << "  GridEmergencyEvent Command Executing... " << std::endl;
 
     //this is specific to a simulated receiver at this point, and not based on a particular resource.
     https_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", "GridEmergencyEventCommand", "na", "GridEmergencyEvent"));
-    response_from_der = receiver_->CriticalPeakEvent();
+    response_from_der = receiver_->GridEmergencyEvent();
     //https_client_->Post("DTM", response_from_der);
 
     return response_from_der;
