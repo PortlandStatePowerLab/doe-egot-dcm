@@ -215,6 +215,24 @@ std::string CriticalPeakEvent::Execute()
     return response_from_der;
 }
 
+//=================================================================================
+
+GridEmergencyEvent::GridEmergencyEvent()
+{
+    // do nothing
+
+}
+
+GridEmergencyEvent::GridEmergencyEvent(CombinedHttpsClient *client, BaseReceiver *receiver)
+    : BaseCommand(client, receiver)
+{
+    // do nothing
+}
+
+GridEmergencyEvent::~GridEmergencyEvent()
+{
+    // do nothing
+}
 std::string GridEmergencyEvent::Execute()
 {
     std::string response_from_der;

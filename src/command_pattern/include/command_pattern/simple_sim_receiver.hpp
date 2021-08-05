@@ -25,6 +25,7 @@ namespace dcm
         virtual std::string GetNameplate() = 0;
         virtual std::string Idle() = 0;
         virtual std::string CriticalPeakEvent() = 0;
+        virtual std::string GridEmergencyEvent() = 0;
 
     private:
     };
@@ -41,6 +42,7 @@ namespace dcm
         std::string GetNameplate();
         std::string Idle();
         std::string CriticalPeakEvent();
+        std::string GridEmergencyEvent();
         void IncrementSimulatorProgress();
 
     private:

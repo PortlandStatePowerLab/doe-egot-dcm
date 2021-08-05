@@ -13,7 +13,6 @@
 #include <cea2045/device/DeviceFactory.h>
 #include <cea2045/communicationport/CEA2045SerialPort.h>
 #include <cea2045/util/MSTimer.h>
-#include "UCMImpl.h"
 #include "ecs_epri_ucm_impl.hpp"
 #include "easylogging++.h"
 

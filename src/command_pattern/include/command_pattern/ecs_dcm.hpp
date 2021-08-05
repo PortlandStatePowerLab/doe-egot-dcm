@@ -70,6 +70,7 @@ private:
   GetNameplate *get_nameplate_c_;
   Idle *idle_c_;
   CriticalPeakEvent *crit_peak_c_;
+  GridEmergencyEvent *grid_emergency_c_;
 
   //BaseInvoker * sim_invoker_;
 };

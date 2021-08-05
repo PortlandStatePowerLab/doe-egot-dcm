@@ -49,6 +49,11 @@ std::string SimpleSimulatorReceiver::CriticalPeakEvent()
     std::cout << "SimpleSimReceiver CriticalPeakEvent, not supported currently" << std::endl;
 }
 
+std::string SimpleSimulatorReceiver::GridEmergencyEvent()
+{
+    std::cout << "SimpleSimReceiver GridEmergencyEvent, not supported currently" << std::endl;
+}
+
 void SimpleSimulatorReceiver::IncrementSimulatorProgress()
 {
     sim_der_->IncrementProgress();
