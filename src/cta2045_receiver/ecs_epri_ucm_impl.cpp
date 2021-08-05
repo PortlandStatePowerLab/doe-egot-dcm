@@ -7,14 +7,15 @@ namespace dcm
 {
 using namespace std;
 
-EPRI_UCM::EPRI_UCM() : comm_log_(nullptr), combined_client_(nullptr)
+EPRI_UCM::EPRI_UCM() : comm_log_(nullptr), combined_client_(nullptr), timer_(nullptr)
 {
 	m_sgdMaxPayload = cea2045::MaxPayloadLengthCode::LENGTH2;
 }
 
 //======================================================================================
 
-EPRI_UCM::EPRI_UCM(std::string * comm, CombinedHttpsClient *client) : comm_log_(comm), combined_client_(client)
+EPRI_UCM::EPRI_UCM(std::string * comm, CombinedHttpsClient *client, cea2045::MSTimer *t) 
+	: comm_log_(comm), combined_client_(client), timer_(t)
 {
 	m_sgdMaxPayload = cea2045::MaxPayloadLengthCode::LENGTH2;
 }
@@ -181,7 +182,7 @@ void EPRI_UCM::processNakReceived(cea2045::LinkLayerNakCode nak, cea2045::Messag
 void EPRI_UCM::processOperationalStateReceived(cea2045::cea2045Basic *message)
 {
 	LOG(INFO) << "operational state received " << (int)message->opCode2;
-	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "OpStateReceived", "na", std::to_string((int)message->opCode2)));
+	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "OpStateReceived", "na", std::to_string((int)message->opCode2) + " elapsed: " + std::to_string(timer_->getElapsedMS())));
 }
 
 //======================================================================================

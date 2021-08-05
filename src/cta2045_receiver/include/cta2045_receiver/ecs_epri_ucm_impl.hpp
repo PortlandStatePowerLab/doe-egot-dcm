@@ -16,10 +16,11 @@ private:
     std::string *comm_log_; //no data structure to simplify/avoid rquirement for memory/clearing old data
     CombinedHttpsClient *combined_client_;
 	xml::XMLCommandAdapter xml_writer_;
+	cea2045::MSTimer *timer_;
 
 public:
 	EPRI_UCM();
-    EPRI_UCM(std::string * comm, CombinedHttpsClient *client);
+    EPRI_UCM(std::string * comm, CombinedHttpsClient *client, cea2045::MSTimer *t);
 	virtual ~EPRI_UCM();
 
 	virtual bool isMessageTypeSupported(cea2045::MessageTypeCode messageType);
