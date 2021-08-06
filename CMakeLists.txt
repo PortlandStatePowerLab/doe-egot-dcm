@@ -57,7 +57,7 @@ if (NOT TARGET ssl-ca)
     BUILD_COMMAND ""
     INSTALL_COMMAND ""
     UPDATE_COMMAND COMMAND ${CMAKE_COMMAND} -E copy_directory
-    <SOURCE_DIR>/root-ca/private/ ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/certs
+    <SOURCE_DIR>/root-ca/private/${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/certs
   )
 endif()
 
