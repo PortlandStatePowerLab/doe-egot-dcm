@@ -94,13 +94,14 @@ namespace detail
     {
         std::cout << "detail::load_root_certificates, root:" << root + "/certs" << std::endl;
         ctx.set_verify_mode(boost::asio::ssl::verify_peer);
+        std::cout << "ctx set verify mode complete" << std::endl;
 
         ctx.add_verify_path(root + "/certs/certs/");
-
+        std::cout << "add verify path complete" << std::endl;
         ctx.use_certificate_file(root + "/certs/client2.crt" , boost::asio::ssl::context::pem);
-
+        std::cout << "use certificate file complete" << std::endl;
         ctx.use_private_key_file(root + "/certs/private/client2.key", boost::asio::ssl::context::pem);
-
+        std::cout << "use private key file complete " << std::endl;
         ctx.set_verify_callback(
           boost::bind(&verify_certificate_simple, true, _2)
         );
