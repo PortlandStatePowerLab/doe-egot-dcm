@@ -1,5 +1,5 @@
-#ifndef __S_SIM_INVOKER_H__
-#define __S_SIM_INVOKER_H__
+#ifndef __BASE_INVOKER_H__
+#define __BASE_INVOKER_H__
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,14 +13,14 @@
 #include <ecs/sim_invoker_module.hpp>
 #include <ecs/dcm_components_module.hpp>
 #include "dcm_commands.hpp"
-#include "base_invoker.hpp"
 
 namespace dcm
 {
-class SimpleSimulatorFlowResInvoker : public BaseInvoker
+
+class BaseInvoker
 {
     public:
-        SimpleSimulatorFlowResInvoker(
+        BaseInvoker(
             flecs::world *shared,
             ImportEnergy *imp,
             ExportEnergy *exp,
@@ -28,11 +28,18 @@ class SimpleSimulatorFlowResInvoker : public BaseInvoker
             GetNameplate *get_n,
             Idle *idle,
             CriticalPeakEvent *crit);
-        ~SimpleSimulatorFlowResInvoker();
-        void ProcessResource(flecs::entity *e);
+        ~BaseInvoker();
+        virtual void ProcessResource(flecs::entity *e) = 0;
 
-    private:
-};   
+    protected:
+        flecs::world *shared_world_ptr_;
+        ImportEnergy *import_;
+        ExportEnergy *export_;
+        GetEnergy *get_energy_;
+        GetNameplate *get_nameplate_;
+        Idle *idle_;
+        CriticalPeakEvent *crit_;
+};
 
 } //namespace dcm
 #endif //__S_SIM_INVOKER_H__

@@ -1,6 +1,5 @@
 #ifndef __CTA2045_RECEIVER_H__
 #define __CTA2045_RECEIVER_H__
-
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,7 +8,7 @@
 #include <mutex>
 #include <chrono>
 #include <cea2045/processmessage/IUCM.h>
-#include <command_pattern/simple_sim_receiver.hpp>
+#include <command_pattern/base_receiver.hpp>
 #include <cea2045/device/DeviceFactory.h>
 #include <cea2045/communicationport/CEA2045SerialPort.h>
 #include <cea2045/util/MSTimer.h>
