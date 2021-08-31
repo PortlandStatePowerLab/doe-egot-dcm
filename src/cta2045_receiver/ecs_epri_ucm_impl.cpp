@@ -32,8 +32,8 @@ EPRI_UCM::~EPRI_UCM()
 
 bool EPRI_UCM::isMessageTypeSupported(cea2045::MessageTypeCode messageType)
 {
-	LOG(INFO) << "message type supported received: " << (int)messageType;
-	combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "MsgTypeSupportedRcvd", "na", "message type supported received: " + std::to_string((int)messageType) + ", elapsed: " + std::to_string(timer_->getElapsedMS())));
+	//LOG(INFO) << "message type supported received: " << (int)messageType;
+	//combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "MsgTypeSupportedRcvd", "na", "message type supported received: " + std::to_string((int)messageType) + ", elapsed: " + std::to_string(timer_->getElapsedMS())));
 
 	if (messageType == cea2045::MessageTypeCode::NONE)
 		return false;
