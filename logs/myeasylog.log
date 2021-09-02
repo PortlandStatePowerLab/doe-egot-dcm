@@ -1,1 +1,102 @@
 2021-07-20 19:37:58,799 ERROR [default] failed to open serial port: No such file or directory
+2021-09-02 14:17:16,910 FATAL [default] CRASH HANDLED; Application has crashed due to [SIGINT] signal
+2021-09-02 14:17:16,910 WARN  [default] Aborting application. Reason: Fatal log at [/home/pi/Remotes/doe-egot-dcm/src/command_pattern/include/command_pattern/../../../cta2045_receiver/include/cta2045_receiver/easylogging++.h:5583]
+2021-09-02 14:31:38,669 FATAL [default] CRASH HANDLED; Application has crashed due to [SIGINT] signal
+2021-09-02 14:31:38,672 WARN  [default] Aborting application. Reason: Fatal log at [/home/pi/Remotes/doe-egot-dcm/src/command_pattern/include/command_pattern/../../../cta2045_receiver/include/cta2045_receiver/easylogging++.h:5583]
+2021-09-02 15:01:28,080 INFO  [default]   query data link elapsed time: 301
+2021-09-02 15:01:28,380 INFO  [default]   query max payload elapsed time: 300
+2021-09-02 15:01:28,681 INFO  [default]   query intermediate elapsed time: 301
+2021-09-02 15:01:28,981 INFO  [default]   device info elapsed time: 300
+2021-09-02 15:01:28,982 INFO  [default] startup complete
+2021-09-02 15:06:40,051 INFO  [default] ack received: 3
+2021-09-02 15:06:40,051 INFO  [default] supports data link messages
+2021-09-02 15:06:40,075 INFO  [default]   query data link elapsed time: 213
+2021-09-02 15:06:40,255 INFO  [default] ack received: 1
+2021-09-02 15:06:40,302 INFO  [default] message type supported received: 3
+2021-09-02 15:06:40,329 INFO  [default] max payload response received
+2021-09-02 15:06:40,396 INFO  [default]   query max payload elapsed time: 320
+2021-09-02 15:06:40,564 INFO  [default] ack received: 4
+2021-09-02 15:06:40,564 INFO  [default] supports intermediate messages
+2021-09-02 15:06:40,588 INFO  [default]   query intermediate elapsed time: 192
+2021-09-02 15:06:40,769 INFO  [default] ack received: 15
+2021-09-02 15:06:40,842 INFO  [default] message type supported received: 2
+2021-09-02 15:06:40,882 INFO  [default] device info response received
+2021-09-02 15:06:40,882 INFO  [default]     device type: 2
+2021-09-02 15:06:40,882 INFO  [default]       vendor ID: 0
+2021-09-02 15:06:40,882 INFO  [default]   firmware date: 2030-3-12
+2021-09-02 15:06:40,923 INFO  [default]   device info elapsed time: 335
+2021-09-02 15:06:40,923 INFO  [default] startup complete
+2021-09-02 15:07:27,605 INFO  [default] ack received: 16
+2021-09-02 15:07:27,667 INFO  [default] message type supported received: 2
+2021-09-02 15:07:27,697 INFO  [default] commodity response received.  count: 2
+2021-09-02 15:07:27,697 INFO  [default] commodity data: 0
+2021-09-02 15:07:27,697 INFO  [default] commodity data: 1
+2021-09-02 15:07:41,489 INFO  [default] ack received: 15
+2021-09-02 15:07:41,563 INFO  [default] message type supported received: 2
+2021-09-02 15:07:41,592 INFO  [default] device info response received
+2021-09-02 15:07:41,592 INFO  [default]     device type: 2
+2021-09-02 15:07:41,592 INFO  [default]       vendor ID: 0
+2021-09-02 15:07:41,592 INFO  [default]   firmware date: 2030-3-12
+2021-09-02 15:07:43,450 INFO  [default] ack received: 0
+2021-09-02 15:07:43,498 INFO  [default] app ack received
+2021-09-02 15:07:48,626 INFO  [default] ack received: 0
+2021-09-02 15:07:48,689 INFO  [default] app ack received
+2021-09-02 15:07:51,154 INFO  [default] ack received: 9
+2021-09-02 15:07:51,202 INFO  [default] app ack received
+2021-09-02 15:07:54,199 INFO  [default] ack received: 6
+2021-09-02 15:07:54,247 INFO  [default] app ack received
+2021-09-02 15:07:55,375 INFO  [default] ack received: 5
+2021-09-02 15:07:55,422 INFO  [default] app ack received
+2021-09-02 15:11:03,701 INFO  [default] ack received: 0
+2021-09-02 15:11:03,763 INFO  [default] message type supported received: 2
+2021-09-02 15:11:03,821 INFO  [default] commodity response received.  count: 2
+2021-09-02 15:11:03,822 INFO  [default] commodity data: 0
+2021-09-02 15:11:03,822 INFO  [default] commodity data: 1
+2021-09-02 15:11:26,403 INFO  [default] ack received: 16
+2021-09-02 15:11:26,465 INFO  [default] message type supported received: 2
+2021-09-02 15:11:26,495 INFO  [default] commodity response received.  count: 2
+2021-09-02 15:11:26,495 INFO  [default] commodity data: 0
+2021-09-02 15:11:26,495 INFO  [default] commodity data: 1
+2021-09-02 15:12:50,470 INFO  [default] ack received: 3
+2021-09-02 15:12:50,470 INFO  [default] supports data link messages
+2021-09-02 15:12:50,499 INFO  [default]   query data link elapsed time: 236
+2021-09-02 15:12:50,677 INFO  [default] ack received: 1
+2021-09-02 15:12:50,724 INFO  [default] message type supported received: 3
+2021-09-02 15:12:50,757 INFO  [default] max payload response received
+2021-09-02 15:12:50,828 INFO  [default]   query max payload elapsed time: 328
+2021-09-02 15:12:51,086 INFO  [default] ack received: 4
+2021-09-02 15:12:51,086 INFO  [default] supports intermediate messages
+2021-09-02 15:12:51,139 INFO  [default]   query intermediate elapsed time: 311
+2021-09-02 15:12:51,391 INFO  [default] ack received: 15
+2021-09-02 15:12:51,465 INFO  [default] message type supported received: 2
+2021-09-02 15:12:51,498 INFO  [default] device info response received
+2021-09-02 15:12:51,498 INFO  [default]     device type: 2
+2021-09-02 15:12:51,498 INFO  [default]       vendor ID: 0
+2021-09-02 15:12:51,498 INFO  [default]   firmware date: 2030-3-12
+2021-09-02 15:12:51,538 INFO  [default]   device info elapsed time: 399
+2021-09-02 15:12:51,538 INFO  [default] startup complete
+2021-09-02 15:12:52,641 INFO  [default] ack received: 16
+2021-09-02 15:12:52,703 INFO  [default] message type supported received: 2
+2021-09-02 15:12:52,736 INFO  [default] commodity response received.  count: 2
+2021-09-02 15:12:52,736 INFO  [default] commodity data: 0
+2021-09-02 15:12:52,736 INFO  [default] commodity data: 1
+2021-09-02 15:13:54,210 INFO  [default] ack received: 3
+2021-09-02 15:13:54,211 INFO  [default] supports data link messages
+2021-09-02 15:13:54,253 INFO  [default]   query data link elapsed time: 260
+2021-09-02 15:13:54,517 INFO  [default] ack received: 1
+2021-09-02 15:13:54,565 INFO  [default] max payload response received
+2021-09-02 15:13:54,640 INFO  [default]   query max payload elapsed time: 387
+2021-09-02 15:13:54,825 INFO  [default] ack received: 4
+2021-09-02 15:13:54,825 INFO  [default] supports intermediate messages
+2021-09-02 15:13:54,896 INFO  [default]   query intermediate elapsed time: 256
+2021-09-02 15:13:55,130 INFO  [default] ack received: 15
+2021-09-02 15:13:55,203 INFO  [default] device info response received
+2021-09-02 15:13:55,203 INFO  [default]     device type: 2
+2021-09-02 15:13:55,203 INFO  [default]       vendor ID: 0
+2021-09-02 15:13:55,203 INFO  [default]   firmware date: 2030-3-12
+2021-09-02 15:13:55,244 INFO  [default]   device info elapsed time: 347
+2021-09-02 15:13:55,244 INFO  [default] startup complete
+2021-09-02 15:14:02,112 INFO  [default] ack received: 16
+2021-09-02 15:14:02,174 INFO  [default] commodity response received.  count: 2
+2021-09-02 15:14:02,174 INFO  [default] commodity data: 0
+2021-09-02 15:14:02,174 INFO  [default] commodity data: 1
