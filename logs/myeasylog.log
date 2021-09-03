@@ -100,3 +100,8 @@
 2021-09-02 15:14:02,174 INFO  [default] commodity response received.  count: 2
 2021-09-02 15:14:02,174 INFO  [default] commodity data: 0
 2021-09-02 15:14:02,174 INFO  [default] commodity data: 1
+2021-09-03 09:09:14,088 INFO  [default]   query data link elapsed time: 301
+2021-09-03 09:09:14,388 INFO  [default]   query max payload elapsed time: 299
+2021-09-03 09:09:14,689 INFO  [default]   query intermediate elapsed time: 301
+2021-09-03 09:09:14,989 INFO  [default]   device info elapsed time: 300
+2021-09-03 09:09:14,990 INFO  [default] startup complete

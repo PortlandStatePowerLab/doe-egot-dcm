@@ -117,12 +117,12 @@ void ECS_DCM::TestCTA2045Commands()
     while (!shutdown)
 	{
         std::cout << "TESTING CTA-2045 COMMANDS" << std::endl;
-        std::cout << "c - GetEnergy() " << std::endl;
-        std::cout << "n - GetNameplate() " << std::endl;
-        std::cout << "i - ImportEnergy() " << std::endl;
-        std::cout << "e - ExportEnergy() " << std::endl;
-        std::cout << "d - Idle() " << std::endl;
-        std::cout << "p - CriticalPeakEvent() " << std::endl;
+        std::cout << "c - GetEnergy() / CommodityRead" << std::endl;
+        std::cout << "n - GetNameplate() / DeviceInfo" << std::endl;
+        std::cout << "i - ImportEnergy() / LoadUp" << std::endl;
+        std::cout << "e - ExportEnergy() / Shed" << std::endl;
+        std::cout << "d - Idle() / EndShed" << std::endl;
+        std::cout << "p - CriticalPeakEvent() / CriticalPeak" << std::endl;
         std::cout << "q - quit " << std::endl;
         std::cout << "==============" << std::endl;
 
