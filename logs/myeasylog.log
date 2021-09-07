@@ -105,3 +105,483 @@
 2021-09-03 09:09:14,689 INFO  [default]   query intermediate elapsed time: 301
 2021-09-03 09:09:14,989 INFO  [default]   device info elapsed time: 300
 2021-09-03 09:09:14,990 INFO  [default] startup complete
+2021-09-03 19:18:30,900 INFO  [default]   query data link elapsed time: 186
+2021-09-03 19:18:31,478 WARN  [default] incomplete message received: 43
+2021-09-03 19:18:32,132 WARN  [default] incomplete message received: 52
+2021-09-03 19:18:32,837 WARN  [default] incomplete message received: 70
+2021-09-03 19:18:33,439 WARN  [default] incomplete message received: 49
+2021-09-03 19:18:33,669 INFO  [default]   query max payload elapsed time: 2767
+2021-09-03 19:18:34,242 WARN  [default] incomplete message received: 36
+2021-09-03 19:18:34,958 WARN  [default] incomplete message received: 45
+2021-09-03 19:18:35,613 WARN  [default] incomplete message received: 52
+2021-09-03 19:18:36,318 WARN  [default] incomplete message received: 70
+2021-09-03 19:18:36,919 WARN  [default] incomplete message received: 49
+2021-09-03 19:18:37,149 INFO  [default]   query intermediate elapsed time: 3480
+2021-09-03 19:18:37,723 WARN  [default] incomplete message received: 36
+2021-09-03 19:18:38,439 WARN  [default] incomplete message received: 45
+2021-09-03 19:18:39,093 WARN  [default] incomplete message received: 52
+2021-09-03 19:18:39,798 WARN  [default] incomplete message received: 70
+2021-09-03 19:18:40,400 WARN  [default] incomplete message received: 49
+2021-09-03 19:18:40,630 INFO  [default]   device info elapsed time: 3481
+2021-09-03 19:18:40,630 INFO  [default] startup complete
+2021-09-03 19:18:41,203 WARN  [default] incomplete message received: 36
+2021-09-03 19:18:41,920 WARN  [default] incomplete message received: 45
+2021-09-03 19:18:42,574 WARN  [default] incomplete message received: 51
+2021-09-03 19:18:43,279 WARN  [default] incomplete message received: 70
+2021-09-03 19:18:43,981 WARN  [default] incomplete message received: 49
+2021-09-03 19:18:44,684 WARN  [default] incomplete message received: 38
+2021-09-03 19:18:45,400 WARN  [default] incomplete message received: 45
+2021-09-03 19:18:46,055 WARN  [default] incomplete message received: 51
+2021-09-03 19:18:46,760 WARN  [default] incomplete message received: 70
+2021-09-03 19:18:47,461 WARN  [default] incomplete message received: 49
+2021-09-03 19:18:48,165 WARN  [default] incomplete message received: 38
+2021-09-03 19:18:48,881 WARN  [default] incomplete message received: 45
+2021-09-03 19:18:49,536 WARN  [default] incomplete message received: 52
+2021-09-03 19:18:50,241 WARN  [default] incomplete message received: 70
+2021-09-03 19:18:50,942 WARN  [default] incomplete message received: 49
+2021-09-03 19:18:51,646 WARN  [default] incomplete message received: 38
+2021-09-03 19:18:52,362 WARN  [default] incomplete message received: 45
+2021-09-03 19:18:53,016 WARN  [default] incomplete message received: 52
+2021-09-03 19:18:53,721 WARN  [default] incomplete message received: 70
+2021-09-03 19:18:54,423 WARN  [default] incomplete message received: 49
+2021-09-03 19:18:55,126 WARN  [default] incomplete message received: 38
+2021-09-03 19:18:55,842 WARN  [default] incomplete message received: 45
+2021-09-03 19:18:56,497 WARN  [default] incomplete message received: 52
+2021-09-03 19:18:57,202 WARN  [default] incomplete message received: 70
+2021-09-03 19:18:57,903 WARN  [default] incomplete message received: 49
+2021-09-03 19:18:58,607 WARN  [default] incomplete message received: 38
+2021-09-03 19:18:59,323 WARN  [default] incomplete message received: 45
+2021-09-03 19:18:59,977 WARN  [default] incomplete message received: 52
+2021-09-03 19:19:00,683 WARN  [default] incomplete message received: 70
+2021-09-03 19:19:01,384 WARN  [default] incomplete message received: 49
+2021-09-03 19:19:02,087 WARN  [default] incomplete message received: 38
+2021-09-03 19:19:02,804 WARN  [default] incomplete message received: 45
+2021-09-03 19:19:03,458 WARN  [default] incomplete message received: 52
+2021-09-03 19:19:04,163 WARN  [default] incomplete message received: 70
+2021-09-03 19:19:04,864 WARN  [default] incomplete message received: 49
+2021-09-03 19:19:05,568 WARN  [default] incomplete message received: 38
+2021-09-03 19:19:06,284 WARN  [default] incomplete message received: 45
+2021-09-03 19:19:06,938 WARN  [default] incomplete message received: 52
+2021-09-03 19:19:07,643 WARN  [default] incomplete message received: 70
+2021-09-03 19:19:08,345 WARN  [default] incomplete message received: 49
+2021-09-03 19:19:09,048 WARN  [default] incomplete message received: 38
+2021-09-03 19:19:09,764 WARN  [default] incomplete message received: 45
+2021-09-03 19:19:10,419 WARN  [default] incomplete message received: 52
+2021-09-03 19:19:11,124 WARN  [default] incomplete message received: 70
+2021-09-03 19:19:11,826 WARN  [default] incomplete message received: 49
+2021-09-03 19:19:12,529 WARN  [default] incomplete message received: 38
+2021-09-03 19:19:13,245 WARN  [default] incomplete message received: 45
+2021-09-03 19:19:13,900 WARN  [default] incomplete message received: 52
+2021-09-03 19:19:14,605 WARN  [default] incomplete message received: 70
+2021-09-03 19:19:15,207 WARN  [default] incomplete message received: 49
+2021-09-03 19:19:16,010 WARN  [default] incomplete message received: 35
+2021-09-03 19:19:16,726 WARN  [default] incomplete message received: 45
+2021-09-03 19:19:17,381 WARN  [default] incomplete message received: 52
+2021-09-03 19:19:18,086 WARN  [default] incomplete message received: 70
+2021-09-03 19:19:18,787 WARN  [default] incomplete message received: 49
+2021-09-03 19:19:19,491 WARN  [default] incomplete message received: 38
+2021-09-03 19:19:20,207 WARN  [default] incomplete message received: 45
+2021-09-03 19:19:20,861 WARN  [default] incomplete message received: 52
+2021-09-03 19:19:21,566 WARN  [default] incomplete message received: 70
+2021-09-03 19:19:22,168 WARN  [default] incomplete message received: 48
+2021-09-03 19:19:22,971 WARN  [default] incomplete message received: 38
+2021-09-03 19:19:23,688 WARN  [default] incomplete message received: 45
+2021-09-03 19:19:24,342 WARN  [default] incomplete message received: 52
+2021-09-03 19:19:25,047 WARN  [default] incomplete message received: 70
+2021-09-03 19:19:25,649 WARN  [default] incomplete message received: 49
+2021-09-03 19:19:26,452 WARN  [default] incomplete message received: 38
+2021-09-03 19:19:27,169 WARN  [default] incomplete message received: 45
+2021-09-03 19:19:27,823 WARN  [default] incomplete message received: 52
+2021-09-03 19:19:28,528 WARN  [default] incomplete message received: 70
+2021-09-03 19:19:29,130 WARN  [default] incomplete message received: 49
+2021-09-03 19:19:29,933 WARN  [default] incomplete message received: 38
+2021-09-03 19:19:30,649 WARN  [default] incomplete message received: 45
+2021-09-03 19:19:31,304 WARN  [default] incomplete message received: 52
+2021-09-03 19:19:32,009 WARN  [default] incomplete message received: 70
+2021-09-03 19:19:32,611 WARN  [default] incomplete message received: 49
+2021-09-03 19:19:33,414 WARN  [default] incomplete message received: 38
+2021-09-03 19:19:34,130 WARN  [default] incomplete message received: 45
+2021-09-03 19:19:34,785 WARN  [default] incomplete message received: 52
+2021-09-03 19:19:35,490 WARN  [default] incomplete message received: 70
+2021-09-03 19:19:36,091 WARN  [default] incomplete message received: 49
+2021-09-03 19:19:36,895 WARN  [default] incomplete message received: 38
+2021-09-03 19:19:37,611 WARN  [default] incomplete message received: 45
+2021-09-03 19:19:38,266 WARN  [default] incomplete message received: 52
+2021-09-03 19:19:38,971 WARN  [default] incomplete message received: 70
+2021-09-03 19:19:39,573 WARN  [default] incomplete message received: 49
+2021-09-03 19:19:40,377 WARN  [default] incomplete message received: 38
+2021-09-03 19:19:41,093 WARN  [default] incomplete message received: 45
+2021-09-03 19:19:41,748 WARN  [default] incomplete message received: 52
+2021-09-03 19:19:42,453 WARN  [default] incomplete message received: 70
+2021-09-03 19:19:43,054 WARN  [default] incomplete message received: 49
+2021-09-03 19:19:43,858 WARN  [default] incomplete message received: 38
+2021-09-03 19:19:44,574 WARN  [default] incomplete message received: 45
+2021-09-03 19:19:45,229 WARN  [default] incomplete message received: 52
+2021-09-03 19:19:45,934 WARN  [default] incomplete message received: 70
+2021-09-03 19:19:46,535 WARN  [default] incomplete message received: 49
+2021-09-03 19:19:47,339 WARN  [default] incomplete message received: 38
+2021-09-03 19:19:48,055 WARN  [default] incomplete message received: 45
+2021-09-03 19:19:48,710 WARN  [default] incomplete message received: 52
+2021-09-03 19:19:49,415 WARN  [default] incomplete message received: 70
+2021-09-03 19:19:50,017 WARN  [default] incomplete message received: 49
+2021-09-03 19:19:50,820 WARN  [default] incomplete message received: 38
+2021-09-03 19:19:51,536 WARN  [default] incomplete message received: 45
+2021-09-03 19:19:52,191 WARN  [default] incomplete message received: 52
+2021-09-03 19:19:52,896 WARN  [default] incomplete message received: 70
+2021-09-03 19:19:53,498 WARN  [default] incomplete message received: 49
+2021-09-03 19:19:54,232 WARN  [default] incomplete message received: 1
+2021-09-03 19:20:04,844 WARN  [default] incomplete message received: 31
+2021-09-03 19:20:05,554 WARN  [default] incomplete message received: 49
+2021-09-03 19:20:06,215 WARN  [default] incomplete message received: 53
+2021-09-03 19:20:06,898 WARN  [default] incomplete message received: 76
+2021-09-03 19:20:07,521 WARN  [default] incomplete message received: 48
+2021-09-03 19:20:08,224 WARN  [default] incomplete message received: 40
+2021-09-03 19:20:08,840 WARN  [default] incomplete message received: 48
+2021-09-03 19:20:09,495 WARN  [default] incomplete message received: 54
+2021-09-03 19:20:10,141 WARN  [default] incomplete message received: 61
+2021-09-03 19:20:10,775 WARN  [default] incomplete message received: 20
+2021-09-03 19:20:11,435 WARN  [default] incomplete message received: 53
+2021-09-03 19:20:12,040 WARN  [default] incomplete message received: 73
+2021-09-03 19:20:12,742 WARN  [default] incomplete message received: 51
+2021-09-03 19:20:13,345 WARN  [default] incomplete message received: 40
+2021-09-03 19:20:13,961 WARN  [default] incomplete message received: 48
+2021-09-03 19:20:14,612 WARN  [default] incomplete message received: 47
+2021-09-03 19:20:15,286 WARN  [default] incomplete message received: 39
+2021-09-03 19:20:15,997 WARN  [default] incomplete message received: 48
+2021-09-03 19:20:16,657 WARN  [default] incomplete message received: 53
+2021-09-03 19:20:17,262 WARN  [default] incomplete message received: 72
+2021-09-03 19:20:17,964 WARN  [default] incomplete message received: 51
+2021-09-03 19:20:18,667 WARN  [default] incomplete message received: 40
+2021-09-03 19:20:19,283 WARN  [default] incomplete message received: 48
+2021-09-03 19:20:19,937 WARN  [default] incomplete message received: 54
+2021-09-03 19:20:20,545 WARN  [default] incomplete message received: 33
+2021-09-03 19:20:20,648 FATAL [default] CRASH HANDLED; Application has crashed due to [SIGINT] signal
+2021-09-03 19:20:20,649 WARN  [default] Aborting application. Reason: Fatal log at [/home/pi/Remotes/doe-egot-dcm/src/command_pattern/include/command_pattern/../../../cta2045_receiver/include/cta2045_receiver/easylogging++.h:5583]
+2021-09-03 19:20:25,258 WARN  [default] incomplete message received: 52
+2021-09-03 19:20:25,883 WARN  [default] incomplete message received: 69
+2021-09-03 19:20:26,564 WARN  [default] incomplete message received: 54
+2021-09-03 19:20:27,153 WARN  [default] incomplete message received: 16
+2021-09-03 19:20:27,883 WARN  [default] incomplete message received: 72
+2021-09-03 19:20:28,535 WARN  [default] incomplete message received: 49
+2021-09-03 19:20:29,208 WARN  [default] incomplete message received: 37
+2021-09-03 19:20:29,918 WARN  [default] incomplete message received: 49
+2021-09-03 19:20:30,579 WARN  [default] incomplete message received: 53
+2021-09-03 19:20:31,262 WARN  [default] incomplete message received: 76
+2021-09-03 19:20:31,885 WARN  [default] incomplete message received: 48
+2021-09-03 19:20:32,588 WARN  [default] incomplete message received: 40
+2021-09-03 19:20:33,204 WARN  [default] incomplete message received: 48
+2021-09-03 19:20:33,859 WARN  [default] incomplete message received: 54
+2021-09-03 19:20:34,467 WARN  [default] incomplete message received: 33
+2021-09-03 19:20:35,139 WARN  [default] incomplete message received: 48
+2021-09-03 19:20:35,800 WARN  [default] incomplete message received: 53
+2021-09-03 19:20:36,404 WARN  [default] incomplete message received: 72
+2021-09-03 19:20:37,106 WARN  [default] incomplete message received: 51
+2021-09-03 19:20:37,709 WARN  [default] incomplete message received: 40
+2021-09-03 19:20:38,425 WARN  [default] incomplete message received: 48
+2021-09-03 19:20:39,180 WARN  [default] incomplete message received: 54
+2021-09-03 19:20:39,885 WARN  [default] incomplete message received: 70
+2021-09-03 19:20:40,487 WARN  [default] incomplete message received: 51
+2021-09-03 19:20:41,190 WARN  [default] incomplete message received: 40
+2021-09-03 19:20:41,806 WARN  [default] incomplete message received: 48
+2021-09-03 19:20:42,459 WARN  [default] incomplete message received: 50
+2021-09-03 19:20:43,132 WARN  [default] incomplete message received: 36
+2021-09-03 19:20:43,842 WARN  [default] incomplete message received: 48
+2021-09-03 19:20:44,503 WARN  [default] incomplete message received: 53
+2021-09-03 19:20:45,186 WARN  [default] incomplete message received: 76
+2021-09-03 19:20:45,809 WARN  [default] incomplete message received: 48
+2021-09-03 19:20:46,512 WARN  [default] incomplete message received: 40
+2021-09-03 19:20:47,129 WARN  [default] incomplete message received: 48
+2021-09-03 19:20:47,163 FATAL [default] CRASH HANDLED; Application has crashed due to [SIGINT] signal
+2021-09-03 19:20:47,163 WARN  [default] Aborting application. Reason: Fatal log at [/home/pi/Remotes/doe-egot-dcm/src/command_pattern/include/command_pattern/../../../cta2045_receiver/include/cta2045_receiver/easylogging++.h:5583]
+2021-09-03 19:26:26,237 WARN  [default] incomplete message received: 70
+2021-09-03 19:26:26,839 WARN  [default] incomplete message received: 49
+2021-09-03 19:26:27,642 WARN  [default] incomplete message received: 38
+2021-09-03 19:26:28,358 WARN  [default] incomplete message received: 44
+2021-09-03 19:26:29,013 WARN  [default] incomplete message received: 52
+2021-09-03 19:26:29,718 WARN  [default] incomplete message received: 69
+2021-09-03 19:26:30,320 WARN  [default] incomplete message received: 49
+2021-09-03 19:26:31,123 WARN  [default] incomplete message received: 38
+2021-09-03 19:26:31,839 WARN  [default] incomplete message received: 45
+2021-09-03 19:26:32,232 INFO  [default]   query data link elapsed time: 6498
+2021-09-03 19:26:32,533 INFO  [default]   query max payload elapsed time: 294
+2021-09-03 19:26:32,833 INFO  [default]   query intermediate elapsed time: 300
+2021-09-03 19:26:33,134 INFO  [default]   device info elapsed time: 301
+2021-09-03 19:26:33,134 INFO  [default] startup complete
+2021-09-03 19:27:00,339 WARN  [default] incomplete message received: 52
+2021-09-03 19:27:01,044 WARN  [default] incomplete message received: 70
+2021-09-03 19:27:01,645 WARN  [default] incomplete message received: 49
+2021-09-03 19:27:02,448 WARN  [default] incomplete message received: 38
+2021-09-03 19:27:03,164 WARN  [default] incomplete message received: 45
+2021-09-03 19:27:03,819 WARN  [default] incomplete message received: 52
+2021-09-03 19:27:04,524 WARN  [default] incomplete message received: 70
+2021-09-03 19:27:05,126 WARN  [default] incomplete message received: 49
+2021-09-03 19:27:05,929 WARN  [default] incomplete message received: 38
+2021-09-03 19:27:06,645 WARN  [default] incomplete message received: 45
+2021-09-03 19:27:07,299 WARN  [default] incomplete message received: 52
+2021-09-03 19:27:08,004 WARN  [default] incomplete message received: 69
+2021-09-03 19:27:08,606 WARN  [default] incomplete message received: 49
+2021-09-03 19:27:09,409 WARN  [default] incomplete message received: 38
+2021-09-03 19:27:10,125 WARN  [default] incomplete message received: 45
+2021-09-03 19:27:10,779 WARN  [default] incomplete message received: 52
+2021-09-03 19:27:11,484 WARN  [default] incomplete message received: 69
+2021-09-03 19:27:12,086 WARN  [default] incomplete message received: 49
+2021-09-03 19:27:12,889 WARN  [default] incomplete message received: 38
+2021-09-03 19:27:13,605 WARN  [default] incomplete message received: 45
+2021-09-03 19:27:14,260 WARN  [default] incomplete message received: 52
+2021-09-03 19:27:14,965 WARN  [default] incomplete message received: 70
+2021-09-03 19:27:15,567 WARN  [default] incomplete message received: 49
+2021-09-03 19:27:16,370 WARN  [default] incomplete message received: 38
+2021-09-03 19:27:17,086 WARN  [default] incomplete message received: 45
+2021-09-03 19:27:17,740 WARN  [default] incomplete message received: 52
+2021-09-03 19:27:18,445 WARN  [default] incomplete message received: 69
+2021-09-03 19:27:19,047 WARN  [default] incomplete message received: 49
+2021-09-03 19:27:19,850 WARN  [default] incomplete message received: 38
+2021-09-03 19:27:20,566 WARN  [default] incomplete message received: 45
+2021-09-03 19:27:21,221 WARN  [default] incomplete message received: 52
+2021-09-03 19:27:21,926 WARN  [default] incomplete message received: 70
+2021-09-03 19:27:22,527 WARN  [default] incomplete message received: 49
+2021-09-03 19:27:23,331 WARN  [default] incomplete message received: 38
+2021-09-03 19:27:24,047 WARN  [default] incomplete message received: 45
+2021-09-03 19:27:24,702 WARN  [default] incomplete message received: 52
+2021-09-03 19:27:25,407 WARN  [default] incomplete message received: 70
+2021-09-03 19:27:26,008 WARN  [default] incomplete message received: 49
+2021-09-03 19:27:26,811 WARN  [default] incomplete message received: 38
+2021-09-03 19:27:27,528 WARN  [default] incomplete message received: 45
+2021-09-03 19:27:28,182 WARN  [default] incomplete message received: 52
+2021-09-03 19:27:28,887 WARN  [default] incomplete message received: 69
+2021-09-03 19:27:29,489 WARN  [default] incomplete message received: 49
+2021-09-03 19:27:30,292 WARN  [default] incomplete message received: 38
+2021-09-03 19:27:31,008 WARN  [default] incomplete message received: 45
+2021-09-03 19:27:31,663 WARN  [default] incomplete message received: 52
+2021-09-03 19:27:32,368 WARN  [default] incomplete message received: 70
+2021-09-03 19:27:32,970 WARN  [default] incomplete message received: 49
+2021-09-03 19:27:33,773 WARN  [default] incomplete message received: 38
+2021-09-03 19:27:34,489 WARN  [default] incomplete message received: 45
+2021-09-03 19:27:35,144 WARN  [default] incomplete message received: 51
+2021-09-03 19:27:35,849 WARN  [default] incomplete message received: 70
+2021-09-03 19:27:36,450 WARN  [default] incomplete message received: 49
+2021-09-03 19:27:37,253 WARN  [default] incomplete message received: 38
+2021-09-03 19:27:37,969 WARN  [default] incomplete message received: 45
+2021-09-03 19:27:38,624 WARN  [default] incomplete message received: 52
+2021-09-03 19:27:39,329 WARN  [default] incomplete message received: 70
+2021-09-03 19:27:39,930 WARN  [default] incomplete message received: 49
+2021-09-03 19:27:40,733 WARN  [default] incomplete message received: 38
+2021-09-03 19:27:41,449 WARN  [default] incomplete message received: 45
+2021-09-03 19:27:42,104 WARN  [default] incomplete message received: 52
+2021-09-03 19:27:42,809 WARN  [default] incomplete message received: 69
+2021-09-03 19:27:43,410 WARN  [default] incomplete message received: 49
+2021-09-03 19:27:44,213 WARN  [default] incomplete message received: 38
+2021-09-03 19:27:44,930 WARN  [default] incomplete message received: 45
+2021-09-03 19:27:45,584 WARN  [default] incomplete message received: 52
+2021-09-03 19:27:46,289 WARN  [default] incomplete message received: 70
+2021-09-03 19:27:46,891 WARN  [default] incomplete message received: 49
+2021-09-03 19:27:47,694 WARN  [default] incomplete message received: 38
+2021-09-03 19:27:48,410 WARN  [default] incomplete message received: 45
+2021-09-03 19:27:49,065 WARN  [default] incomplete message received: 51
+2021-09-03 19:27:49,770 WARN  [default] incomplete message received: 70
+2021-09-03 19:27:50,471 WARN  [default] incomplete message received: 49
+2021-09-03 19:27:51,174 WARN  [default] incomplete message received: 38
+2021-09-03 19:27:51,890 WARN  [default] incomplete message received: 45
+2021-09-03 19:27:52,644 WARN  [default] incomplete message received: 52
+2021-09-03 19:27:53,329 WARN  [default] incomplete message received: 73
+2021-09-03 19:27:54,051 WARN  [default] incomplete message received: 46
+2021-09-03 19:27:54,654 WARN  [default] incomplete message received: 38
+2021-09-03 19:27:55,370 WARN  [default] incomplete message received: 45
+2021-09-03 19:27:56,025 WARN  [default] incomplete message received: 51
+2021-09-03 19:27:56,730 WARN  [default] incomplete message received: 69
+2021-09-03 19:27:57,431 WARN  [default] incomplete message received: 49
+2021-09-03 19:27:58,134 WARN  [default] incomplete message received: 38
+2021-09-03 19:27:58,851 WARN  [default] incomplete message received: 45
+2021-09-03 19:27:59,605 WARN  [default] incomplete message received: 52
+2021-09-03 19:28:00,289 WARN  [default] incomplete message received: 73
+2021-09-03 19:28:01,012 WARN  [default] incomplete message received: 46
+2021-09-03 19:28:01,615 WARN  [default] incomplete message received: 38
+2021-09-03 19:28:02,331 WARN  [default] incomplete message received: 45
+2021-09-03 19:28:02,985 WARN  [default] incomplete message received: 52
+2021-09-03 19:28:03,690 WARN  [default] incomplete message received: 70
+2021-09-03 19:28:04,392 WARN  [default] incomplete message received: 49
+2021-09-03 19:28:05,095 WARN  [default] incomplete message received: 38
+2021-09-03 19:28:05,812 WARN  [default] incomplete message received: 45
+2021-09-03 19:28:06,566 WARN  [default] incomplete message received: 52
+2021-09-03 19:28:07,250 WARN  [default] incomplete message received: 73
+2021-09-03 19:28:07,973 WARN  [default] incomplete message received: 46
+2021-09-03 19:28:08,676 WARN  [default] incomplete message received: 38
+2021-09-03 19:28:09,386 WARN  [default] incomplete message received: 46
+2021-09-03 19:28:10,047 WARN  [default] incomplete message received: 51
+2021-09-03 19:28:10,730 WARN  [default] incomplete message received: 73
+2021-09-03 19:28:11,353 WARN  [default] incomplete message received: 46
+2021-09-03 19:28:12,056 WARN  [default] incomplete message received: 38
+2021-09-03 19:28:12,773 WARN  [default] incomplete message received: 45
+2021-09-03 19:28:13,527 WARN  [default] incomplete message received: 52
+2021-09-03 19:28:14,211 WARN  [default] incomplete message received: 73
+2021-09-03 19:28:14,934 WARN  [default] incomplete message received: 46
+2021-09-03 19:28:15,637 WARN  [default] incomplete message received: 38
+2021-09-03 19:28:16,347 WARN  [default] incomplete message received: 46
+2021-09-03 19:28:17,008 WARN  [default] incomplete message received: 51
+2021-09-03 19:28:17,691 WARN  [default] incomplete message received: 73
+2021-09-03 19:28:18,314 WARN  [default] incomplete message received: 46
+2021-09-03 19:28:19,017 WARN  [default] incomplete message received: 38
+2021-09-03 19:28:19,734 WARN  [default] incomplete message received: 45
+2021-09-03 19:28:20,488 WARN  [default] incomplete message received: 52
+2021-09-03 19:28:21,172 WARN  [default] incomplete message received: 73
+2021-09-03 19:28:21,895 WARN  [default] incomplete message received: 46
+2021-09-03 19:28:22,598 WARN  [default] incomplete message received: 38
+2021-09-03 19:28:23,308 WARN  [default] incomplete message received: 46
+2021-09-03 19:28:23,969 WARN  [default] incomplete message received: 51
+2021-09-03 19:28:24,652 WARN  [default] incomplete message received: 73
+2021-09-03 19:28:25,275 WARN  [default] incomplete message received: 46
+2021-09-03 19:28:25,978 WARN  [default] incomplete message received: 38
+2021-09-03 19:28:26,276 FATAL [default] CRASH HANDLED; Application has crashed due to [SIGINT] signal
+2021-09-03 19:28:26,277 WARN  [default] Aborting application. Reason: Fatal log at [/home/pi/Remotes/doe-egot-dcm/src/command_pattern/include/command_pattern/../../../cta2045_receiver/include/cta2045_receiver/easylogging++.h:5583]
+2021-09-03 20:22:43,934 WARN  [default] incomplete message received: 40
+2021-09-03 20:22:44,174 INFO  [default]   query data link elapsed time: 836
+2021-09-03 20:22:44,750 WARN  [default] incomplete message received: 42
+2021-09-03 20:22:45,505 WARN  [default] incomplete message received: 52
+2021-09-03 20:22:46,189 WARN  [default] incomplete message received: 75
+2021-09-03 20:22:46,911 WARN  [default] incomplete message received: 45
+2021-09-03 20:22:47,614 WARN  [default] incomplete message received: 38
+2021-09-03 20:22:48,327 WARN  [default] incomplete message received: 50
+2021-09-03 20:22:48,985 WARN  [default] incomplete message received: 48
+2021-09-03 20:22:49,669 WARN  [default] incomplete message received: 75
+2021-09-03 20:22:50,291 WARN  [default] incomplete message received: 45
+2021-09-03 20:22:50,994 WARN  [default] incomplete message received: 38
+2021-09-03 20:22:51,710 WARN  [default] incomplete message received: 46
+2021-09-03 20:22:52,465 WARN  [default] incomplete message received: 52
+2021-09-03 20:22:53,149 WARN  [default] incomplete message received: 76
+2021-09-03 20:22:53,871 WARN  [default] incomplete message received: 45
+2021-09-03 20:22:54,575 WARN  [default] incomplete message received: 38
+2021-09-03 20:22:55,287 WARN  [default] incomplete message received: 50
+2021-09-03 20:22:55,945 WARN  [default] incomplete message received: 48
+2021-09-03 20:22:56,630 WARN  [default] incomplete message received: 76
+2021-09-03 20:22:57,252 WARN  [default] incomplete message received: 45
+2021-09-03 20:22:57,955 WARN  [default] incomplete message received: 38
+2021-09-03 20:22:58,671 WARN  [default] incomplete message received: 47
+2021-09-03 20:22:59,425 WARN  [default] incomplete message received: 52
+2021-09-03 20:23:00,110 WARN  [default] incomplete message received: 75
+2021-09-03 20:23:00,832 WARN  [default] incomplete message received: 45
+2021-09-03 20:23:01,535 WARN  [default] incomplete message received: 38
+2021-09-03 20:23:02,247 WARN  [default] incomplete message received: 50
+2021-09-03 20:23:02,905 WARN  [default] incomplete message received: 48
+2021-09-03 20:23:03,589 WARN  [default] incomplete message received: 75
+2021-09-03 20:23:04,211 WARN  [default] incomplete message received: 45
+2021-09-03 20:23:04,914 WARN  [default] incomplete message received: 38
+2021-09-03 20:23:05,631 WARN  [default] incomplete message received: 46
+2021-09-03 20:23:06,385 WARN  [default] incomplete message received: 52
+2021-09-03 20:23:07,070 WARN  [default] incomplete message received: 76
+2021-09-03 20:23:07,792 WARN  [default] incomplete message received: 45
+2021-09-03 20:23:08,495 WARN  [default] incomplete message received: 38
+2021-09-03 20:23:09,207 WARN  [default] incomplete message received: 50
+2021-09-03 20:23:09,865 WARN  [default] incomplete message received: 48
+2021-09-03 20:23:10,550 WARN  [default] incomplete message received: 75
+2021-09-03 20:23:11,172 WARN  [default] incomplete message received: 45
+2021-09-03 20:23:11,875 WARN  [default] incomplete message received: 38
+2021-09-03 20:23:12,591 WARN  [default] incomplete message received: 46
+2021-09-03 20:23:13,345 WARN  [default] incomplete message received: 52
+2021-09-03 20:23:14,030 WARN  [default] incomplete message received: 75
+2021-09-03 20:23:14,752 WARN  [default] incomplete message received: 45
+2021-09-03 20:23:15,455 WARN  [default] incomplete message received: 38
+2021-09-03 20:23:16,167 WARN  [default] incomplete message received: 50
+2021-09-03 20:23:16,825 WARN  [default] incomplete message received: 48
+2021-09-03 20:23:17,510 WARN  [default] incomplete message received: 75
+2021-09-03 20:23:18,132 WARN  [default] incomplete message received: 45
+2021-09-03 20:23:18,835 WARN  [default] incomplete message received: 38
+2021-09-03 20:23:19,551 WARN  [default] incomplete message received: 46
+2021-09-03 20:23:20,305 WARN  [default] incomplete message received: 52
+2021-09-03 20:23:20,990 WARN  [default] incomplete message received: 75
+2021-09-03 20:23:21,712 WARN  [default] incomplete message received: 45
+2021-09-03 20:23:22,415 WARN  [default] incomplete message received: 38
+2021-09-03 20:23:23,127 WARN  [default] incomplete message received: 50
+2021-09-03 20:23:23,785 WARN  [default] incomplete message received: 48
+2021-09-03 20:23:24,470 WARN  [default] incomplete message received: 76
+2021-09-03 20:23:24,811 FATAL [default] CRASH HANDLED; Application has crashed due to [SIGINT] signal
+2021-09-03 20:23:24,811 WARN  [default] Aborting application. Reason: Fatal log at [/home/pi/Remotes/doe-egot-dcm/src/command_pattern/include/command_pattern/../../../cta2045_receiver/include/cta2045_receiver/easylogging++.h:5583]
+2021-09-03 20:24:13,038 WARN  [default] incomplete message received: 76
+2021-09-03 20:24:13,718 WARN  [default] incomplete message received: 55
+2021-09-03 20:24:14,421 WARN  [default] incomplete message received: 40
+2021-09-03 20:24:15,138 WARN  [default] incomplete message received: 53
+2021-09-03 20:24:15,895 WARN  [default] incomplete message received: 54
+2021-09-03 20:24:16,598 WARN  [default] incomplete message received: 79
+2021-09-03 20:24:17,299 WARN  [default] incomplete message received: 51
+2021-09-03 20:24:18,002 WARN  [default] incomplete message received: 40
+2021-09-03 20:24:18,718 WARN  [default] incomplete message received: 46
+2021-09-03 20:24:19,375 WARN  [default] incomplete message received: 51
+2021-09-03 20:24:20,079 WARN  [default] incomplete message received: 79
+2021-09-03 20:24:20,780 WARN  [default] incomplete message received: 51
+2021-09-03 20:24:21,483 WARN  [default] incomplete message received: 40
+2021-09-03 20:24:22,199 WARN  [default] incomplete message received: 53
+2021-09-03 20:24:22,956 WARN  [default] incomplete message received: 54
+2021-09-03 20:24:23,637 WARN  [default] incomplete message received: 81
+2021-09-03 20:24:24,360 WARN  [default] incomplete message received: 49
+2021-09-03 20:24:25,064 WARN  [default] incomplete message received: 40
+2021-09-03 20:24:25,774 WARN  [default] incomplete message received: 54
+2021-09-03 20:24:25,924 FATAL [default] CRASH HANDLED; Application has crashed due to [SIGINT] signal
+2021-09-03 20:24:25,924 WARN  [default] Aborting application. Reason: Fatal log at [/home/pi/Remotes/doe-egot-dcm/src/command_pattern/include/command_pattern/../../../cta2045_receiver/include/cta2045_receiver/easylogging++.h:5583]
+2021-09-07 15:27:18,562 INFO  [default]   query data link elapsed time: 301
+2021-09-07 15:27:18,863 INFO  [default]   query max payload elapsed time: 299
+2021-09-07 15:27:19,163 INFO  [default]   query intermediate elapsed time: 300
+2021-09-07 15:27:19,464 INFO  [default]   device info elapsed time: 301
+2021-09-07 15:27:19,464 INFO  [default] startup complete
+2021-09-07 15:50:40,880 INFO  [default]   query data link elapsed time: 301
+2021-09-07 15:50:41,180 INFO  [default]   query max payload elapsed time: 299
+2021-09-07 15:50:41,481 INFO  [default]   query intermediate elapsed time: 301
+2021-09-07 15:50:41,781 INFO  [default]   device info elapsed time: 300
+2021-09-07 15:50:41,781 INFO  [default] startup complete
+2021-09-07 15:56:23,510 INFO  [default]   query data link elapsed time: 300
+2021-09-07 15:56:23,811 INFO  [default]   query max payload elapsed time: 301
+2021-09-07 15:56:24,111 INFO  [default]   query intermediate elapsed time: 300
+2021-09-07 15:56:24,412 INFO  [default]   device info elapsed time: 301
+2021-09-07 15:56:24,412 INFO  [default] startup complete
+2021-09-07 16:08:00,242 INFO  [default]   query data link elapsed time: 301
+2021-09-07 16:08:00,542 INFO  [default]   query max payload elapsed time: 299
+2021-09-07 16:08:00,843 INFO  [default]   query intermediate elapsed time: 301
+2021-09-07 16:08:01,143 INFO  [default]   device info elapsed time: 300
+2021-09-07 16:08:01,143 INFO  [default] startup complete
+2021-09-07 16:08:39,823 FATAL [default] CRASH HANDLED; Application has crashed due to [SIGINT] signal
+2021-09-07 16:08:39,823 WARN  [default] Aborting application. Reason: Fatal log at [/home/pi/Remotes/doe-egot-dcm/src/command_pattern/include/command_pattern/../../../cta2045_receiver/include/cta2045_receiver/easylogging++.h:5583]
+2021-09-07 16:10:34,397 INFO  [default]   query data link elapsed time: 300
+2021-09-07 16:10:34,697 INFO  [default]   query max payload elapsed time: 300
+2021-09-07 16:10:34,997 INFO  [default]   query intermediate elapsed time: 300
+2021-09-07 16:10:35,298 INFO  [default]   device info elapsed time: 300
+2021-09-07 16:10:35,298 INFO  [default] startup complete
+2021-09-07 16:12:59,375 INFO  [default] ack received: 3
+2021-09-07 16:12:59,375 INFO  [default] supports data link messages
+2021-09-07 16:12:59,476 INFO  [default]   query data link elapsed time: 245
+2021-09-07 16:12:59,620 INFO  [default] ack received: 1
+2021-09-07 16:12:59,723 INFO  [default] max payload response received
+2021-09-07 16:12:59,863 INFO  [default]   query max payload elapsed time: 387
+2021-09-07 16:13:00,005 INFO  [default] ack received: 4
+2021-09-07 16:13:00,005 INFO  [default] supports intermediate messages
+2021-09-07 16:13:00,169 INFO  [default]   query intermediate elapsed time: 306
+2021-09-07 16:13:00,355 INFO  [default] ack received: 15
+2021-09-07 16:13:00,483 INFO  [default] device info response received
+2021-09-07 16:13:00,483 INFO  [default]     device type: 3
+2021-09-07 16:13:00,483 INFO  [default]       vendor ID: 4660
+2021-09-07 16:13:00,483 INFO  [default]   firmware date: 2052-19-0
+2021-09-07 16:13:00,523 INFO  [default]   device info elapsed time: 354
+2021-09-07 16:13:00,524 INFO  [default] startup complete
+2021-09-07 16:13:02,469 INFO  [default] ack received: 16
+2021-09-07 16:13:02,593 INFO  [default] commodity response received.  count: 3
+2021-09-07 16:13:02,594 INFO  [default] commodity data: 0
+2021-09-07 16:13:02,594 INFO  [default] commodity data: 1
+2021-09-07 16:13:02,594 INFO  [default] commodity data: 2
+2021-09-07 16:15:08,837 INFO  [default] ack received: 3
+2021-09-07 16:15:08,837 INFO  [default] supports data link messages
+2021-09-07 16:15:08,938 INFO  [default]   query data link elapsed time: 243
+2021-09-07 16:15:09,082 INFO  [default] ack received: 1
+2021-09-07 16:15:09,185 INFO  [default] max payload response received
+2021-09-07 16:15:09,326 INFO  [default]   query max payload elapsed time: 388
+2021-09-07 16:15:09,467 INFO  [default] ack received: 4
+2021-09-07 16:15:09,467 INFO  [default] supports intermediate messages
+2021-09-07 16:15:09,625 INFO  [default]   query intermediate elapsed time: 299
+2021-09-07 16:15:09,806 INFO  [default] ack received: 15
+2021-09-07 16:15:09,935 INFO  [default] device info response received
+2021-09-07 16:15:09,935 INFO  [default]     device type: 2
+2021-09-07 16:15:09,935 INFO  [default]       vendor ID: 4660
+2021-09-07 16:15:09,935 INFO  [default]   firmware date: 2255-32-0
+2021-09-07 16:15:09,975 INFO  [default]   device info elapsed time: 350
+2021-09-07 16:15:09,975 INFO  [default] startup complete
+2021-09-07 16:15:11,721 INFO  [default] ack received: 16
+2021-09-07 16:15:11,846 INFO  [default] commodity response received.  count: 3
+2021-09-07 16:15:11,846 INFO  [default] commodity data: 0
+2021-09-07 16:15:11,847 INFO  [default] commodity data: 1
+2021-09-07 16:15:11,848 INFO  [default] commodity data: 2
