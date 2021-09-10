@@ -33,6 +33,7 @@ class CTA2045Receiver : public BaseReceiver
         std::string Idle(); 
         std::string CriticalPeakEvent();
         std::string GridEmergencyEvent();
+        std::string OutsideCommConnectStatus();
 
     private:
         std::string response_;
