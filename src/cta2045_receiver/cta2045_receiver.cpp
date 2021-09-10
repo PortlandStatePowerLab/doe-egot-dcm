@@ -162,5 +162,36 @@ std::string CTA2045Receiver::GridEmergencyEvent()
     return log + ", elapsed: " + std::to_string(elapsed);
 }
 
+std::string CTA2045Receiver::OutsideCommConnectionStatus(int status_code) // 0=no, 1=found, 2=poor
+{
+    unsigned long elapsed = 0;
+    cea2045::OutsideCommuncatonStatusCode cea2045_status_code = cea2045::OutsideCommuncatonStatusCode::Found;
+    std::string log;
+    std::cout << "cta2045receiver Outside Communication Connection Status " << std::endl;
+
+    switch (status_code)
+    {
+        case 0:
+            cea2045_status_code = cea2045::OutsideCommuncatonStatusCode::No;
+            break;
+        case 1:
+            cea2045_status_code = cea2045::OutsideCommuncatonStatusCode::Found;
+            break;
+        case 2:
+            cea2045_status_code = cea2045::OutsideCommuncatonStatusCode::Poor;
+            break;
+    }
+
+    timer_.reset();
+    device_->basicOutsideCommConnectionStatus(cea2045_status_code).get();
+    elapsed = timer_.getElapsedMS();
+
+    log = "CTA2045: " + response_; //for command
+    response_.erase();
+    std::cout << " cta2045receiver OutsideCommConnectionStatus log: " << log << std::endl;
+
+    return log + ", elapsed: " + std::to_string(elapsed);
+}
+
 } // namespace dcm
 
