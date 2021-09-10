@@ -120,6 +120,17 @@ class GridEmergencyEvent : public BaseCommand
     private:
 };
 
+class OutsideCommConnectionStatus : public BaseCommand
+{
+    public:
+        OutsideCommConnectionStatus();
+        OutsideCommConnectionStatus(CombinedHttpsClient *client, BaseReceiver *receiver);
+        ~OutsideCommConnectionStatus();
+        std::string Execute(int status); // 0=no, 1=found, 2=poor
+
+    private:
+};
+
 } // namespace dcm
 
 #endif //__DCM_COMMANDS_H__

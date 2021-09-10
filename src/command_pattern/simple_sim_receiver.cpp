@@ -54,6 +54,11 @@ std::string SimpleSimulatorReceiver::GridEmergencyEvent()
     std::cout << "SimpleSimReceiver GridEmergencyEvent, not supported currently" << std::endl;
 }
 
+std::string SimpleSimulatorReceiver::OutsideCommConnectionStatus(int status_code)
+{
+    std::cout << "SimpleSimReceiver OutsideCommConnectStatus, not supported currently" << std::endl;
+}
+
 void SimpleSimulatorReceiver::IncrementSimulatorProgress()
 {
     sim_der_->IncrementProgress();

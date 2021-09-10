@@ -42,7 +42,6 @@ std::string ImportEnergy::Execute()
     std::string response_from_der = "der response not supported yet";
     std::cout << "  ImportEnergy Command Executing... " << std::endl;
 
-    //this is specific to a simulated receiver at this point, and not based on a particular resource.
     https_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", "ImportEnergyCommand", "na", "ImportEnergy"));
 
     response_from_der = receiver_->Import();
@@ -79,7 +78,6 @@ std::string ExportEnergy::Execute()
     std::string response_from_der = "der response not supported yet";
     std::cout << "  ExportEnergy Command Executing... " << std::endl;
 
-    //this is specific to a simulated receiver at this point, and not based on a particular resource.
     https_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", "ExportEnergyCommand", "na", "ExportEnergy"));
 
     response_from_der = receiver_->Export();
@@ -175,7 +173,6 @@ std::string Idle::Execute()
     std::string response_from_der = "der response not supported yet";
     std::cout << "  Idle Command Executing... " << std::endl;
 
-    //this is specific to a simulated receiver at this point, and not based on a particular resource.
     https_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", "IdleCommand", "na", "Idle"));
 
     response_from_der = receiver_->Idle();
@@ -207,7 +204,6 @@ std::string CriticalPeakEvent::Execute()
     std::string response_from_der = "der response not supported yet";
     std::cout << "  CriticalPeakEvent Command Executing... " << std::endl;
 
-    //this is specific to a simulated receiver at this point, and not based on a particular resource.
     https_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", "CriticalPeakEventCommand", "na", "CriticalPeakEvent"));
     response_from_der = receiver_->CriticalPeakEvent();
     //https_client_->Post("DTM", response_from_der);
@@ -238,9 +234,51 @@ std::string GridEmergencyEvent::Execute()
     std::string response_from_der;
     std::cout << "  GridEmergencyEvent Command Executing... " << std::endl;
 
-    //this is specific to a simulated receiver at this point, and not based on a particular resource.
     https_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", "GridEmergencyEventCommand", "na", "GridEmergencyEvent"));
     response_from_der = receiver_->GridEmergencyEvent();
+    //https_client_->Post("DTM", response_from_der);
+
+    return response_from_der;
+}
+
+//=================================================================================
+
+ OutsideCommConnectionStatus :: OutsideCommConnectionStatus ()
+{
+    // do nothing
+
+}
+
+ OutsideCommConnectionStatus :: OutsideCommConnectionStatus (CombinedHttpsClient *client, BaseReceiver *receiver)
+    : BaseCommand(client, receiver)
+{
+    // do nothing
+}
+ OutsideCommConnectionStatus :: ~OutsideCommConnectionStatus ()
+{
+    // do nothing
+}
+std::string  OutsideCommConnectionStatus :: Execute(int status) // 0=no, 1=found, 2=poor
+{
+    std::string response_from_der;
+    std::string status_str;
+    std::cout << "   OutsideCommConnectionStatus  Command Executing... " << std::endl;
+
+    switch (status)
+    {
+        case 0:
+            status_str = "No";
+            break;
+        case 1:
+            status_str = "Found";
+            break;
+        case 2:
+            status_str = "Poor";
+            break;
+    }
+    
+    https_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", " OutsideCommConnectionStatusCommand", "na", " OutsideCommConnectionStatus: " + status_str));
+    response_from_der = receiver_->OutsideCommConnectionStatus(status);
     //https_client_->Post("DTM", response_from_der);
 
     return response_from_der;

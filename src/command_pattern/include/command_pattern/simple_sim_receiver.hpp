@@ -26,6 +26,7 @@ namespace dcm
         virtual std::string Idle() = 0;
         virtual std::string CriticalPeakEvent() = 0;
         virtual std::string GridEmergencyEvent() = 0;
+        virtual std::string OutsideCommConnectionStatus(int status_code) =0;
 
     private:
     };
@@ -43,6 +44,7 @@ namespace dcm
         std::string Idle();
         std::string CriticalPeakEvent();
         std::string GridEmergencyEvent();
+        std::string OutsideCommConnectionStatus(int status_code);
         void IncrementSimulatorProgress();
 
     private:
