@@ -126,7 +126,7 @@ class OutsideCommConnectionStatus : public BaseCommand
         OutsideCommConnectionStatus();
         OutsideCommConnectionStatus(CombinedHttpsClient *client, BaseReceiver *receiver);
         ~OutsideCommConnectionStatus();
-        std::string Execute(int status); // 0=no, 1=found, 2=poor
+        std::string Execute(); 
 
     private:
 };

@@ -258,12 +258,12 @@ std::string GridEmergencyEvent::Execute()
 {
     // do nothing
 }
-std::string  OutsideCommConnectionStatus :: Execute(int status) // 0=no, 1=found, 2=poor
+std::string  OutsideCommConnectionStatus :: Execute() 
 {
     std::string response_from_der;
-    std::string status_str;
+    std::string status_str = "Found";
     std::cout << "   OutsideCommConnectionStatus  Command Executing... " << std::endl;
-
+/*
     switch (status)
     {
         case 0:
@@ -276,9 +276,9 @@ std::string  OutsideCommConnectionStatus :: Execute(int status) // 0=no, 1=found
             status_str = "Poor";
             break;
     }
-    
+*/
     https_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", " OutsideCommConnectionStatusCommand", "na", " OutsideCommConnectionStatus: " + status_str));
-    response_from_der = receiver_->OutsideCommConnectionStatus(status);
+    response_from_der = receiver_->OutsideCommConnectionStatus(1); // 0=no, 1=found, 2=poor
     //https_client_->Post("DTM", response_from_der);
 
     return response_from_der;

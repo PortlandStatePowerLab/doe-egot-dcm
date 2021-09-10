@@ -12,7 +12,8 @@ ECS_DCM::ECS_DCM() :
         get_nameplate_c_(nullptr),
         idle_c_(nullptr),
         crit_peak_c_(nullptr),
-        grid_emergency_c_(nullptr)
+        grid_emergency_c_(nullptr),
+        outside_comm_connection_status_c_(nullptr)
 {
     //SetReceiver();
     //need a program path
@@ -28,7 +29,8 @@ ECS_DCM::ECS_DCM(const std::string &root) :
         get_nameplate_c_(nullptr),
         idle_c_(nullptr),
         crit_peak_c_(nullptr),
-        grid_emergency_c_(nullptr)
+        grid_emergency_c_(nullptr),
+        outside_comm_connection_status_c_(nullptr)
 {
     std::cout << " ECS_DCM root arg overload constructor reduced" << std::endl;
     
@@ -44,6 +46,7 @@ ECS_DCM::ECS_DCM(const std::string &root) :
                                                           get_nameplate_c_, idle_c_, crit_peak_c_); 
     crit_peak_c_ = new CriticalPeakEvent(combined_client_, receiver_);
     grid_emergency_c_ = new GridEmergencyEvent(combined_client_, receiver_);
+    outside_comm_connection_status_c_ = new OutsideCommConnectionStatus(combined_client_, receiver_);
     dcm_world_.import<dcm::dcm_components_module>();
     std::string startup_msg = xml_writer_.WriteMsg("DCM", "DTM", "DCM_Startup", "na", "DCM system starting up");
     combined_client_->Post("DTM", startup_msg);
@@ -87,6 +90,9 @@ ECS_DCM::~ECS_DCM()
     if (grid_emergency_c_)
         delete grid_emergency_c_;
     std::cout << "10" << std::endl;
+    if (outside_comm_connection_status_c_)
+        delete outside_comm_connection_status_c_;
+    std::cout << "11" << std::endl;
 }
 
 void ECS_DCM::SetReceiver()
@@ -123,6 +129,7 @@ void ECS_DCM::TestCTA2045Commands()
         std::cout << "e - ExportEnergy() / Shed" << std::endl;
         std::cout << "d - Idle() / EndShed" << std::endl;
         std::cout << "p - CriticalPeakEvent() / CriticalPeak" << std::endl;
+        std::cout << "s - OutsideCommConnectionStatus() " << std::endl;
         std::cout << "q - quit " << std::endl;
         std::cout << "==============" << std::endl;
 
@@ -149,6 +156,9 @@ void ECS_DCM::TestCTA2045Commands()
             case 'p':
 				crit_peak_c_->Execute();
 				break;
+            case 's':
+                outside_comm_connection_status_c_->Execute();
+                break;
 			case 'q':
 				shutdown = true;
 				break;
