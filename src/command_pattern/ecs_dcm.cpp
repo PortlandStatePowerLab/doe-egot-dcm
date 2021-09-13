@@ -97,17 +97,26 @@ ECS_DCM::~ECS_DCM()
 
 void ECS_DCM::SetReceiver()
 {
-    std::cout << " ECS_DCM::SetReceiver(), please type 0 for simulator and 1 for CTA2045 " << std::endl;
+    std::cout << " ECS_DCM::SetReceiver() " << std::endl;
+    std::cout << "0 - Simulator " << std::endl;
+    std::cout << "1 - CTA2045 Terminal Interface " << std::endl;
+    std::cout << "2 - CTA2045 Control Loop " << std::endl;
     // imaginary comms tests, or pre-defined binary init
     int choice = 0;
     std::cin >> choice;
     std::cin.ignore(100, '\n');
-    if (choice)
+    switch (choice)
     {
-        receiver_ = new CTA2045Receiver(combined_client_);
+        case 0:
+            receiver_ = new SimpleSimulatorReceiver; //emulated DER
+            break;
+        case 1:
+            receiver_ = new CTA2045Receiver(combined_client_);
+            break;
+        case 2:
+            std::cout << "do something" << std::endl;
+            break;
     }
-    else
-        receiver_ = new SimpleSimulatorReceiver; //emulated DER
 }
 
 void ECS_DCM::RunSimulatorLoop()
