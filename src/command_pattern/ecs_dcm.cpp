@@ -136,55 +136,59 @@ void ECS_DCM::TestCTA2045Commands()
 {
     
     bool shutdown = false;
-
     while (!shutdown)
-	{
-        std::cout << "TESTING CTA-2045 COMMANDS" << std::endl;
-        std::cout << "c - GetEnergy() / CommodityRead" << std::endl;
-        std::cout << "n - GetNameplate() / DeviceInfo" << std::endl;
-        std::cout << "i - ImportEnergy() / LoadUp" << std::endl;
-        std::cout << "e - ExportEnergy() / Shed" << std::endl;
-        std::cout << "d - Idle() / EndShed" << std::endl;
-        std::cout << "p - CriticalPeakEvent() / CriticalPeak" << std::endl;
-        std::cout << "s - OutsideCommConnectionStatus() " << std::endl;
-        std::cout << "q - quit " << std::endl;
-        std::cout << "==============" << std::endl;
+    {
+        gettimeofday(&tv_dcm_now_, nullptr)) // -1 returned means operation was unsuccessful
+    
+        while (!shutdown)
+        {
+            std::cout << "TESTING CTA-2045 COMMANDS" << std::endl;
+            std::cout << "c - GetEnergy() / CommodityRead" << std::endl;
+            std::cout << "n - GetNameplate() / DeviceInfo" << std::endl;
+            std::cout << "i - ImportEnergy() / LoadUp" << std::endl;
+            std::cout << "e - ExportEnergy() / Shed" << std::endl;
+            std::cout << "d - Idle() / EndShed" << std::endl;
+            std::cout << "p - CriticalPeakEvent() / CriticalPeak" << std::endl;
+            std::cout << "s - OutsideCommConnectionStatus() " << std::endl;
+            std::cout << "q - quit " << std::endl;
+            std::cout << "==============" << std::endl;
 
-		char c = getchar();
-        std::cin.ignore(100, '\n');
-        
-		switch (c)
-		{
-			case 'c':
-				get_energy_c_->Execute();
-				break;
-			case 'n':
-				get_nameplate_c_->Execute();
-				break;
-            case 'i':
-				import_energy_c_->Execute();
-				break;
-            case 'e':
-				export_energy_c_->Execute();
-				break;
-            case 'd':
-				idle_c_->Execute();
-				break;
-            case 'p':
-				crit_peak_c_->Execute();
-				break;
-            case 's':
-                outside_comm_connection_status_c_->Execute();
-                break;
-			case 'q':
-				shutdown = true;
-				break;
-			default:
-				std::cout << "invalid command" << std::endl;;
-				break;
-		}
-        std::cout << "==============" << std::endl;
-	}
+            char c = getchar();
+            std::cin.ignore(100, '\n');
+            
+            switch (c)
+            {
+                case 'c':
+                    get_energy_c_->Execute();
+                    break;
+                case 'n':
+                    get_nameplate_c_->Execute();
+                    break;
+                case 'i':
+                    import_energy_c_->Execute();
+                    break;
+                case 'e':
+                    export_energy_c_->Execute();
+                    break;
+                case 'd':
+                    idle_c_->Execute();
+                    break;
+                case 'p':
+                    crit_peak_c_->Execute();
+                    break;
+                case 's':
+                    outside_comm_connection_status_c_->Execute();
+                    break;
+                case 'q':
+                    shutdown = true;
+                    break;
+                default:
+                    std::cout << "invalid command" << std::endl;;
+                    break;
+            }
+            std::cout << "==============" << std::endl;
+        }
+    }
     
 }
 

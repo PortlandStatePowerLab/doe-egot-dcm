@@ -36,7 +36,7 @@ CombinedHttpsClient::Get(const std::string& target, const std::string& query)
     
     // Now notify DTM of response from GSP
     //msg = xml_writer_.ReturnCustomGSPNotify("DCM", "GSP", "GET_response", "na", response_body); // "From: GSP, To: DCM, Method: Response, Body: " + boost::beast::buffers_to_string(res.body().data());
-    dtm_client_.Post("/na", xml_writer_.WriteMsg("GSP", "DCM", "GETResp", "na", response_body));
+    dtm_client_.Post("/na", xml_writer_.WriteMsg("DCM", "GSP", "GETResp", "na", response_body));
 
     return res;
 }
