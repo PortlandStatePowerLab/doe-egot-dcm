@@ -138,8 +138,13 @@ void ECS_DCM::TestCTA2045Commands()
     bool shutdown = false;
     while (!shutdown)
     {
-        gettimeofday(&tv_dcm_now_, nullptr)) // -1 returned means operation was unsuccessful
-    
+        gettimeofday(&tv_dcm_now_, nullptr); // -1 returned means operation was unsuccessful
+
+        if ( (tv_dcm_now_.tv_sec - tv_dcm_epoch_.tv_sec) % 60 == 0) // check if it's been a whole minute
+        {
+            outside_comm_connection_status_c_->Execute();
+        }
+
         while (!shutdown)
         {
             std::cout << "TESTING CTA-2045 COMMANDS" << std::endl;
