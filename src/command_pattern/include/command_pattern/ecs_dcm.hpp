@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <flecs.h>
 #include <sstream>
+#include <sys/time.h>
 #include <https/https_client.hpp>
 #include <https/combined_client.hpp>
 #include <sep/models.hpp>
@@ -62,6 +63,8 @@ class ECS_DCM
     flecs::world dcm_world_;
     xml::XMLCommandAdapter xml_writer_;
     CombinedHttpsClient *combined_client_;
+    struct timeval tv_dcm_now_;
+    struct timeval tv_dcm_epoch_;
     BaseInvoker *sim_flow_invoker_;
     BaseReceiver *receiver_;
     ImportEnergy *import_energy_c_;

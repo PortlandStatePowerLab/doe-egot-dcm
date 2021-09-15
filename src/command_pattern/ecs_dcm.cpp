@@ -17,6 +17,10 @@ ECS_DCM::ECS_DCM() :
 {
     //SetReceiver();
     //need a program path
+    if (!gettimeofday(&tv_dcm_epoch_, nullptr)) // -1 returned means operation was unsuccessful
+    {
+        std::cout << "TIME OPERATION UNSUCCESSFUL FOR UNKNOWN REASONS. SOMETHING IMPORTANT IS BROKEN" << std::endl;
+    }
 }
 
 ECS_DCM::ECS_DCM(const std::string &root) : 
@@ -33,6 +37,12 @@ ECS_DCM::ECS_DCM(const std::string &root) :
         outside_comm_connection_status_c_(nullptr)
 {
     std::cout << " ECS_DCM root arg overload constructor reduced" << std::endl;
+
+    if (!gettimeofday(&tv_dcm_epoch_, nullptr)) // -1 returned means operation was unsuccessful
+    {
+        std::cout << "TIME OPERATION UNSUCCESSFUL FOR UNKNOWN REASONS. SOMETHING IMPORTANT IS BROKEN" << std::endl;
+    }
+
     
     combined_client_ = new CombinedHttpsClient(root, "localhost", "4430", root, "localhost", "4430");
     SetReceiver(); //have to init after https init
@@ -100,7 +110,7 @@ void ECS_DCM::SetReceiver()
     std::cout << " ECS_DCM::SetReceiver() " << std::endl;
     std::cout << "0 - Simulator " << std::endl;
     std::cout << "1 - CTA2045 Terminal Interface " << std::endl;
-    std::cout << "2 - CTA2045 Control Loop " << std::endl;
+    //std::cout << "2 - CTA2045 Control Loop " << std::endl;
     // imaginary comms tests, or pre-defined binary init
     int choice = 0;
     std::cin >> choice;
@@ -113,9 +123,7 @@ void ECS_DCM::SetReceiver()
         case 1:
             receiver_ = new CTA2045Receiver(combined_client_);
             break;
-        case 2:
-            std::cout << "do something" << std::endl;
-            break;
+        
     }
 }
 
