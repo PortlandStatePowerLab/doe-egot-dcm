@@ -109,6 +109,8 @@ class CriticalPeakEvent : public BaseCommand
     private:
 };
 
+//===============================================================================
+
 class GridEmergencyEvent : public BaseCommand
 {
     public:
@@ -120,12 +122,27 @@ class GridEmergencyEvent : public BaseCommand
     private:
 };
 
+//===============================================================================
+
 class OutsideCommConnectionStatus : public BaseCommand
 {
     public:
         OutsideCommConnectionStatus();
         OutsideCommConnectionStatus(CombinedHttpsClient *client, BaseReceiver *receiver);
         ~OutsideCommConnectionStatus();
+        std::string Execute(); 
+
+    private:
+};
+
+//===============================================================================
+
+class QueryOperationalState : public BaseCommand
+{
+    public:
+        QueryOperationalState();
+        QueryOperationalState(CombinedHttpsClient *client, BaseReceiver *receiver);
+        ~QueryOperationalState();
         std::string Execute(); 
 
     private:

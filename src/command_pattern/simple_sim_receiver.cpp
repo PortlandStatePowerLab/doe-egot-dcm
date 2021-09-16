@@ -59,6 +59,11 @@ std::string SimpleSimulatorReceiver::OutsideCommConnectionStatus(int status_code
     std::cout << "SimpleSimReceiver OutsideCommConnectStatus, not supported currently" << std::endl;
 }
 
+std::string SimpleSimulatorReceiver::QueryOperationalState()
+{
+    std::cout << "SimpleSimReceiver QueryOperationalState, not supported currently" << std::endl;
+}
+
 void SimpleSimulatorReceiver::IncrementSimulatorProgress()
 {
     sim_der_->IncrementProgress();

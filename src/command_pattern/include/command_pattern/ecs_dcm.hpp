@@ -75,6 +75,7 @@ class ECS_DCM
     CriticalPeakEvent *crit_peak_c_;
     GridEmergencyEvent *grid_emergency_c_;
     OutsideCommConnectionStatus *outside_comm_connection_status_c_;
+    QueryOperationalState *query_op_state_c_;
 
     //BaseInvoker * sim_invoker_;
 };

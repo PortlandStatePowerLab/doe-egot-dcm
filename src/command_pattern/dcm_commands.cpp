@@ -283,3 +283,32 @@ std::string  OutsideCommConnectionStatus :: Execute()
 
     return response_from_der;
 }
+
+//=================================================================================
+
+ QueryOperationalState :: QueryOperationalState ()
+{
+    // do nothing
+
+}
+ QueryOperationalState :: QueryOperationalState (CombinedHttpsClient *client, BaseReceiver *receiver)
+    : BaseCommand(client, receiver)
+{
+    // do nothing
+}
+ QueryOperationalState :: ~QueryOperationalState ()
+{
+    // do nothing
+}
+std::string  QueryOperationalState :: Execute() 
+{
+    std::string response_from_der;
+    std::string status_str = "Found";
+    std::cout << "   QueryOperationalState  Command Executing... " << std::endl;
+
+    https_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", " QueryOperationalStateCommand", "na", " QueryOperationalState: " + status_str));
+    response_from_der = receiver_->QueryOperationalState(); // 0=no, 1=found, 2=poor
+    //https_client_->Post("DTM", response_from_der);
+
+    return response_from_der;
+}

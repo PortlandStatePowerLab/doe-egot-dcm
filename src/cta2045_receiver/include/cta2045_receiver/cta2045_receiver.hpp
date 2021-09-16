@@ -35,6 +35,7 @@ class CTA2045Receiver : public BaseReceiver
         std::string CriticalPeakEvent();
         std::string GridEmergencyEvent();
         std::string OutsideCommConnectionStatus(int status_code); // 0=no, 1=found, 2=poor
+        std::string QueryOperationalState();
 
     private:
         std::string response_;

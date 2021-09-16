@@ -13,7 +13,8 @@ ECS_DCM::ECS_DCM() :
         idle_c_(nullptr),
         crit_peak_c_(nullptr),
         grid_emergency_c_(nullptr),
-        outside_comm_connection_status_c_(nullptr)
+        outside_comm_connection_status_c_(nullptr),
+        query_op_state_c_(nullptr)
 {
     //SetReceiver();
     //need a program path
@@ -34,7 +35,8 @@ ECS_DCM::ECS_DCM(const std::string &root) :
         idle_c_(nullptr),
         crit_peak_c_(nullptr),
         grid_emergency_c_(nullptr),
-        outside_comm_connection_status_c_(nullptr)
+        outside_comm_connection_status_c_(nullptr),
+        query_op_state_c_(nullptr)
 {
     std::cout << " ECS_DCM root arg overload constructor reduced" << std::endl;
 
@@ -57,6 +59,7 @@ ECS_DCM::ECS_DCM(const std::string &root) :
     crit_peak_c_ = new CriticalPeakEvent(combined_client_, receiver_);
     grid_emergency_c_ = new GridEmergencyEvent(combined_client_, receiver_);
     outside_comm_connection_status_c_ = new OutsideCommConnectionStatus(combined_client_, receiver_);
+    query_op_state_c_ = new QueryOperationalState(combined_client_, receiver_);
     dcm_world_.import<dcm::dcm_components_module>();
     std::string startup_msg = xml_writer_.WriteMsg("DCM", "DTM", "DCM_Startup", "na", "DCM system starting up");
     combined_client_->Post("DTM", startup_msg);
@@ -102,6 +105,9 @@ ECS_DCM::~ECS_DCM()
     std::cout << "10" << std::endl;
     if (outside_comm_connection_status_c_)
         delete outside_comm_connection_status_c_;
+    std::cout << "11" << std::endl;
+    if (query_op_state_c_)
+        delete query_op_state_c_;
     std::cout << "11" << std::endl;
 }
 
@@ -155,6 +161,7 @@ void ECS_DCM::TestCTA2045Commands()
             std::cout << "d - Idle() / EndShed" << std::endl;
             std::cout << "p - CriticalPeakEvent() / CriticalPeak" << std::endl;
             std::cout << "s - OutsideCommConnectionStatus() " << std::endl;
+            std::cout << "r - QueryOperationalState() " << std::endl;
             std::cout << "q - quit " << std::endl;
             std::cout << "==============" << std::endl;
 
@@ -183,6 +190,9 @@ void ECS_DCM::TestCTA2045Commands()
                     break;
                 case 's':
                     outside_comm_connection_status_c_->Execute();
+                    break;
+                case 'r':
+                    query_op_state_c_->Execute();
                     break;
                 case 'q':
                     shutdown = true;

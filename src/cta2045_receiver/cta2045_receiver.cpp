@@ -193,5 +193,24 @@ std::string CTA2045Receiver::OutsideCommConnectionStatus(int status_code) // 0=n
     return log + ", elapsed: " + std::to_string(elapsed);
 }
 
+std::string CTA2045Receiver::QueryOperationalState() // 0=no, 1=found, 2=poor
+{
+    unsigned long elapsed = 0;
+    std::string log;
+    std::cout << "cta2045receiver Outside Communication Connection Status " << std::endl;
+
+
+
+    timer_.reset();
+    device_->basicQueryOperationalState().get();
+    elapsed = timer_.getElapsedMS();
+
+    log = "CTA2045: " + response_; //for command
+    response_.erase();
+    std::cout << " cta2045receiver QueryOperationalState log: " << log << std::endl;
+
+    return log + ", elapsed: " + std::to_string(elapsed);
+}
+
 } // namespace dcm
 
