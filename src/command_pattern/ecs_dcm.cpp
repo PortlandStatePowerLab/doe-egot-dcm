@@ -141,18 +141,6 @@ void ECS_DCM::RunSimulatorLoop()
 void ECS_DCM::TestCTA2045Commands()
 {
     
-    bool shutdown = false;
-    std::cout << "TESTING CTA-2045 COMMANDS" << std::endl;
-    std::cout << "c - GetEnergy() / CommodityRead" << std::endl;
-    std::cout << "n - GetNameplate() / DeviceInfo" << std::endl;
-    std::cout << "i - ImportEnergy() / LoadUp" << std::endl;
-    std::cout << "e - ExportEnergy() / Shed" << std::endl;
-    std::cout << "d - Idle() / EndShed" << std::endl;
-    std::cout << "p - CriticalPeakEvent() / CriticalPeak" << std::endl;
-    std::cout << "s - OutsideCommConnectionStatus() " << std::endl;
-    std::cout << "r - QueryOperationalState() " << std::endl;
-    std::cout << "q - quit " << std::endl;
-    std::cout << "==============" << std::endl;
 
     while (!shutdown)
     {
