@@ -142,6 +142,18 @@ void ECS_DCM::TestCTA2045Commands()
 {
     
     bool shutdown = false;
+    std::cout << "TESTING CTA-2045 COMMANDS" << std::endl;
+    std::cout << "c - GetEnergy() / CommodityRead" << std::endl;
+    std::cout << "n - GetNameplate() / DeviceInfo" << std::endl;
+    std::cout << "i - ImportEnergy() / LoadUp" << std::endl;
+    std::cout << "e - ExportEnergy() / Shed" << std::endl;
+    std::cout << "d - Idle() / EndShed" << std::endl;
+    std::cout << "p - CriticalPeakEvent() / CriticalPeak" << std::endl;
+    std::cout << "s - OutsideCommConnectionStatus() " << std::endl;
+    std::cout << "r - QueryOperationalState() " << std::endl;
+    std::cout << "q - quit " << std::endl;
+    std::cout << "==============" << std::endl;
+
     while (!shutdown)
     {
         gettimeofday(&tv_dcm_now_, nullptr); // -1 returned means operation was unsuccessful
@@ -151,8 +163,9 @@ void ECS_DCM::TestCTA2045Commands()
             outside_comm_connection_status_c_->Execute();
         }
 
-        while (!shutdown)
+        if ((tv_dcm_now_.tv_sec - tv_dcm_epoch_.tv_sec) % 5 == 0)
         {
+            bool shutdown = false;
             std::cout << "TESTING CTA-2045 COMMANDS" << std::endl;
             std::cout << "c - GetEnergy() / CommodityRead" << std::endl;
             std::cout << "n - GetNameplate() / DeviceInfo" << std::endl;
@@ -164,7 +177,6 @@ void ECS_DCM::TestCTA2045Commands()
             std::cout << "r - QueryOperationalState() " << std::endl;
             std::cout << "q - quit " << std::endl;
             std::cout << "==============" << std::endl;
-
             char c = getchar();
             std::cin.ignore(100, '\n');
             
