@@ -46,7 +46,7 @@ namespace dcm
         std::string CriticalPeakEvent();
         std::string GridEmergencyEvent();
         std::string OutsideCommConnectionStatus(int status_code);
-        virtual std::string QueryOperationalState();
+        std::string QueryOperationalState();
         void IncrementSimulatorProgress();
 
     private:
