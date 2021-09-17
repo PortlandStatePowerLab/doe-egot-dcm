@@ -59,6 +59,8 @@ class ECS_DCM
     sep::FlowReservationResponse GetFlowResRespFromGSP();
     void InitializeFlowResInvokingSystems();
 
+    // for multithread
+    void ControlLoop();
   private:
     flecs::world dcm_world_;
     xml::XMLCommandAdapter xml_writer_;
@@ -76,6 +78,10 @@ class ECS_DCM
     GridEmergencyEvent *grid_emergency_c_;
     OutsideCommConnectionStatus *outside_comm_connection_status_c_;
     QueryOperationalState *query_op_state_c_;
+
+    // for threading
+    bool run_daemon_;
+
 
     //BaseInvoker * sim_invoker_;
 };

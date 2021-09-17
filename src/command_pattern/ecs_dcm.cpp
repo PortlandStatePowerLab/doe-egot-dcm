@@ -14,7 +14,8 @@ ECS_DCM::ECS_DCM() :
         crit_peak_c_(nullptr),
         grid_emergency_c_(nullptr),
         outside_comm_connection_status_c_(nullptr),
-        query_op_state_c_(nullptr)
+        query_op_state_c_(nullptr),
+        run_daemon_(false)
 {
     //SetReceiver();
     //need a program path
@@ -138,72 +139,77 @@ void ECS_DCM::RunSimulatorLoop()
     // TODO
 }
 
-void ECS_DCM::TestCTA2045Commands()
-{
-    
-
-    while (!shutdown)
-    {
+void ECS_DCM::ControlLoop(){
+    while (run_daemon_){
         gettimeofday(&tv_dcm_now_, nullptr); // -1 returned means operation was unsuccessful
 
         if ( (tv_dcm_now_.tv_sec - tv_dcm_epoch_.tv_sec) % 60 == 0) // check if it's been a whole minute
         {
             outside_comm_connection_status_c_->Execute();
         }
-
-        if ((tv_dcm_now_.tv_sec - tv_dcm_epoch_.tv_sec) % 5 == 0)
-        {
-            bool shutdown = false;
-            std::cout << "TESTING CTA-2045 COMMANDS" << std::endl;
-            std::cout << "c - GetEnergy() / CommodityRead" << std::endl;
-            std::cout << "n - GetNameplate() / DeviceInfo" << std::endl;
-            std::cout << "i - ImportEnergy() / LoadUp" << std::endl;
-            std::cout << "e - ExportEnergy() / Shed" << std::endl;
-            std::cout << "d - Idle() / EndShed" << std::endl;
-            std::cout << "p - CriticalPeakEvent() / CriticalPeak" << std::endl;
-            std::cout << "s - OutsideCommConnectionStatus() " << std::endl;
-            std::cout << "r - QueryOperationalState() " << std::endl;
-            std::cout << "q - quit " << std::endl;
-            std::cout << "==============" << std::endl;
-            char c = getchar();
-            std::cin.ignore(100, '\n');
-            
-            switch (c)
-            {
-                case 'c':
-                    get_energy_c_->Execute();
-                    break;
-                case 'n':
-                    get_nameplate_c_->Execute();
-                    break;
-                case 'i':
-                    import_energy_c_->Execute();
-                    break;
-                case 'e':
-                    export_energy_c_->Execute();
-                    break;
-                case 'd':
-                    idle_c_->Execute();
-                    break;
-                case 'p':
-                    crit_peak_c_->Execute();
-                    break;
-                case 's':
-                    outside_comm_connection_status_c_->Execute();
-                    break;
-                case 'r':
-                    query_op_state_c_->Execute();
-                    break;
-                case 'q':
-                    shutdown = true;
-                    break;
-                default:
-                    std::cout << "invalid command" << std::endl;;
-                    break;
-            }
-            std::cout << "==============" << std::endl;
-        }
     }
+    return;
+}
+
+void ECS_DCM::TestCTA2045Commands()
+{
+    run_daemon_ = true;
+    bool shutdown = false;
+    std::thread daemon_thread = std::thread(&ECS_DCM::ControlLoop,this);
+
+    while (!shutdown)
+    {
+        std::cout << "TESTING CTA-2045 COMMANDS" << std::endl;
+        std::cout << "c - GetEnergy() / CommodityRead" << std::endl;
+        std::cout << "n - GetNameplate() / DeviceInfo" << std::endl;
+        std::cout << "i - ImportEnergy() / LoadUp" << std::endl;
+        std::cout << "e - ExportEnergy() / Shed" << std::endl;
+        std::cout << "d - Idle() / EndShed" << std::endl;
+        std::cout << "p - CriticalPeakEvent() / CriticalPeak" << std::endl;
+        std::cout << "s - OutsideCommConnectionStatus() " << std::endl;
+        std::cout << "r - QueryOperationalState() " << std::endl;
+        std::cout << "q - quit " << std::endl;
+        std::cout << "==============" << std::endl;
+        char c = getchar();
+        std::cin.ignore(100, '\n');
+        
+        switch (c)
+        {
+            case 'c':
+                get_energy_c_->Execute();
+                break;
+            case 'n':
+                get_nameplate_c_->Execute();
+                break;
+            case 'i':
+                import_energy_c_->Execute();
+                break;
+            case 'e':
+                export_energy_c_->Execute();
+                break;
+            case 'd':
+                idle_c_->Execute();
+                break;
+            case 'p':
+                crit_peak_c_->Execute();
+                break;
+            case 's':
+                outside_comm_connection_status_c_->Execute();
+                break;
+            case 'r':
+                query_op_state_c_->Execute();
+                break;
+            case 'q':
+                shutdown = true;
+                run_daemon_ = false;
+                break;
+            default:
+                std::cout << "invalid command" << std::endl;;
+                break;
+        }
+        std::cout << "==============" << std::endl;
+    }
+    daemon_thread.join();
     
 }
 
