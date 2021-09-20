@@ -140,7 +140,7 @@ void ECS_DCM::RunSimulatorLoop()
 }
 
 void ECS_DCM::ControlLoop(){
-    int heartbeat_increment = 60; // 60 secs (used to send a heartbeat every minute)
+    int heartbeat_increment = 5 * 60; // # of minutes between heartbeat msgs (send a heartbeat every 5 minutes)
     gettimeofday(&tv_dcm_now_, nullptr); // priming the pump 
     int heartbeat_interval = tv_dcm_now_.tv_sec + heartbeat_increment; // init heartbreat_interval
 
