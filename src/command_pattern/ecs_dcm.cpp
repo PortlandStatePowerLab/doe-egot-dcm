@@ -140,12 +140,17 @@ void ECS_DCM::RunSimulatorLoop()
 }
 
 void ECS_DCM::ControlLoop(){
+    int heartbeat_increment = 60; // 60 secs (used to send a heartbeat every minute)
+    gettimeofday(&tv_dcm_now_, nullptr); // priming the pump 
+    int heartbeat_interval = tv_dcm_now_.tv_sec + heartbeat_increment; // init heartbreat_interval
+
     while (run_daemon_){
         gettimeofday(&tv_dcm_now_, nullptr); // -1 returned means operation was unsuccessful
 
-        if ( (tv_dcm_now_.tv_sec - tv_dcm_epoch_.tv_sec) % 60 == 0) // check if it's been a whole minute
+        if ( tv_dcm_now_.tv_sec >= heartbeat_interval ) // check if it's been a whole minute
         {
             outside_comm_connection_status_c_->Execute();
+            heartbeat_interval = tv_dcm_now_.tv_sec + heartbeat_increment; // calculate next heartbeat time
         }
     }
     return;
