@@ -15,7 +15,7 @@ ECS_DCM::ECS_DCM() :
         grid_emergency_c_(nullptr),
         outside_comm_connection_status_c_(nullptr),
         query_op_state_c_(nullptr),
-        run_daemon_(false)
+        shutdown_(false)
 {
     //SetReceiver();
     //need a program path
@@ -37,7 +37,8 @@ ECS_DCM::ECS_DCM(const std::string &root) :
         crit_peak_c_(nullptr),
         grid_emergency_c_(nullptr),
         outside_comm_connection_status_c_(nullptr),
-        query_op_state_c_(nullptr)
+        query_op_state_c_(nullptr),
+        shutdown_(false)
 {
     std::cout << " ECS_DCM root arg overload constructor reduced" << std::endl;
 
@@ -116,8 +117,8 @@ void ECS_DCM::SetReceiver()
 {
     std::cout << " ECS_DCM::SetReceiver() " << std::endl;
     std::cout << "0 - Simulator " << std::endl;
-    std::cout << "1 - CTA2045 Terminal Interface " << std::endl;
-    //std::cout << "2 - CTA2045 Control Loop " << std::endl;
+    std::cout << "1 - CTA2045 receiver " << std::endl;
+    // std::cout << "2 - SunSpecModBus receiver " << std::endl;
     // imaginary comms tests, or pre-defined binary init
     int choice = 0;
     std::cin >> choice;
@@ -130,7 +131,11 @@ void ECS_DCM::SetReceiver()
         case 1:
             receiver_ = new CTA2045Receiver(combined_client_);
             break;
-        
+        // case 2:
+        //     receiver_ = new SunSpecModBusReceiver(combined_client_); // DO YOUR THESIS EARLY!!!
+        //     break;
+        default:
+            break;        
     }
 }
 
@@ -139,18 +144,41 @@ void ECS_DCM::RunSimulatorLoop()
     // TODO
 }
 
+void ECS_DCM::Run(){
+    std::cout << " ----- Choice Control Type ----- " << std::endl;
+    std::cout << "0 - Manual Terminal Control" << std::endl;
+    std::cout << "1 -  Auto Control Loop" << std::endl;
+    int choice = 0;
+    std::cin >> choice;
+    std::cin.ignore(100, '\n');
+    switch(choice){
+        case 0:
+            TestCTA2045Commands();
+            break;
+        default:
+            ControlLoop();
+            break;
+    }
+    return;
+}
+
 void ECS_DCM::ControlLoop(){
-    int heartbeat_increment = 5 * 60; // # of minutes between heartbeat msgs (send a heartbeat every 5 minutes)
+    int heartbeat_increment = 1 * 60; // # of minutes between heartbeat msgs (send a heartbeat every 5 minutes)
     gettimeofday(&tv_dcm_now_, nullptr); // priming the pump 
     int heartbeat_interval = tv_dcm_now_.tv_sec + heartbeat_increment; // init heartbreat_interval
 
-    while (run_daemon_){
+    while (! shutdown_){
         gettimeofday(&tv_dcm_now_, nullptr); // -1 returned means operation was unsuccessful
 
         if ( tv_dcm_now_.tv_sec >= heartbeat_interval ) // check if it's been a whole minute
         {
+            std::cout<<"sending the out heartbeat \n";
+            std::cout<<outside_comm_connection_status_c_<<"\n";
             outside_comm_connection_status_c_->Execute();
             heartbeat_interval = tv_dcm_now_.tv_sec + heartbeat_increment; // calculate next heartbeat time
+        }
+        if ((tv_dcm_now_.tv_sec - tv_dcm_epoch_.tv_sec) % 10 == 0 && (tv_dcm_now_.tv_usec - tv_dcm_epoch_.tv_usec) % 1000000 == 0){
+            std::cout<<"\n"<<tv_dcm_now_.tv_usec<<" Ten secs passed! \n";
         }
     }
     return;
@@ -158,11 +186,7 @@ void ECS_DCM::ControlLoop(){
 
 void ECS_DCM::TestCTA2045Commands()
 {
-    run_daemon_ = true;
-    bool shutdown = false;
-    std::thread daemon_thread = std::thread(&ECS_DCM::ControlLoop,this);
-
-    while (!shutdown)
+    while (!shutdown_)
     {
         std::cout << "TESTING CTA-2045 COMMANDS" << std::endl;
         std::cout << "c - GetEnergy() / CommodityRead" << std::endl;
@@ -205,8 +229,7 @@ void ECS_DCM::TestCTA2045Commands()
                 query_op_state_c_->Execute();
                 break;
             case 'q':
-                shutdown = true;
-                run_daemon_ = false;
+                shutdown_ = true;
                 break;
             default:
                 std::cout << "invalid command" << std::endl;;
@@ -214,8 +237,7 @@ void ECS_DCM::TestCTA2045Commands()
         }
         std::cout << "==============" << std::endl;
     }
-    daemon_thread.join();
-    
+    return;    
 }
 
 void ECS_DCM::AddFlowResRespEntity(sep::FlowReservationResponse &flowresresp)
