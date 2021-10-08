@@ -191,6 +191,7 @@ std::future<ResponseCodes> ECS_CEA2045DeviceUCM::basicPowerLevel(unsigned char p
 
 std::future<ResponseCodes> ECS_CEA2045DeviceUCM::queryMaxPayload()
 {
+    combined_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", "QueryMaxPayload", "na", "querying max payload"));
 	return CEA2045Device::queryMaxPayload();
 }
 
@@ -198,6 +199,7 @@ std::future<ResponseCodes> ECS_CEA2045DeviceUCM::queryMaxPayload()
 
 std::future<ResponseCodes> ECS_CEA2045DeviceUCM::queryMessageTypeSupported(MessageCode messageCode, unsigned char messageType1, unsigned char messageType2)
 {
+    combined_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", "QueryMsgTypeSupported", "na", "querying message type supported"));
 	return CEA2045Device::queryMessageTypeSupported(messageCode, messageType1, messageType2);
 }
 
@@ -205,6 +207,7 @@ std::future<ResponseCodes> ECS_CEA2045DeviceUCM::queryMessageTypeSupported(Messa
 
 std::future<ResponseCodes> ECS_CEA2045DeviceUCM::querySuportDataLinkMessages()
 {
+    combined_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", "QuerySupportDataLinkMsgs", "na", "querying support of data link messages"));
 	return CEA2045Device::querySuportDataLinkMessages();
 }
 
@@ -212,6 +215,7 @@ std::future<ResponseCodes> ECS_CEA2045DeviceUCM::querySuportDataLinkMessages()
 
 std::future<ResponseCodes> ECS_CEA2045DeviceUCM::querySuportIntermediateMessages()
 {
+    combined_client_->Post("DTM", xml_writer_.WriteMsg("DCM", "DER", "QuerySupportIntermediateMsgs", "na", "querying support of intermediate messages"));
 	return CEA2045Device::querySuportIntermediateMessages();
 }
 
