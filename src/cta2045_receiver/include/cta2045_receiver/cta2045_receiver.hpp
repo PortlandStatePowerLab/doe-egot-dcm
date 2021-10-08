@@ -14,7 +14,28 @@
 #include <cea2045/communicationport/CEA2045SerialPort.h>
 #include <cea2045/util/MSTimer.h>
 #include "ecs_epri_ucm_impl.hpp"
+#include "ecs_CEA2045DeviceUCM.hpp"
+#include "ecs_DeviceFactory.hpp"
 #include "easylogging++.h"
+
+//#include "CEA2045Device.h"
+#include <cea2045/device/CEA2045Device.h>
+//#include "ICEA2045DeviceUCM.h"
+#include <cea2045/device/ICEA2045DeviceUCM.h>
+//#include "message/Basic.h"
+#include <cea2045/device/message/Basic.h>
+//#include "message/Intermediate.h"
+#include <cea2045/device/message/Intermediate.h>
+//#include "message/SetEnergyPrice.h"
+#include <cea2045/device/message/SetEnergyPrice.h>
+//#include "message/SetSetpoints.h"
+#include <cea2045/device/message/SetSetpoints.h>
+//#include "message/SetTemperatureOffset.h"
+#include <cea2045/device/message/SetTemperatureOffset.h>
+//#include "message/StartCycling.h"
+#include <cea2045/device/message/StartCycling.h>
+//#include "message/TerminateCycling.h"
+#include <cea2045/device/message/TerminateCycling.h>
 
 
 namespace dcm
@@ -46,6 +67,7 @@ class CTA2045Receiver : public BaseReceiver
         cea2045::ResponseCodes responseCodes_;
         cea2045::MSTimer timer_;
         bool shutdown_;
+        ECS_DeviceFactory * factory_;
         cea2045::ICEA2045DeviceUCM * device_;
 };
 

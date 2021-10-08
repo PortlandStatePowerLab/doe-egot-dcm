@@ -23,8 +23,8 @@ EPRI_UCM::EPRI_UCM(std::string * comm, CombinedHttpsClient *client) : comm_log_(
 
 EPRI_UCM::~EPRI_UCM()
 {
-    if (comm_log_)
-        delete comm_log_;
+	comm_log_ = nullptr;
+	combined_client_ = nullptr;
 }
 
 //======================================================================================

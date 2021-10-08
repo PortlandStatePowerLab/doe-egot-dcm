@@ -3,6 +3,8 @@ set(COMPONENT_NAME cta2045_receiver)
 add_library(${COMPONENT_NAME} STATIC
   cta2045_receiver.cpp
   ecs_epri_ucm_impl.cpp
+  ecs_CEA2045DeviceUCM.cpp
+  ecs_DeviceFactory.cpp
 )
 
 # Create ALIAS targets.

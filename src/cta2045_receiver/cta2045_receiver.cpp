@@ -1,10 +1,10 @@
 #include "include/cta2045_receiver/cta2045_receiver.hpp"
 
-
-
 namespace dcm
 {
+
 using namespace cea2045;
+
 CTA2045Receiver::CTA2045Receiver(CombinedHttpsClient *c) : epri_ucm_(&response_, c), serial_port_("/dev/ttyS0"), shutdown_(false)
 {
     std::cout << "CTA2045 Receiver Default Constructor" << std::endl;
@@ -16,7 +16,9 @@ CTA2045Receiver::CTA2045Receiver(CombinedHttpsClient *c) : epri_ucm_(&response_,
     {
         std::string msg_out = xml_writer_.WriteMsg("DCM", "DER", "CTA2045_Startup", "na", "Startup... Initiating CTA2045 Communications");
         c->Post("DTM", msg_out);
-        device_ = cea2045::DeviceFactory::createUCM(&serial_port_, &epri_ucm_);
+        //device_ = cea2045::DeviceFactory::createUCM(&serial_port_, &epri_ucm_);
+        factory_ = new ECS_DeviceFactory(&response_, c);
+        device_ = factory_->createUCM(&serial_port_, &epri_ucm_);
         device_->start();
         timer_.reset();
         responseCodes_ = device_->querySuportDataLinkMessages().get();
@@ -40,6 +42,7 @@ CTA2045Receiver::~CTA2045Receiver()
     std::cout << "cta2045receiver destructor" << std::endl;
     device_->shutDown();
     delete (device_);
+
 }
 
 std::string CTA2045Receiver::Import() 
