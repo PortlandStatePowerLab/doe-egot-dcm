@@ -123,23 +123,28 @@ void EPRI_UCM::processAckReceived(cea2045::MessageCode messageCode)
 
 	switch (messageCode)
 	{
+		case cea2045::MessageCode::SUPPORT_DATALINK_MESSAGES:
+		{
+			LOG(INFO) << "supports data link messages";
+			body += ", supports data link messages";
+			combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "AckReceived", "na", body));
+			break;
+		}
 
-	case cea2045::MessageCode::SUPPORT_DATALINK_MESSAGES:
-		LOG(INFO) << "supports data link messages";
-		body += ", supports data link messages";
-		break;
+		case cea2045::MessageCode::SUPPORT_INTERMEDIATE_MESSAGES:
+		{
+			LOG(INFO) << "supports intermediate messages";
+			body += ", supports intermediate messages";
+			combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "AckReceived", "na", body));
+			break;
+		}
 
-	case cea2045::MessageCode::SUPPORT_INTERMEDIATE_MESSAGES:
-		LOG(INFO) << "supports intermediate messages";
-		body += ", supports intermediate messages";
-		break;
-
-	default:
-		break;
+		default:
+			break;
 	}
-	outgoing = xml_writer_.WriteMsg("DER", "DCM", "AckReceived", "na", body);
-	std::cout << "about to POST from processAckReceived" << std::endl;
-	combined_client_->Post("DTM", outgoing);
+	//outgoing = xml_writer_.WriteMsg("DER", "DCM", "AckReceived", "na", body);
+	//std::cout << "about to POST from processAckReceived" << std::endl;
+	//combined_client_->Post("DTM", outgoing);
 }
 
 //======================================================================================
