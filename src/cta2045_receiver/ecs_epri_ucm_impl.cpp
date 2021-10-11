@@ -154,24 +154,29 @@ void EPRI_UCM::processNakReceived(cea2045::LinkLayerNakCode nak, cea2045::Messag
 	{
 		switch (messageCode)
 		{
+			case cea2045::MessageCode::SUPPORT_DATALINK_MESSAGES:
+			{
+				LOG(WARNING) << "does not support data link";
+				body += "does not support data link";
+				combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "NakReceived", "na", body));
+				break;
+			}
 
-		case cea2045::MessageCode::SUPPORT_DATALINK_MESSAGES:
-			LOG(WARNING) << "does not support data link";
-			body += "does not support data link";
-			break;
+			case cea2045::MessageCode::SUPPORT_INTERMEDIATE_MESSAGES:
+			{
+				LOG(WARNING) << "does not support intermediate";
+				body += "does not support intermediate";
+				combined_client_->Post("DTM", xml_writer_.WriteMsg("DER", "DCM", "NakReceived", "na", body));
+				break;
+			}
 
-		case cea2045::MessageCode::SUPPORT_INTERMEDIATE_MESSAGES:
-			LOG(WARNING) << "does not support intermediate";
-			body += "does not support intermediate";
-			break;
-
-		default:
-			break;
+			default:
+				break;
 		}
 	}
-	outgoing = xml_writer_.WriteMsg("DER", "DCM", "NakReceived", "na", body);
-	std::cout << "about to POST from processNakReceived" << std::endl;
-	combined_client_->Post("DTM", outgoing);
+	//outgoing = xml_writer_.WriteMsg("DER", "DCM", "NakReceived", "na", body);
+	//std::cout << "about to POST from processNakReceived" << std::endl;
+	//combined_client_->Post("DTM", outgoing);
 }
 
 //======================================================================================
